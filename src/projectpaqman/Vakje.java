@@ -7,6 +7,7 @@
 package projectpaqman;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Vakje implements DrawInterface {
     private boolean muur;
     private int posX;
     private int posY;
-    private Spelelement element;
+    private ArrayList<Spelelement> elementen = new ArrayList();
     
     public Vakje(Graphics g, int posX, int posY, String element) {
         this.posX = posX;
@@ -28,13 +29,13 @@ public class Vakje implements DrawInterface {
                 muur = true;
                 break;
             case "b": 
-                this.element = new Bolletje();
+                this.elementen.add(new Bolletje(this));
                 break;
             case "s":
-                this.element = new Superbolletje();
+                this.elementen.add(new Superbolletje(this));
                 break;
             case "p":
-                this.element = new Paqman();
+                this.elementen.add(new Paqman(this));
         }
 
         this.draw(g, this);
@@ -51,8 +52,10 @@ public class Vakje implements DrawInterface {
         }
         
         //Als het vakje een element bevat, moet dit element zichzelf gaan tekenen.
-        if(element != null){
-            element.draw(g, vakje);
+        if(!elementen.isEmpty()){
+            for(Spelelement element : elementen){
+                element.draw(g, vakje);   
+            }
         }
     }
     

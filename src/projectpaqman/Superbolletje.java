@@ -14,9 +14,14 @@ import java.awt.*;
  */
 public class Superbolletje extends Spelelement {
     
-    public void draw(Graphics g, int posX, int posY) {
+    public Superbolletje(Vakje vakje){
+        super(vakje);
+    }
+        
+    @Override
+    public void draw(Graphics g, Vakje vakje) {
         g.setColor(Color.LIGHT_GRAY);
-        g.drawOval(posX, posY, 30, 30);
-        g.fillOval(posX, posY, 30, 30);
+        g.drawOval(vakje.getPosX()*30, vakje.getPosY()*30, 30, 30);
+        g.fillOval(vakje.getPosX()*30, vakje.getPosY()*30, 30, 30);
     }
 }
