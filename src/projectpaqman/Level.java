@@ -20,8 +20,6 @@ public class Level extends JPanel {
     }
 
     private String naam;
-    private int lengte;
-    private int breedte;
     private Vakje[][] vakjes;
     private String[][] layout = {
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
@@ -38,58 +36,32 @@ public class Level extends JPanel {
         {"m", "p", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"}
     };
 
-    public Level(String naam, int breedte, int lengte) {
+    public Level(String naam, int lengte, int breedte) {
         this.setBackground(Color.WHITE);
         this.naam = naam;
-        this.lengte = lengte;
-        this.breedte = breedte;
         this.vakjes = new Vakje[breedte / 30][lengte / 30];
-
-//        for (int x = 0; x < vakjes.length; x++) {
-//            for (int y = 0; y < vakjes[x].length; y++) {
-//                vakjes[x][y] = new Vakje(true, x * 30, y * 30);
-//            }
-//        }
     }
 
     @Override
     public void paintComponent(Graphics g) {
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
-                System.out.println(x + " " + y + " " + layout[y][x]);
+                System.out.println(x + " " + y + " " + layout[x][y]);
                 switch (layout[y][x]) {
                     case ("m"):
-                        vakjes[x][y] = new Vakje(g, x * 30, y * 30, Vakje.inhoudVakje.muur);
+                        vakjes[x][y] = new Vakje(g, x , y , layout[x][y]);
                         break;
                     case ("b"):
-                        vakjes[x][y] = new Vakje(g, x * 30, y * 30, Vakje.inhoudVakje.bolletje);
+                        vakjes[x][y] = new Vakje(g, x, y, layout[x][y]);
                         break;
                     case ("s"):
-                        vakjes[x][y] = new Vakje(g, x * 30, y * 30, Vakje.inhoudVakje.superbolletje);
+                        vakjes[x][y] = new Vakje(g, x, y, layout[x][y]);
                         break;
                     default:
-                        vakjes[x][y] = new Vakje(g, x * 30, y * 30, Vakje.inhoudVakje.leeg);
+                        vakjes[x][y] = new Vakje(g, x, y, layout[x][y]);
                         break;
                 }
             }
         }
-
-//        for(int x=0; x < layout.length; x++){
-//            for(int y=0; y < layout[x].length; y++){
-//                switch(layout[x][y]){
-//                    case("m"):
-//                        vakjes[x][y].setMuur(true);
-//                        break;
-//                    case("b"):
-//                        Bolletje b = new Bolletje();
-//                        b.draw(g, x, y);
-//                        break;
-//                    case("s"):
-//                        Superbolletje s = new Superbolletje();
-//                        s.draw(g, x, y);
-//                        break;
-//                }
-//            }
-//        }
     }
 }

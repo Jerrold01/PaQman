@@ -14,9 +14,10 @@ import java.awt.*;
  */
 public class Bolletje extends Spelelement {
     
-    public void draw(Graphics g, int posX, int posY) {
+    @Override
+    public void draw(Graphics g, Vakje vakje) {
         g.setColor(Color.BLUE);
-        g.drawOval(posX, posY, 30, 30);
-        g.fillOval(posX, posY, 30, 30);
+        g.drawOval(vakje.getPosX(), vakje.getPosY(), 30, 30);
+        g.fillOval(vakje.getPosX(), vakje.getPosY(), 30, 30);
     }
 }

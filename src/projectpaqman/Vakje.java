@@ -7,58 +7,53 @@
 package projectpaqman;
 
 import java.awt.*;
-import javax.swing.*;
 
 /**
  *
  * @author Jerrold
  */
-public class Vakje {
+public class Vakje implements DrawInterface {
     
     private boolean muur;
     private int posX;
     private int posY;
-    private Spelelement elt;
+    private Spelelement element;
     
-    public enum inhoudVakje{
-        bolletje,
-        superbolletje,
-        muur,
-        leeg
-    }
-    
-    public Vakje(Graphics g, int posX, int posY, inhoudVakje inhoudVakje) {
+    public Vakje(Graphics g, int posX, int posY, String element) {
         this.posX = posX;
         this.posY = posY;
-        draw(g, inhoudVakje);
-    }
-    
-
-    
-    public void draw(Graphics g, inhoudVakje inhoudVakje) {
-        g.setColor(Color.BLACK);
-        switch (inhoudVakje){
-            case bolletje:
-                g.drawRect(posX, posY, 30, 30);
-                Bolletje b = new Bolletje();
-                b.draw(g, posX, posY);
+        
+        switch(element){
+            case "m":
+                muur = true;
                 break;
-            case superbolletje:
-                g.drawRect(posX, posY, 30, 30);
-                Superbolletje s = new Superbolletje();
-                s.draw(g, posX, posY);
+            case "b": 
+                this.element = new Bolletje();
                 break;
-            case muur:
-                g.drawRect(posX, posY, 30, 30);
-                g.fillRect(posX, posY, 30, 30);
-                this.muur = true;
+            case "s":
+                this.element = new Superbolletje();
                 break;
-            case leeg:
-                g.drawRect(posX, posY, 30, 30);
-                break;
-                
+            case "p":
+                this.element = new Paqman();
         }
 
+        this.draw(g, this);
+    }
+    
+    @Override
+    public void draw(Graphics g, Vakje vakje){
+        g.setColor(Color.BLACK);
+        g.drawRect(posX*30, posY*30, 30, 30);
+        
+        //Als het vakje een muur is, vullen we deze op.
+        if(muur){
+            g.fillRect(posX*30, posY*30, 30, 30);
+        }
+        
+        //Als het vakje een element bevat, moet dit element zichzelf gaan tekenen.
+        if(element != null){
+            element.draw(g, vakje);
+        }
     }
     
     public int getPosX(){
@@ -67,9 +62,5 @@ public class Vakje {
     
     public int getPosY(){
         return posY;
-    }
-    
-    public void setMuur(boolean muur){
-        this.muur = muur;
     }
 }
