@@ -56,7 +56,7 @@ public class Level extends JPanel {
     public void paintComponent(Graphics g) {
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
-                System.out.println(x + " " + y);
+                System.out.println(x + " " + y + " " + layout[y][x]);
                 switch (layout[y][x]) {
                     case ("m"):
                         vakjes[x][y] = new Vakje(g, x * 30, y * 30, Vakje.inhoudVakje.muur);

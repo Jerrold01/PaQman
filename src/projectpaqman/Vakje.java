@@ -50,7 +50,8 @@ public class Vakje {
                 break;
             case muur:
                 g.drawRect(posX, posY, 30, 30);
-                g.fillRect(posX, posX, 30, 30);
+                g.fillRect(posX, posY, 30, 30);
+                this.muur = true;
                 break;
             case leeg:
                 g.drawRect(posX, posY, 30, 30);
