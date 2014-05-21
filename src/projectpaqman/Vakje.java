@@ -15,9 +15,10 @@ import javax.swing.*;
  */
 public class Vakje {
     
-    private final boolean muur;
-    public int posX;
-    public int posY;
+    private boolean muur;
+    private int posX;
+    private int posY;
+    private Spelelement elt;
     
     public Vakje(boolean muur, int posX, int posY) {
         this.muur = muur;
@@ -28,5 +29,20 @@ public class Vakje {
     public void draw(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawRect(posX, posY, 30, 30);
+        if (elt!=null){
+            //elt.draw(x,y,g);
+        }
+    }
+    
+    public int getPosX(){
+        return posX;
+    }
+    
+    public int getPosY(){
+        return posY;
+    }
+    
+    public void setMuur(boolean muur){
+        this.muur = muur;
     }
 }
