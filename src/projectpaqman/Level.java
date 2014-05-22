@@ -38,6 +38,56 @@ public class Level extends JPanel implements KeyListener {
         this.vakjes = new Vakje[lengte / 30][breedte / 30];
         this.setFocusable(true);
     }
+    
+    private void setBuren(){
+        for(int x = 0; x < vakjes.length; x++) {
+            for (int y = 0; y < vakjes[x].length; y++) {
+                //Als het vakje op 0,0 zit: Voeg buren in OOST en ZUID toe.
+                if(x == 0 && y == 0){
+                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                //Als het vakje op 0,MAX zit: Voeg buren in WEST en ZUID toe.
+                } else if (x == 0 && y == vakjes[x].length){
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                //ALS het vakje op MAX, 0 zit: Voeg buren in NOORD en OOST toe.
+                } else if (x == vakjes.length && y == 0){
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                //ALS het vakje op MAX, MAX zit: Voeg buren in NOORD en WEST toe.
+                } else if (x == vakjes.length && y == vakjes[x].length){
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                //ALS het vakje op 0,X zit: Voeg buren NOORD en ZUID en OOST toe.
+                } else if (x == 0){
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                //ALS het vakje op MAX,X Zit: Voeg buren NOORD en ZUID en WEST toe.
+                } else if (x == vakjes.length){
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                //ALS het vakje op X,0 zit: Voeg buren WEST en OOST en ZUID toe.
+                } else if (y == 0){
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                //ALS het vakje op X,MAX zit: Voeg buren WEST en OOST en NOORD toe.
+                } else if (y == vakjes[x].length){
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                //In alle andere gevallen: Voeg buren NOORD, ZUID, OOST, WEST toe.
+                } else {
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                }
+            }
+        }
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -47,6 +97,8 @@ public class Level extends JPanel implements KeyListener {
                 vakjes[x][y] = new Vakje(g, x , y , layout[y][x]);
             }
         }
+        this.requestFocus();
+        setBuren();
     }
     
     @Override

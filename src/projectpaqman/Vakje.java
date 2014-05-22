@@ -8,6 +8,7 @@ package projectpaqman;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Vakje implements DrawInterface {
     private int posX;
     private int posY;
     private ArrayList<Spelelement> elementen = new ArrayList();
+    private HashMap<String, Vakje> buren = new HashMap();
     
     public Vakje(Graphics g, int posX, int posY, String element) {
         this.posX = posX;
@@ -39,6 +41,10 @@ public class Vakje implements DrawInterface {
         }
 
         this.draw(g, this);
+    }
+    
+    public void setBuren(String windrichting, Vakje vakje){
+        buren.put(windrichting, vakje);
     }
     
     @Override
