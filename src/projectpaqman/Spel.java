@@ -22,6 +22,5 @@ public abstract class Spel {
         
         MainFrame frame = new MainFrame();
         frame.setVisible(true);
-        
     }
 }
