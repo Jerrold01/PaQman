@@ -32,6 +32,11 @@ public class Level extends JPanel implements KeyListener {
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"}
     };
 
+    /**
+     * @param naam De naam van het level.
+     * @param lengte De lengte in pixels x van het level.
+     * @param breedte  De breedte in pixels y van het level.
+     */
     public Level(String naam, int lengte, int breedte) {
         this.setBackground(Color.WHITE);
         this.naam = naam;
@@ -39,6 +44,9 @@ public class Level extends JPanel implements KeyListener {
         this.setFocusable(true);
     }
     
+    /**
+     * De functie waarmee alle buren van de vakjes, die binnen de constructor van klasse Level worden aangemaakt, worden meegegeven.
+     */
     private void setBuren(){
         for(int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
@@ -46,16 +54,16 @@ public class Level extends JPanel implements KeyListener {
                 if(x == 0 && y == 0){
                     vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
                     vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
-                //Als het vakje op 0,MAX zit: Voeg buren in WEST en ZUID toe.
-                } else if (x == 0 && y == vakjes[x].length){
-                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
-                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
-                //ALS het vakje op MAX, 0 zit: Voeg buren in NOORD en OOST toe.
-                } else if (x == vakjes.length && y == 0){
-                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                //Als het vakje op 0,MAX zit: Voeg buren in OOST en NOORD toe.
+                } else if (x == 0 && y == vakjes[x].length-1){
                     vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                //ALS het vakje op MAX, 0 zit: Voeg buren in ZUID en WEST toe.
+                } else if (x == vakjes.length-1 && y == 0){
+                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
                 //ALS het vakje op MAX, MAX zit: Voeg buren in NOORD en WEST toe.
-                } else if (x == vakjes.length && y == vakjes[x].length){
+                } else if (x == vakjes.length-1 && y == vakjes[x].length-1){
                     vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
                     vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
                 //ALS het vakje op 0,X zit: Voeg buren NOORD en ZUID en OOST toe.
@@ -64,7 +72,7 @@ public class Level extends JPanel implements KeyListener {
                     vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
                     vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
                 //ALS het vakje op MAX,X Zit: Voeg buren NOORD en ZUID en WEST toe.
-                } else if (x == vakjes.length){
+                } else if (x == vakjes.length-1){
                     vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
                     vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
                     vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
@@ -74,7 +82,7 @@ public class Level extends JPanel implements KeyListener {
                     vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
                     vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
                 //ALS het vakje op X,MAX zit: Voeg buren WEST en OOST en NOORD toe.
-                } else if (y == vakjes[x].length){
+                } else if (y == vakjes[x].length-1){
                     vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
                     vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
                     vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
@@ -88,7 +96,7 @@ public class Level extends JPanel implements KeyListener {
             }
         }
     }
-
+    
     @Override
     public void paintComponent(Graphics g) {
         for (int x = 0; x < vakjes.length; x++) {
