@@ -7,6 +7,7 @@
 package projectpaqman;
 
 import java.awt.Graphics;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -86,12 +87,13 @@ public class VakjeTest {
     @Test
     public void testSetBuren() {
         System.out.println("setBuren");
-        String windrichting = "";
-        Vakje vakje = null;
-        Vakje instance = null;
-        instance.setBuren(windrichting, vakje);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Vakje vakje = new Vakje(0,0);
+        Vakje oosterBuur = new Vakje(0,1);
+        
+        Windrichting windrichting = Windrichting.OOST;
+        vakje.setBuren(windrichting, vakje);
+
+        assertEquals(vakje.getBuren().get(windrichting), oosterBuur);
     }
 
     /**
@@ -100,11 +102,10 @@ public class VakjeTest {
     @Test
     public void testSetMuur() {
         System.out.println("setMuur");
-        boolean muur = false;
-        Vakje instance = null;
-        instance.setMuur(muur);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Vakje instance = new Vakje(0,0);
+        instance.setMuur(true);
+       
+        assertTrue(instance.getMuur() == true);
     }
 
     /**
@@ -116,6 +117,47 @@ public class VakjeTest {
         Graphics g = null;
         Vakje instance = null;
         instance.draw(g);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of removeElement method, of class Vakje.
+     */
+    @Test
+    public void testRemoveElement() {
+        System.out.println("removeElement");
+        Spelelement element = null;
+        Vakje instance = null;
+        instance.removeElement(element);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBuren method, of class Vakje.
+     */
+    @Test
+    public void testGetBuren() {
+        System.out.println("getBuren");
+        Vakje instance = null;
+        HashMap<Windrichting, Vakje> expResult = null;
+        HashMap<Windrichting, Vakje> result = instance.getBuren();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getMuur method, of class Vakje.
+     */
+    @Test
+    public void testGetMuur() {
+        System.out.println("getMuur");
+        Vakje instance = null;
+        boolean expResult = false;
+        boolean result = instance.getMuur();
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

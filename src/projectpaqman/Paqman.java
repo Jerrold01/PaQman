@@ -8,15 +8,26 @@ package projectpaqman;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 
 /**
  *
  * @author Jerrold
  */
 public class Paqman extends Spelelement implements KeyListener {
-    
+       
     public Paqman(Vakje vakje){
         super(vakje);
+    }
+    
+    private void move(Windrichting windrichting){
+        HashMap<Windrichting, Vakje> buren = vakje.getBuren();
+        Vakje nieuwVakje = buren.get(windrichting);
+        if(!nieuwVakje.getMuur()){
+            nieuwVakje.addElement(this);
+            vakje.removeElement(this);
+            vakje = nieuwVakje;
+        }
     }
     
     @Override
@@ -35,16 +46,16 @@ public class Paqman extends Spelelement implements KeyListener {
     public void keyPressed(KeyEvent event){
         switch(event.getKeyCode()){
             case KeyEvent.VK_UP: 
-                System.out.println("Loop omhoog");
+                this.move(Windrichting.NOORD);
                 break;
             case KeyEvent.VK_DOWN:
-                System.out.println("Loop omlaag");
+                this.move(Windrichting.ZUID);
                 break;
             case KeyEvent.VK_LEFT:
-                System.out.println("Loop links");
+                this.move(Windrichting.WEST);
                 break;
             case KeyEvent.VK_RIGHT:
-                System.out.println("Loop rechts");
+                this.move(Windrichting.OOST);
                 break;
         }
     }

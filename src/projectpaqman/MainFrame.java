@@ -19,12 +19,20 @@ public class MainFrame extends JFrame {
     private Menu menu;
     private Level level;
     
+    public static void main(String[] args) {
+        Game game = new Game();
+        
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+    }
+    
     public MainFrame(){
         createComponents();
     }
     
     public void createComponents(){
-        setSize(new Dimension(600, 400));
+        setSize(new Dimension(900, 600));
         setTitle("PaQman");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -33,9 +41,10 @@ public class MainFrame extends JFrame {
         this.add(main);
         
         menu = new Menu();
-        level = new Level("Level 1", 600, 360);
+        level = new Level("Level 1", 900, 540);
 
         main.add(menu, BorderLayout.NORTH);
         main.add(level, BorderLayout.CENTER);
+        level.requestFocus();
     }
 }

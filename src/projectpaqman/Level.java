@@ -6,31 +6,39 @@
 package projectpaqman;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 /**
  *
  * @author Jerrold
  */
-public class Level extends JPanel {
+public class Level extends JPanel implements GameEventListener{
 
     private String naam;
     private Vakje[][] vakjes;
     private String[][] layout = {
-        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
-        {"m", "p", "x", "x", "x", "b", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "m", "m", "m", "x", "m", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "s", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"}
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
+        {"m", "p", "x", "x", "x", "b", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "x", "m", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "s", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "m", "b", "x", "x", "x", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
+                                                        
     };
+    private EventListenerList listenerList = new EventListenerList();
 
     /**
      * @param naam De naam van het level.
@@ -79,6 +87,7 @@ public class Level extends JPanel {
             }
         }
         setBuren();
+        this.addGameEventListener(this);
     }
     
     /**
@@ -89,22 +98,22 @@ public class Level extends JPanel {
             for (int y = 0; y < vakjes[x].length; y++) {
                 //Als het vakje niet in de bovenste rij zit.
                 if(y != 0){
-                    vakjes[x][y].setBuren("NOORD", vakjes[x][y-1]);
+                    vakjes[x][y].setBuren(Windrichting.NOORD, vakjes[x][y-1]);
                 }
                 
                 //Als het vakje niet in de linkse kolom zit.
                 if(x != 0){
-                    vakjes[x][y].setBuren("WEST", vakjes[x-1][y]);
+                    vakjes[x][y].setBuren(Windrichting.WEST, vakjes[x-1][y]);
                 }
                 
                 //Als het vakje niet in de rechtste kolom zit.
                 if (x != vakjes.length-1){
-                    vakjes[x][y].setBuren("OOST", vakjes[x+1][y]);
+                    vakjes[x][y].setBuren(Windrichting.OOST, vakjes[x+1][y]);
                 }
                 
                 //Als het vakje niet in de onderste rij zit.
                 if (y != vakjes[x].length-1) {
-                    vakjes[x][y].setBuren("ZUID", vakjes[x][y+1]);
+                    vakjes[x][y].setBuren(Windrichting.ZUID, vakjes[x][y+1]);
                 }
             }
         }
@@ -117,5 +126,31 @@ public class Level extends JPanel {
                 vakjes[x][y].draw(g);
             }
         }
+    }
+    
+    @Override
+    public void addGameEventListener(GameEventListener listener) {
+        listenerList.add(GameEventListener.class, listener);
+    }
+    
+    @Override
+    public void removeGameEventListener(GameEventListener listener) {
+        listenerList.remove(GameEventListener.class, listener);
+    }
+    
+    @Override
+    public void fireGameEvent(GameEvent event) {
+        Object[] listeners = listenerList.getListenerList();
+        for (int i = 0; i < listeners.length; i = i+2) {
+            if (listeners[i] == GameEventListener.class) {
+                ((GameEventListener) listeners[i+1]).gameEventOccurred(event);
+            }
+        }
+    }
+    
+    @Override
+    public void gameEventOccurred(GameEvent event){
+        System.out.println("Er heeft een GameEvent plaatsgevonden.");
+        repaint();
     }
 }

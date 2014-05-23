@@ -51,4 +51,68 @@ public class LevelTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of setBuren method, of class Level.
+     */
+    @Test
+    public void testSetBuren() {
+        System.out.println("setBuren");
+        Level instance = null;
+        instance.setBuren();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addGameEventListener method, of class Level.
+     */
+    @Test
+    public void testAddGameEventListener() {
+        System.out.println("addGameEventListener");
+        GameEventListener listener = null;
+        Level instance = null;
+        instance.addGameEventListener(listener);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of removeGameEventListener method, of class Level.
+     */
+    @Test
+    public void testRemoveGameEventListener() {
+        System.out.println("removeGameEventListener");
+        GameEventListener listener = null;
+        Level instance = null;
+        instance.removeGameEventListener(listener);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of fireGameEvent method, of class Level.
+     */
+    @Test
+    public void testFireGameEvent() {
+        System.out.println("fireGameEvent");
+        GameEvent event = null;
+        Level instance = null;
+        instance.fireGameEvent(event);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of gameEventOccurred method, of class Level.
+     */
+    @Test
+    public void testGameEventOccurred() {
+        System.out.println("gameEventOccurred");
+        GameEvent event = null;
+        Level instance = null;
+        instance.gameEventOccurred(event);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

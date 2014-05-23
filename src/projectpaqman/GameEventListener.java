@@ -1,0 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package projectpaqman;
+
+import java.util.EventListener;
+
+/**
+ *
+ * @author kevinwareman
+ */
+public interface GameEventListener extends EventListener {
+     
+    public void addGameEventListener(GameEventListener listener);
+    public void removeGameEventListener(GameEventListener listener);
+    public void fireGameEvent(GameEvent event);
+    public void gameEventOccurred(GameEvent event);
+}

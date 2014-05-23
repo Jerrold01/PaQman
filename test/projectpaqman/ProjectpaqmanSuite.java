@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
  * @author Jerrold
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({projectpaqman.SpelTest.class, projectpaqman.SuperbolletjeTest.class, projectpaqman.VakjeTest.class, projectpaqman.LevelTest.class, projectpaqman.PaqmanTest.class, projectpaqman.BeweegBangTest.class, projectpaqman.BeweegDronkenTest.class, projectpaqman.MainFrameTest.class, projectpaqman.BeweegStrategyTest.class, projectpaqman.MenuTest.class, projectpaqman.BeweegSlimTest.class, projectpaqman.SpelelementTest.class, projectpaqman.BolletjeTest.class})
+@Suite.SuiteClasses({PaqmanTest.class, MainFrameTest.class, SuperbolletjeTest.class, MenuTest.class, GameEventTest.class, VakjeTest.class, BolletjeTest.class, WindrichtingTest.class, BeweegBangTest.class, BeweegStrategyTest.class, SpelelementTest.class, BeweegSlimTest.class, GameEventListenerTest.class, GameTest.class, LevelTest.class, BeweegDronkenTest.class})
 public class ProjectpaqmanSuite {
 
     @BeforeClass
