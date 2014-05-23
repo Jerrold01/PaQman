@@ -34,7 +34,6 @@ public class MainFrame extends JFrame {
         
         menu = new Menu();
         level = new Level("Level 1", 600, 360);
-        level.addKeyListener(level);
 
         main.add(menu, BorderLayout.NORTH);
         main.add(level, BorderLayout.CENTER);

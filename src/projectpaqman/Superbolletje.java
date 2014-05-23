@@ -17,9 +17,9 @@ public class Superbolletje extends Spelelement {
     public Superbolletje(Vakje vakje){
         super(vakje);
     }
-        
+    
     @Override
-    public void draw(Graphics g, Vakje vakje) {
+    public void draw(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
         g.drawOval(vakje.getPosX()*30, vakje.getPosY()*30, 30, 30);
         g.fillOval(vakje.getPosX()*30, vakje.getPosY()*30, 30, 30);

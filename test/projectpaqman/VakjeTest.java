@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author kevinwareman
+ * @author Jerrold
  */
 public class VakjeTest {
     
@@ -37,34 +37,6 @@ public class VakjeTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of setBuren method, of class Vakje.
-     */
-    @Test
-    public void testSetBuren() {
-        System.out.println("setBuren");
-        String windrichting = "";
-        Vakje vakje = null;
-        Vakje instance = null;
-        instance.setBuren(windrichting, vakje);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of draw method, of class Vakje.
-     */
-    @Test
-    public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Vakje vakje = null;
-        Vakje instance = null;
-        instance.draw(g, vakje);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -91,6 +63,59 @@ public class VakjeTest {
         int expResult = 0;
         int result = instance.getPosY();
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addElement method, of class Vakje.
+     */
+    @Test
+    public void testAddElement() {
+        System.out.println("addElement");
+        Spelelement element = null;
+        Vakje instance = null;
+        instance.addElement(element);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setBuren method, of class Vakje.
+     */
+    @Test
+    public void testSetBuren() {
+        System.out.println("setBuren");
+        String windrichting = "";
+        Vakje vakje = null;
+        Vakje instance = null;
+        instance.setBuren(windrichting, vakje);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setMuur method, of class Vakje.
+     */
+    @Test
+    public void testSetMuur() {
+        System.out.println("setMuur");
+        boolean muur = false;
+        Vakje instance = null;
+        instance.setMuur(muur);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of draw method, of class Vakje.
+     */
+    @Test
+    public void testDraw() {
+        System.out.println("draw");
+        Graphics g = null;
+        Vakje instance = null;
+        instance.draw(g);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author kevinwareman
+ * @author Jerrold
  */
 public class SpelelementTest {
     
@@ -59,9 +59,8 @@ public class SpelelementTest {
     public void testDraw() {
         System.out.println("draw");
         Graphics g = null;
-        Vakje vakje = null;
         Spelelement instance = null;
-        instance.draw(g, vakje);
+        instance.draw(g);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -70,6 +69,9 @@ public class SpelelementTest {
 
         public SpelelementImpl() {
             super(null);
+        }
+
+        public void draw(Graphics g) {
         }
     }
     

@@ -12,9 +12,9 @@ import java.awt.*;
  *
  * @author Jerrold
  */
-public abstract class Spelelement implements DrawInterface {
+public abstract class Spelelement {
     
-    private Vakje vakje;
+    protected Vakje vakje;
     
     public Spelelement(Vakje vakje){
         this.vakje = vakje;
@@ -24,14 +24,5 @@ public abstract class Spelelement implements DrawInterface {
         this.vakje = vakje;
     }
     
-    @Override
-    public void draw(Graphics g, Vakje vakje){
-        if(this instanceof Bolletje){
-            this.draw(g, vakje);
-        }else if(this instanceof Superbolletje){
-            this.draw(g, vakje);
-        }else if(this instanceof Paqman){
-            this.draw(g, vakje);
-        }
-    }
+    public abstract void draw(Graphics g);
 }

@@ -6,7 +6,6 @@
 
 package projectpaqman;
 
-import java.awt.Graphics;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author Jerrold
  */
-public class BolletjeTest {
+public class BeweegSlimTest {
     
-    public BolletjeTest() {
+    public BeweegSlimTest() {
     }
     
     @BeforeClass
@@ -39,15 +38,8 @@ public class BolletjeTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of draw method, of class Bolletje.
-     */
     @Test
-    public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Bolletje instance = null;
-        instance.draw(g);
+    public void testSomeMethod() {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

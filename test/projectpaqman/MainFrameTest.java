@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author kevinwareman
+ * @author Jerrold
  */
 public class MainFrameTest {
     

@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-package projectpaqman;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,8 +16,8 @@ import org.junit.runners.Suite;
  * @author Jerrold
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({projectpaqman.SpelTest.class, projectpaqman.SuperbolletjeTest.class, projectpaqman.VakjeTest.class, projectpaqman.LevelTest.class, projectpaqman.PaqmanTest.class, projectpaqman.BeweegBangTest.class, projectpaqman.BeweegDronkenTest.class, projectpaqman.MainFrameTest.class, projectpaqman.BeweegStrategyTest.class, projectpaqman.MenuTest.class, projectpaqman.BeweegSlimTest.class, projectpaqman.SpelelementTest.class, projectpaqman.BolletjeTest.class})
-public class ProjectpaqmanSuite {
+@Suite.SuiteClasses({projectpaqman.ProjectpaqmanSuite.class})
+public class RootSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {

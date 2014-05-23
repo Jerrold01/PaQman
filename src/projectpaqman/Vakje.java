@@ -14,7 +14,7 @@ import java.util.HashMap;
  *
  * @author Jerrold
  */
-public class Vakje implements DrawInterface {
+public class Vakje {
     
     private boolean muur;
     private int posX;
@@ -22,33 +22,32 @@ public class Vakje implements DrawInterface {
     private ArrayList<Spelelement> elementen = new ArrayList();
     private HashMap<String, Vakje> buren = new HashMap();
     
-    public Vakje(Graphics g, int posX, int posY, String element) {
+    public Vakje(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        
-        switch(element){
-            case "m":
-                muur = true;
-                break;
-            case "b": 
-                this.elementen.add(new Bolletje(this));
-                break;
-            case "s":
-                this.elementen.add(new Superbolletje(this));
-                break;
-            case "p":
-                this.elementen.add(new Paqman(this));
-        }
-
-        this.draw(g, this);
+    }
+    
+    public int getPosX(){
+        return posX;
+    }
+    
+    public int getPosY(){
+        return posY;
+    }
+    
+    public void addElement(Spelelement element){
+        elementen.add(element);
     }
     
     public void setBuren(String windrichting, Vakje vakje){
         buren.put(windrichting, vakje);
     }
     
-    @Override
-    public void draw(Graphics g, Vakje vakje){
+    public void setMuur(boolean muur){
+        this.muur = muur;
+    }
+    
+    public void draw(Graphics g){
         g.setColor(Color.BLACK);
         g.drawRect(posX*30, posY*30, 30, 30);
         
@@ -60,16 +59,8 @@ public class Vakje implements DrawInterface {
         //Als het vakje een element bevat, moet dit element zichzelf gaan tekenen.
         if(!elementen.isEmpty()){
             for(Spelelement element : elementen){
-                element.draw(g, vakje);   
+                element.draw(g);   
             }
         }
-    }
-    
-    public int getPosX(){
-        return posX;
-    }
-    
-    public int getPosY(){
-        return posY;
     }
 }

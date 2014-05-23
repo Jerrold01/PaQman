@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author kevinwareman
+ * @author Jerrold
  */
 public class SuperbolletjeTest {
     
@@ -46,9 +46,8 @@ public class SuperbolletjeTest {
     public void testDraw() {
         System.out.println("draw");
         Graphics g = null;
-        Vakje vakje = null;
         Superbolletje instance = null;
-        instance.draw(g, vakje);
+        instance.draw(g);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
