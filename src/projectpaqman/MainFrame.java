@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
     }
     
     public void createComponents(){
-        setSize(new Dimension(900, 600));
+        setSize(new Dimension(1000, 810));
         setTitle("PaQman");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
         this.add(main);
         
         menu = new Menu();
-        level = new Level("Level 1", 900, 540);
+        level = new Level("Level 1", 1000, 750);
 
         main.add(menu, BorderLayout.NORTH);
         main.add(level, BorderLayout.CENTER);

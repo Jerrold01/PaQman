@@ -21,7 +21,7 @@ public class Superbolletje extends Spelelement {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
-        g.drawOval(vakje.getPosX()*30+8, vakje.getPosY()*30+8, 16, 16);
-        g.fillOval(vakje.getPosX()*30+8, vakje.getPosY()*30+8, 16, 16);
+        g.drawOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
+        g.fillOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
     }
 }

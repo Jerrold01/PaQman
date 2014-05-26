@@ -65,11 +65,11 @@ public class Vakje {
     
     public void draw(Graphics g){
         g.setColor(Color.BLACK);
-        g.drawRect(posX*30, posY*30, 30, 30);
+        g.drawRect(posX*25, posY*25, 25, 25);
         
         //Als het vakje een muur is, vullen we deze op.
         if(muur){
-            g.fillRect(posX*30, posY*30, 30, 30);
+            g.fillRect(posX*25, posY*25, 25, 25);
         }
         
         //Als het vakje een element bevat, moet dit element zichzelf gaan tekenen.

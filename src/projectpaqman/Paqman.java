@@ -33,8 +33,8 @@ public class Paqman extends Spelelement implements KeyListener {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.drawOval(vakje.getPosX()*30, vakje.getPosY()*30, 30, 30);
-        g.fillOval(vakje.getPosX()*30, vakje.getPosY()*30, 30, 30);
+        g.drawOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
+        g.fillOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
     }
 
     @Override
