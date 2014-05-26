@@ -14,8 +14,5 @@ import java.util.EventListener;
  */
 public interface GameEventListener extends EventListener {
      
-    public void addGameEventListener(GameEventListener listener);
-    public void removeGameEventListener(GameEventListener listener);
-    public void fireGameEvent(GameEvent event);
     public void gameEventOccurred(GameEvent event);
 }

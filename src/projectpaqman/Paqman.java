@@ -14,7 +14,7 @@ import java.util.HashMap;
  *
  * @author Jerrold
  */
-public class Paqman extends Spelelement implements KeyListener {
+public class Paqman extends Spelelement implements GameEventListener, KeyListener {
        
     public Paqman(Vakje vakje){
         super(vakje);
@@ -47,15 +47,19 @@ public class Paqman extends Spelelement implements KeyListener {
         switch(event.getKeyCode()){
             case KeyEvent.VK_UP: 
                 this.move(Windrichting.NOORD);
+                gameEventOccurred(new GameEvent(this, false, false, 3, 100));
                 break;
             case KeyEvent.VK_DOWN:
                 this.move(Windrichting.ZUID);
+                gameEventOccurred(new GameEvent(this, false, false, 3, 100));
                 break;
             case KeyEvent.VK_LEFT:
                 this.move(Windrichting.WEST);
+                gameEventOccurred(new GameEvent(this, false, false, 3, 100));
                 break;
             case KeyEvent.VK_RIGHT:
                 this.move(Windrichting.OOST);
+                gameEventOccurred(new GameEvent(this, false, false, 3, 100));
                 break;
         }
     }
@@ -63,5 +67,10 @@ public class Paqman extends Spelelement implements KeyListener {
     @Override
     public void keyTyped(KeyEvent event){
         
+    }
+    
+    @Override
+    public void gameEventOccurred(GameEvent event){
+        System.out.println(event.getAantalPunten());
     }
 }

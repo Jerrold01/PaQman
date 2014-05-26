@@ -13,7 +13,7 @@ import javax.swing.event.*;
  *
  * @author Jerrold
  */
-public class Level extends JPanel implements GameEventListener{
+public class Level extends JPanel{
 
     private String naam;
     private Vakje[][] vakjes;
@@ -79,6 +79,7 @@ public class Level extends JPanel implements GameEventListener{
                         Paqman paqman = new Paqman(vakjes[x][y]);
                         vakjes[x][y].addElement(paqman);
                         this.addKeyListener(paqman);
+                        this.addGameEventListener(paqman);
                         break;
                     default:
                         vakjes[x][y] = new Vakje(x, y);
@@ -87,7 +88,6 @@ public class Level extends JPanel implements GameEventListener{
             }
         }
         setBuren();
-        this.addGameEventListener(this);
     }
     
     /**
@@ -128,17 +128,14 @@ public class Level extends JPanel implements GameEventListener{
         }
     }
     
-    @Override
     public void addGameEventListener(GameEventListener listener) {
         listenerList.add(GameEventListener.class, listener);
     }
     
-    @Override
     public void removeGameEventListener(GameEventListener listener) {
         listenerList.remove(GameEventListener.class, listener);
     }
     
-    @Override
     public void fireGameEvent(GameEvent event) {
         Object[] listeners = listenerList.getListenerList();
         for (int i = 0; i < listeners.length; i = i+2) {
@@ -146,11 +143,5 @@ public class Level extends JPanel implements GameEventListener{
                 ((GameEventListener) listeners[i+1]).gameEventOccurred(event);
             }
         }
-    }
-    
-    @Override
-    public void gameEventOccurred(GameEvent event){
-        System.out.println("Er heeft een GameEvent plaatsgevonden.");
-        repaint();
     }
 }
