@@ -14,6 +14,6 @@ import java.util.HashMap;
  */
 public interface BeweegStrategy {
    
-    public void move(HashMap<Windrichting, Vakje> buren, Vakje vakje, Spelelement spelelement, GameEventListener gameEventListener);
+    public void move(Spelelement spelelement, GameEventListener gameEventListener);
     
 }

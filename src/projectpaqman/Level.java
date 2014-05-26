@@ -90,7 +90,6 @@ public class Level extends JPanel implements GameEventListener{
                     case "g":
                         Spook spook = new Spook(vakjes[x][y], this);
                         vakjes[x][y].addElement(spook);
-                        this.addKeyListener(spook);
                         break;
                     default:
                         break;

@@ -6,22 +6,18 @@
 
 package projectpaqman;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.concurrent.*;
-
+import java.awt.*;
 /**
  *
  * @author Jerrold
  */
-public class Spook extends Spelelement implements KeyListener {
+public class Spook extends Spelelement{
     
     BeweegStrategy beweegstrategy;
     
     public Spook(Vakje vakje, GameEventListener gameEventListener){
         super(vakje, gameEventListener);
+        
     }
     
     @Override
@@ -33,26 +29,9 @@ public class Spook extends Spelelement implements KeyListener {
     
     public void move(){
         this.beweegstrategy = new BeweegDronken();
-        beweegstrategy.move(vakje.getBuren(), vakje, this, gameEventListener);
-    }
+        beweegstrategy.move(this, gameEventListener);
+    }     
     
-    
-    @Override
-    public void keyReleased(KeyEvent event){
-
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event){
-        move();
-    }
-    
-    
-    @Override
-    public void keyTyped(KeyEvent event){
-        
-    }
-        
 }
   
     

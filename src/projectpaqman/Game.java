@@ -6,6 +6,8 @@
 
 package projectpaqman;
 
+import java.util.Timer;
+
 /**
  *
  * @author kevinwareman
@@ -16,12 +18,15 @@ public class Game {
     private int aantal_punten;
     private boolean onverslaanbaar;
     private boolean gepauzeerd;
+    private Timer timer;
+    private GameEventListener[] gameEventListeners;
     
     Game(){
         aantal_levens = 3;
         aantal_punten = 0;
         onverslaanbaar = false;
         gepauzeerd = false;
+        timer = new Timer();
     }
   
     public int getAantalLevens(){

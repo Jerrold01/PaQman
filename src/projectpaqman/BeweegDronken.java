@@ -19,17 +19,18 @@ public class BeweegDronken implements BeweegStrategy {
     private Windrichting laatsteWindrichting;
     private Windrichting windrichting;
     
-    public void move(HashMap<Windrichting, Vakje> buren, Vakje vakje, Spelelement spelelement, GameEventListener gameEventListener ){
+    public void move(Spelelement spelelement, GameEventListener gameEventListener ){
         
         int windrichtingInt = new Random().nextInt(Windrichting.values().length);
         windrichting = Windrichting.values()[windrichtingInt];
+        HashMap<Windrichting, Vakje> buren = spelelement.vakje.getBuren();
         Vakje nieuwVakje = buren.get(windrichting);
         
         
         if(!isTegenovergesteldeWindrichting(windrichting, laatsteWindrichting)){
             if(!nieuwVakje.getMuur()){
                 nieuwVakje.addElement(spelelement);
-                vakje.removeElement(spelelement);
+                spelelement.vakje.removeElement(spelelement);
                 spelelement.setVakje(nieuwVakje);
                 gameEventListener.gameEventOccurred(new GameEvent());
             }

@@ -39,12 +39,7 @@ public class Paqman extends Spelelement implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent event){
-
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event){
-        switch(event.getKeyCode()){
+            switch(event.getKeyCode()){
             case KeyEvent.VK_UP: 
                 this.move(Windrichting.NOORD);
                 break;
@@ -60,9 +55,15 @@ public class Paqman extends Spelelement implements KeyListener {
         }
         gameEventListener.gameEventOccurred(new GameEvent());
     }
+
+    
+    @Override
+    public void keyPressed(KeyEvent event){
+
+    }
     
     @Override
     public void keyTyped(KeyEvent event){
-        
+
     }
 }

@@ -14,6 +14,7 @@ import java.awt.*;
  */
 public class Bolletje extends Spelelement {
     
+    
     public Bolletje(Vakje vakje, GameEventListener gameEventListener){
         super(vakje, gameEventListener);
     }
