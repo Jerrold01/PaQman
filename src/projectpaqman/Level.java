@@ -7,6 +7,7 @@ package projectpaqman;
 
 import java.awt.*;
 import javax.swing.*;
+import java.util.Timer;
 
 /**
  *
@@ -15,6 +16,8 @@ import javax.swing.*;
 public class Level extends JPanel implements GameEventListener{
 
     private String naam;
+    private Timer timer = new Timer();
+    private LevelTimerTask timertask = new LevelTimerTask();
     private Vakje[][] vakjes;
     private String[][] layout = {
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
@@ -77,7 +80,9 @@ public class Level extends JPanel implements GameEventListener{
                         vakjes[x][y].setMuur(true);
                         break;
                     case "b": 
-                        vakjes[x][y].addElement(new Bolletje(vakjes[x][y], this));
+                        Bolletje bolletje = new Bolletje(vakjes[x][y], this);
+                        vakjes[x][y].addElement(bolletje);
+                        timertask.addGameEventListener(bolletje);
                         break;
                     case "s":
                         vakjes[x][y].addElement(new Superbolletje(vakjes[x][y], this));
@@ -90,6 +95,7 @@ public class Level extends JPanel implements GameEventListener{
                     case "g":
                         Spook spook = new Spook(vakjes[x][y], this);
                         vakjes[x][y].addElement(spook);
+                        timertask.addGameEventListener(spook);
                         break;
                     default:
                         break;
@@ -97,12 +103,13 @@ public class Level extends JPanel implements GameEventListener{
             }
         }
         setBuren();
+        setTimer();
     }
     
     /**
      * De functie waarmee alle buren van de vakjes, die binnen de constructor van klasse Level worden aangemaakt, worden meegegeven.
      */
-    public void setBuren(){
+    private void setBuren(){
         for(int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
                 //Als het vakje niet in de bovenste rij zit.
@@ -126,6 +133,10 @@ public class Level extends JPanel implements GameEventListener{
                 }
             }
         }
+    }
+    
+    private void setTimer(){
+        timer.scheduleAtFixedRate(timertask, 0, 500);
     }
     
     @Override

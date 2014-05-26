@@ -47,6 +47,10 @@ public class Vakje {
         }
     }
     
+    public ArrayList<Spelelement> getElementen(){
+        return elementen;
+    }
+    
     public HashMap<Windrichting, Vakje> getBuren(){
         return buren;
     }

@@ -11,7 +11,7 @@ import java.awt.*;
  *
  * @author Jerrold
  */
-public class Spook extends Spelelement{
+public class Spook extends Spelelement implements GameEventListener{
     
     BeweegStrategy beweegstrategy;
     
@@ -20,18 +20,31 @@ public class Spook extends Spelelement{
         
     }
     
+    private void move(){
+        this.beweegstrategy = new BeweegDronken();
+        beweegstrategy.move(this, gameEventListener);
+    } 
+    
+    private void delete(){
+        
+    }
+    
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.GREEN);
         g.drawRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
         g.fillRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
+    }    
+    
+    @Override
+    public void gameEventOccurred(GameEvent event){
+        move();
+        for(Spelelement element : vakje.getElementen()){
+            if(element instanceof Paqman){
+                delete();
+            }
+        }  
     }
-    
-    public void move(){
-        this.beweegstrategy = new BeweegDronken();
-        beweegstrategy.move(this, gameEventListener);
-    }     
-    
 }
   
     
