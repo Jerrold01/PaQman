@@ -26,10 +26,10 @@ public class Level extends JPanel implements GameEventListener{
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "m", "m", "m", "m", "m", "m", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "b", "b", "b", "b", "b", "m", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "m", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
-        {"m", "x", "b", "m", "x", "x", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
+        {"m", "x", "b", "m", "x", "g", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "b", "b", "b", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
+        {"m", "g", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "x", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "m", "m", "x", "m", "m", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "x", "x", "x", "x", "x", "b", "b", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "m", "x", "x", "m", "b", "x", "m"},
@@ -68,29 +68,31 @@ public class Level extends JPanel implements GameEventListener{
      * Deze functie voegt tevens een KeyListener toe aan Paqman.
      */
     private void init(){
+        
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
+                vakjes[x][y] = new Vakje(x, y);
                 switch(layout[y][x]){
                     case "m":
-                        vakjes[x][y] = new Vakje(x, y);
                         vakjes[x][y].setMuur(true);
                         break;
                     case "b": 
-                        vakjes[x][y] = new Vakje(x, y);
                         vakjes[x][y].addElement(new Bolletje(vakjes[x][y], this));
                         break;
                     case "s":
-                        vakjes[x][y] = new Vakje(x, y);
                         vakjes[x][y].addElement(new Superbolletje(vakjes[x][y], this));
                         break;
                     case "p":
-                        vakjes[x][y] = new Vakje(x, y);
                         Paqman paqman = new Paqman(vakjes[x][y], this);
                         vakjes[x][y].addElement(paqman);
                         this.addKeyListener(paqman);
                         break;
+                    case "g":
+                        Spook spook = new Spook(vakjes[x][y], this);
+                        vakjes[x][y].addElement(spook);
+                        this.addKeyListener(spook);
+                        break;
                     default:
-                        vakjes[x][y] = new Vakje(x, y);
                         break;
                 }
             }

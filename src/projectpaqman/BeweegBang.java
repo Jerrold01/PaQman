@@ -6,10 +6,16 @@
 
 package projectpaqman;
 
+import java.util.HashMap;
+
 /**
  *
  * @author kevinwareman
  */
 public class BeweegBang implements BeweegStrategy {
+    
+    public void move(HashMap<Windrichting, Vakje> buren, Vakje vakje, Spelelement spelelement, GameEventListener gameEventListener){
+        
+    }
     
 }
