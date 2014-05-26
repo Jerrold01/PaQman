@@ -7,13 +7,12 @@ package projectpaqman;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  *
  * @author Jerrold
  */
-public class Level extends JPanel{
+public class Level extends JPanel implements GameEventListener{
 
     private String naam;
     private Vakje[][] vakjes;
@@ -38,7 +37,6 @@ public class Level extends JPanel{
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
                                                         
     };
-    private EventListenerList listenerList = new EventListenerList();
 
     /**
      * @param naam De naam van het level.
@@ -68,18 +66,17 @@ public class Level extends JPanel{
                         break;
                     case "b": 
                         vakjes[x][y] = new Vakje(x, y);
-                        vakjes[x][y].addElement(new Bolletje(vakjes[x][y]));
+                        vakjes[x][y].addElement(new Bolletje(vakjes[x][y], this));
                         break;
                     case "s":
                         vakjes[x][y] = new Vakje(x, y);
-                        vakjes[x][y].addElement(new Superbolletje(vakjes[x][y]));
+                        vakjes[x][y].addElement(new Superbolletje(vakjes[x][y], this));
                         break;
                     case "p":
                         vakjes[x][y] = new Vakje(x, y);
-                        Paqman paqman = new Paqman(vakjes[x][y]);
+                        Paqman paqman = new Paqman(vakjes[x][y], this);
                         vakjes[x][y].addElement(paqman);
                         this.addKeyListener(paqman);
-                        this.addGameEventListener(paqman);
                         break;
                     default:
                         vakjes[x][y] = new Vakje(x, y);
@@ -121,6 +118,7 @@ public class Level extends JPanel{
     
     @Override
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
                 vakjes[x][y].draw(g);
@@ -128,20 +126,8 @@ public class Level extends JPanel{
         }
     }
     
-    public void addGameEventListener(GameEventListener listener) {
-        listenerList.add(GameEventListener.class, listener);
-    }
-    
-    public void removeGameEventListener(GameEventListener listener) {
-        listenerList.remove(GameEventListener.class, listener);
-    }
-    
-    public void fireGameEvent(GameEvent event) {
-        Object[] listeners = listenerList.getListenerList();
-        for (int i = 0; i < listeners.length; i = i+2) {
-            if (listeners[i] == GameEventListener.class) {
-                ((GameEventListener) listeners[i+1]).gameEventOccurred(event);
-            }
-        }
+    @Override
+    public void gameEventOccurred(GameEvent gameEvent){
+        repaint();
     }
 }

@@ -12,12 +12,14 @@ import java.awt.*;
  *
  * @author Jerrold
  */
-public abstract class Spelelement {
+public abstract class Spelelement  {
     
     protected Vakje vakje;
+    protected GameEventListener gameEventListener;
     
-    public Spelelement(Vakje vakje){
+    public Spelelement(Vakje vakje, GameEventListener gameEventListener){
         this.vakje = vakje;
+        this.gameEventListener = gameEventListener;
     }
     
     public void setVakje(Vakje vakje){

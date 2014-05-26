@@ -14,8 +14,8 @@ import java.awt.*;
  */
 public class Superbolletje extends Spelelement {
     
-    public Superbolletje(Vakje vakje){
-        super(vakje);
+    public Superbolletje(Vakje vakje, GameEventListener gameEventListener){
+        super(vakje, gameEventListener);
     }
     
     @Override

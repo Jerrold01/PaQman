@@ -6,13 +6,11 @@
 
 package projectpaqman;
 
-import java.util.EventListener;
-
 /**
  *
  * @author kevinwareman
  */
-public interface GameEventListener extends EventListener {
-     
-    public void gameEventOccurred(GameEvent event);
+public interface GameEventListener {
+
+    public void gameEventOccurred(GameEvent gameEvent);
 }
