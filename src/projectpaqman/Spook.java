@@ -15,13 +15,13 @@ public class Spook extends Spelelement implements GameEventListener{
     
     BeweegStrategy beweegstrategy;
     
-    public Spook(Vakje vakje, GameEventListener gameEventListener){
+    public Spook(Vakje vakje, GameEventListener gameEventListener, BeweegStrategy beweegStrategy){
         super(vakje, gameEventListener);
+        this.beweegstrategy = beweegStrategy;
         
     }
     
     private void move(){
-        this.beweegstrategy = new BeweegDronken();
         beweegstrategy.move(this, gameEventListener);
     } 
     

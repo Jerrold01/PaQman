@@ -18,16 +18,12 @@ public class MainFrame extends JFrame {
     private JPanel main;
     private Menu menu;
     private Level level;
+    private GameEventListener gameEventListener;
     
-    public static void main(String[] args) {
-        Game game = new Game();
-        
-        MainFrame frame = new MainFrame();
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-    }
+
     
-    public MainFrame(){
+    public MainFrame(GameEventListener gameEventListener){
+        this.gameEventListener = gameEventListener;
         createComponents();
     }
     
@@ -40,7 +36,7 @@ public class MainFrame extends JFrame {
         main.setBackground(Color.WHITE);
         this.add(main);
         
-        menu = new Menu();
+        menu = new Menu(gameEventListener);
         level = new Level("Level 1", 1000, 750);
 
         main.add(menu, BorderLayout.NORTH);

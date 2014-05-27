@@ -6,18 +6,20 @@
 package projectpaqman;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
-import java.util.Timer;
+
 
 /**
  *
  * @author Jerrold
  */
-public class Level extends JPanel implements GameEventListener{
+public class Level extends JPanel implements GameEventListener, ActionListener{
 
     private String naam;
-    private Timer timer = new Timer();
-    private LevelTimerTask timertask = new LevelTimerTask();
+    private Timer timer = new Timer(500, this);
+    private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
     private Vakje[][] vakjes;
     private String[][] layout = {
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
@@ -29,17 +31,17 @@ public class Level extends JPanel implements GameEventListener{
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "m", "m", "m", "m", "m", "m", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "b", "b", "b", "b", "b", "m", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "m", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
-        {"m", "x", "b", "m", "x", "g", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
+        {"m", "x", "b", "m", "x", "gd", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "b", "b", "b", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "g", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "x", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "m", "m", "x", "m", "m", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "x", "x", "x", "x", "x", "b", "b", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "b", "b", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "b", "b", "x", "m", "x", "b", "x", "m", "m", "x", "x", "m", "m", "b", "m", "x", "x", "x", "m", "m", "m", "m", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
-        {"m", "x", "m", "x", "x", "x", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
+        {"m", "x", "m", "x", "x", "gs", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "m", "m", "m", "m", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "m", "b", "b", "b", "b", "b", "m", "x", "m", "m", "m", "m", "m", "x", "x", "x", "b", "b", "b", "b", "b", "m", "x", "x", "m"},
@@ -82,7 +84,7 @@ public class Level extends JPanel implements GameEventListener{
                     case "b": 
                         Bolletje bolletje = new Bolletje(vakjes[x][y], this);
                         vakjes[x][y].addElement(bolletje);
-                        timertask.addGameEventListener(bolletje);
+                        gameEventListeners.add(bolletje);
                         break;
                     case "s":
                         vakjes[x][y].addElement(new Superbolletje(vakjes[x][y], this));
@@ -92,10 +94,14 @@ public class Level extends JPanel implements GameEventListener{
                         vakjes[x][y].addElement(paqman);
                         this.addKeyListener(paqman);
                         break;
-                    case "g":
-                        Spook spook = new Spook(vakjes[x][y], this);
+                    case "gd":
+                        Spook spook = new Spook(vakjes[x][y], this, new BeweegDronken());
                         vakjes[x][y].addElement(spook);
-                        timertask.addGameEventListener(spook);
+                        gameEventListeners.add(spook);
+                        break;
+                    case "gs":
+                        Spook slimSpook = new Spook(vakjes[x][y], this, new BeweegSlim());
+                        vakjes[x][y].addElement(slimSpook);
                         break;
                     default:
                         break;
@@ -103,7 +109,7 @@ public class Level extends JPanel implements GameEventListener{
             }
         }
         setBuren();
-        setTimer();
+        timer.start();
     }
     
     /**
@@ -135,10 +141,6 @@ public class Level extends JPanel implements GameEventListener{
         }
     }
     
-    private void setTimer(){
-        timer.scheduleAtFixedRate(timertask, 0, 500);
-    }
-    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -152,5 +154,12 @@ public class Level extends JPanel implements GameEventListener{
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
         repaint();
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent actionEvent){
+        for(GameEventListener gameEventListener: gameEventListeners){
+            gameEventListener.gameEventOccurred(new GameEvent());
+        }
     }
 }

@@ -10,18 +10,30 @@ package projectpaqman;
  *
  * @author kevinwareman
  */
-public class Game {
+public class Game implements GameEventListener {
     
     private int aantal_levens;
     private int aantal_punten;
     private boolean onverslaanbaar;
     private boolean gepauzeerd;
     
+    public static void main(String[] args) {
+        Game game = new Game();
+    }
+
     Game(){
         aantal_levens = 3;
         aantal_punten = 0;
         onverslaanbaar = false;
         gepauzeerd = false;
+        createMainFrame();
+    }
+    
+    private void createMainFrame(){
+        MainFrame frame = new MainFrame(this);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        
     }
   
     public int getAantalLevens(){
@@ -54,5 +66,10 @@ public class Game {
     
     public void setGepauzeerd(boolean gepauzeerd){
         this.gepauzeerd = gepauzeerd;
+    }
+    
+    @Override
+    public void gameEventOccurred(GameEvent gameEvent){
+        
     }
 }
