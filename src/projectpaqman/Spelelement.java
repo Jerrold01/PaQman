@@ -12,7 +12,7 @@ import java.awt.*;
  *
  * @author Jerrold
  */
-public abstract class Spelelement  {
+public abstract class Spelelement implements GameEventListener{
     
     protected Vakje vakje;
     protected GameEventListener gameEventListener;

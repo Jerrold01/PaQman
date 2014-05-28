@@ -67,4 +67,9 @@ public class Paqman extends Spelelement implements KeyListener {
     public void keyTyped(KeyEvent event){
 
     }
+    
+    @Override
+    public void gameEventOccurred(GameEvent gameEvent){
+        
+    }
 }

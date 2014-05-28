@@ -16,7 +16,9 @@ public class GameEvent{
     private boolean waarde;
     private int getal;
     
-    GameEvent(EventType eventType){}
+    GameEvent(EventType eventType){
+        this.eventType = eventType;
+    }
     
     GameEvent(EventType eventType, boolean waarde){
         this.eventType = eventType;
@@ -30,5 +32,13 @@ public class GameEvent{
     
     public EventType getEventType(){
         return eventType;
+    }
+    
+    public boolean getWaarde(){
+        return waarde;
+    }
+    
+    public int getGetal(){
+        return getal;
     }
 }

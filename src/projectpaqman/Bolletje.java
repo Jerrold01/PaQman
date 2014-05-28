@@ -12,7 +12,7 @@ import java.awt.*;
  *
  * @author Jerrold
  */
-public class Bolletje extends Spelelement implements GameEventListener{
+public class Bolletje extends Spelelement {
     
     
     public Bolletje(Vakje vakje, GameEventListener gameEventListener){
@@ -32,7 +32,7 @@ public class Bolletje extends Spelelement implements GameEventListener{
     }
     
     @Override
-    public void gameEventOccurred(GameEvent event){
+    public void gameEventOccurred(GameEvent gameEvent){
         if(vakje != null){
             for(Spelelement element : vakje.getElementen()){
                 if(element instanceof Paqman){

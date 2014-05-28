@@ -24,4 +24,9 @@ public class Superbolletje extends Spelelement {
         g.drawOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
         g.fillOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
     }
+    
+    @Override
+    public void gameEventOccurred(GameEvent gameEvent){
+        
+    }
 }
