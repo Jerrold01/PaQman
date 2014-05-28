@@ -55,10 +55,9 @@ public class Paqman extends Spelelement implements KeyListener {
                 this.move(Windrichting.OOST);
                 break;
         }
-        gameEventListener.gameEventOccurred(new GameEvent());
+        gameEventListener.gameEventOccurred(new GameEvent(EventType.REPAINT));
     }
 
-    
     @Override
     public void keyPressed(KeyEvent event){
 

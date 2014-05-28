@@ -47,14 +47,14 @@ public class Menu extends JPanel {
     public class pauzeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            gameEventListener.gameEventOccurred(new GameEvent(true, false, 3, 1));
+            gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));
         }
     }
     
     public class startClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            
+            gameEventListener.gameEventOccurred(new GameEvent(EventType.HERSTART));
         }
     }
 }

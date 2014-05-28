@@ -153,13 +153,15 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        repaint();
+        if(gameEvent.getEventType().equals(EventType.REPAINT)){
+            repaint();
+        }
     }
     
     @Override
     public void actionPerformed(ActionEvent actionEvent){
         for(GameEventListener gameEventListener: gameEventListeners){
-            gameEventListener.gameEventOccurred(new GameEvent());
+            gameEventListener.gameEventOccurred(new GameEvent(EventType.REPAINT));
         }
     }
 }

@@ -12,17 +12,23 @@ package projectpaqman;
  */
 public class GameEvent{
     
-    private boolean gepauzeerd;
-    private boolean onverslaanbaar;
-    private int aantal_levens;
-    private int aantal_punten;
+    private EventType eventType;
+    private boolean waarde;
+    private int getal;
     
-    GameEvent(){}
+    GameEvent(EventType eventType){}
     
-    GameEvent(boolean gepauzeerd, boolean onverslaanbaar, int aantal_levens, int aantal_punten){
-        this.gepauzeerd = gepauzeerd;
-        this.onverslaanbaar = onverslaanbaar;
-        this.aantal_levens = aantal_levens;
-        this.aantal_punten = aantal_punten;
+    GameEvent(EventType eventType, boolean waarde){
+        this.eventType = eventType;
+        this.waarde = waarde;
+    }
+    
+    GameEvent(EventType eventType, int waarde){
+        this.eventType = eventType;
+        this.getal = waarde;
+    }
+    
+    public EventType getEventType(){
+        return eventType;
     }
 }

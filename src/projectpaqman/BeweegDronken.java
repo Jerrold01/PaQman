@@ -31,7 +31,7 @@ public class BeweegDronken implements BeweegStrategy {
                 nieuwVakje.addElement(spelelement);
                 spelelement.vakje.removeElement(spelelement);
                 spelelement.setVakje(nieuwVakje);
-                gameEventListener.gameEventOccurred(new GameEvent());
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.REPAINT));
             }
             else{
                 move(spelelement, gameEventListener);

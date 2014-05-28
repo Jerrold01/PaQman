@@ -6,15 +6,24 @@
 
 package projectpaqman;
 
+import java.awt.*;
+import javax.swing.*;
+
 /**
  *
  * @author kevinwareman
  */
 public class Game implements GameEventListener {
+ 
+    private MainFrame frame;
+    private JPanel main;
+    private Level level;
+    private Menu menu;
     
     private int aantal_levens;
     private int aantal_punten;
     private boolean onverslaanbaar;
+    private boolean gestart;
     private boolean gepauzeerd;
     
     public static void main(String[] args) {
@@ -25,15 +34,21 @@ public class Game implements GameEventListener {
         aantal_levens = 3;
         aantal_punten = 0;
         onverslaanbaar = false;
+        gestart = true;
         gepauzeerd = false;
-        createMainFrame();
+        createComponents();
     }
     
-    private void createMainFrame(){
-        MainFrame frame = new MainFrame(this);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+    private void createComponents(){
+        frame = new MainFrame(new BorderLayout());
+        menu = new Menu(this);
+        level = new Level("Level 1", 1000, 750);
         
+        frame.add(menu, BorderLayout.NORTH);
+        frame.add(level, BorderLayout.CENTER);
+  
+        level.requestFocus();
+        frame.setVisible(true);
     }
   
     public int getAantalLevens(){
@@ -60,6 +75,14 @@ public class Game implements GameEventListener {
         this.onverslaanbaar = onverslaanbaar;
     }
     
+    public boolean getGestart(){
+        return gestart;
+    }
+    
+    public void setGestart(boolean gestart){
+        this.gestart = gestart;
+    }
+    
     public boolean getGepauzeerd(){
         return gepauzeerd;
     }
@@ -70,6 +93,19 @@ public class Game implements GameEventListener {
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        
+        switch(gameEvent.getEventType()){
+            case HERSTART:
+                if(getGestart()){
+                    
+                }else{
+
+                }
+            case PAUZEER:
+                if(getGepauzeerd()){
+                    setGepauzeerd(false);
+                }else{
+                    setGepauzeerd(true);
+                }
+        }
     }
 }
