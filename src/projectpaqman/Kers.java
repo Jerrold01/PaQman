@@ -22,16 +22,11 @@ public class Kers extends Spelelement {
         super(vakje, gameEventListener);
     }
     
-    private void delete(){
-        vakje.removeElement(this);
-        setVakje(null);
-    }
-    
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
+        g.setColor(Color.RED);
         g.drawOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 7, 7);
-        g.fillOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 7, 7);
+        g.fillOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 8, 8);
     }
     
     @Override

@@ -25,10 +25,6 @@ public class Spook extends Spelelement implements GameEventListener{
         beweegstrategy.move(this, gameEventListener);
     } 
     
-    private void delete(){
-        
-    }
-    
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.GREEN);

@@ -19,11 +19,6 @@ public class Bolletje extends Spelelement {
         super(vakje, gameEventListener);
     }
     
-    private void delete(){
-        vakje.removeElement(this);
-        setVakje(null);
-    }
-    
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
