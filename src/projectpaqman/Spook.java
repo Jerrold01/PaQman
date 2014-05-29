@@ -18,7 +18,6 @@ public class Spook extends Spelelement implements GameEventListener{
     public Spook(Vakje vakje, GameEventListener gameEventListener, BeweegStrategy beweegStrategy){
         super(vakje, gameEventListener);
         this.beweegstrategy = beweegStrategy;
-        
     }
     
     private void move(){
@@ -33,13 +32,10 @@ public class Spook extends Spelelement implements GameEventListener{
     }    
     
     @Override
-    public void gameEventOccurred(GameEvent event){
-        move();
-        for(Spelelement element : vakje.getElementen()){
-            if(element instanceof Paqman){
-                delete();
-            }
-        }  
+    public void gameEventOccurred(GameEvent gameEvent){
+        if(gameEvent.getEventType().equals(EventType.TIMER)){
+            move();            
+        }
     }
 }
   

@@ -7,7 +7,6 @@
 package projectpaqman;
 
 import java.awt.*;
-import javax.swing.*;
 
 /**
  *
@@ -16,7 +15,6 @@ import javax.swing.*;
 public class Game implements GameEventListener {
  
     private MainFrame frame;
-    private JPanel main;
     private Level level;
     private Menu menu;
     
@@ -43,28 +41,13 @@ public class Game implements GameEventListener {
         frame = new MainFrame(new BorderLayout());
         menu = new Menu(this);
         level = new Level("Level 1", 1000, 750);
+        level.addGameEventListener(this);
         
         frame.add(menu, BorderLayout.NORTH);
         frame.add(level, BorderLayout.CENTER);
   
         level.requestFocus();
         frame.setVisible(true);
-    }
-  
-    public int getAantalLevens(){
-        return aantal_levens;
-    }
-    
-    public void setAantalLevens(int aantal_levens){
-        this.aantal_levens = aantal_levens;
-    }
-    
-    public int getAantalPunten(){
-        return aantal_punten;
-    }
-    
-    public void setAantalPunten(int aantal_punten){
-        this.aantal_punten = aantal_punten;
     }
     
     public boolean getOnverslaanbaar(){
@@ -100,12 +83,33 @@ public class Game implements GameEventListener {
                 }else{
 
                 }
+                break;
             case PAUZEER:
                 if(getGepauzeerd()){
-                    setGepauzeerd(false);
+
                 }else{
-                    setGepauzeerd(true);
+
                 }
+                break;
+            case EATBOLLETJE:
+                aantal_punten += 10;
+                menu.setPunten(aantal_punten);
+                break;
+            case EATSUPERBOLLETJE:
+                setOnverslaanbaar(true);
+                break;
+            case EATKERS:
+                aantal_punten += 100;
+                menu.setPunten(aantal_punten);
+                break;
+            case EATSPOOK:
+                aantal_punten += 200;
+                menu.setPunten(aantal_punten);
+                break;
+            case DEAD:
+                aantal_levens--;
+                menu.setLevens(aantal_levens);
+                break;
         }
     }
 }

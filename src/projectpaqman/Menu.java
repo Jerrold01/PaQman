@@ -44,6 +44,30 @@ public class Menu extends JPanel {
         this.add(level_nummer);
     }
     
+    public void setStartknop(){
+        if(startknop.getText().equalsIgnoreCase("Start")){
+            startknop.setText("Herstart");
+        }else{
+            startknop.setText("Start");
+        }
+    }
+    
+    public void setPauzeknop(){
+        if(startknop.getText().equalsIgnoreCase("Pauzeer")){
+            startknop.setText("Hervat");
+        }else{
+            startknop.setText("Pauzeer");
+        }        
+    }
+    
+    public void setPunten(int aantal_punten){
+        this.aantal_punten.setText("Punten: " + String.valueOf(aantal_punten));
+    }
+    
+    public void setLevens(int aantal_levens){
+        this.aantal_levens.setText("Levens: " + String.valueOf(aantal_levens));
+    }
+    
     public class pauzeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){

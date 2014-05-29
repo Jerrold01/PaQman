@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class BeweegBang implements BeweegStrategy {
     
+    @Override
     public void move(Spelelement spelelement, GameEventListener gameEventListener){
         
     }

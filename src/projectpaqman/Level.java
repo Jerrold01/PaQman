@@ -18,20 +18,24 @@ import javax.swing.*;
 public class Level extends JPanel implements GameEventListener, ActionListener{
 
     private String naam;
+    
+    private int aantalBolletjes;
+    private int aantalBolletjesGegeten;
+    private Spelelement temporaryElement;
     private Timer timer = new Timer(500, this);
     private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
     private Vakje[][] vakjes;
     private String[][] layout = {
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
-        {"m", "p", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "m", "m", "m", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "b", "b", "b", "b", "m"},
-        {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "m", "m", "m", "b", "m"},
+        {"m", "x", "x", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "m", "m", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m", "x", "b", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "m", "m", "m", "m", "m", "m", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "b", "b", "b", "b", "b", "m", "b", "m", "b", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "m", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
-        {"m", "x", "b", "m", "x", "gd", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
+        {"m", "x", "b", "m", "b", "gd", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "b", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "b", "b", "b", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
@@ -41,7 +45,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         {"m", "x", "m", "x", "x", "x", "x", "b", "b", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "b", "b", "x", "m", "x", "b", "x", "m", "m", "x", "x", "m", "m", "b", "m", "x", "x", "x", "m", "m", "m", "m", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
-        {"m", "x", "m", "x", "x", "gs", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
+        {"m", "x", "m", "p", "x", "gs", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "m", "m", "m", "m", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "m", "b", "b", "b", "b", "b", "m", "x", "m", "m", "m", "m", "m", "x", "x", "x", "b", "b", "b", "b", "b", "m", "x", "x", "m"},
@@ -85,6 +89,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                         Bolletje bolletje = new Bolletje(vakjes[x][y], this);
                         vakjes[x][y].addElement(bolletje);
                         gameEventListeners.add(bolletje);
+                        aantalBolletjes++;
                         break;
                     case "s":
                         vakjes[x][y].addElement(new Superbolletje(vakjes[x][y], this));
@@ -102,6 +107,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     case "gs":
                         Spook slimSpook = new Spook(vakjes[x][y], this, new BeweegSlim());
                         vakjes[x][y].addElement(slimSpook);
+                        gameEventListeners.add(slimSpook);
                         break;
                     default:
                         break;
@@ -110,6 +116,10 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         }
         setBuren();
         timer.start();
+    }
+    
+    public void addGameEventListener(GameEventListener gameEventListener){
+        gameEventListeners.add(gameEventListener);
     }
     
     /**
@@ -141,6 +151,18 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         }
     }
     
+    private void spawnKers(){
+        double posX = Math.random()*vakjes.length;
+        double posY = Math.random()*vakjes[0].length;
+        if(!vakjes[(int)posX][(int)posY].getMuur()){
+            Kers kers = new Kers(vakjes[(int)posX][(int)posY], this);
+            vakjes[(int)posX][(int)posY].addElement(kers);
+            temporaryElement = kers;
+        }else{
+            spawnKers();
+        }
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -153,15 +175,40 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        if(gameEvent.getEventType().equals(EventType.REPAINT)){
-            repaint();
+        switch(gameEvent.getEventType()){
+            case MOVE:
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
+                }
+                
+                if(temporaryElement != null){
+                    gameEventListeners.add(temporaryElement);
+                    temporaryElement = null;
+                }
+                break;
+            case EATBOLLETJE:
+                aantalBolletjesGegeten++;
+                if(Math.round(aantalBolletjes/2) == aantalBolletjesGegeten){
+                    spawnKers();
+                }
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATBOLLETJE));
+                }
+                break;
+            case EATKERS:
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATKERS));
+                }
+                break;
         }
+        repaint();
     }
     
     @Override
     public void actionPerformed(ActionEvent actionEvent){
         for(GameEventListener gameEventListener: gameEventListeners){
-            gameEventListener.gameEventOccurred(new GameEvent(EventType.REPAINT));
+            gameEventListener.gameEventOccurred(new GameEvent(EventType.TIMER));
+            repaint();
         }
     }
 }

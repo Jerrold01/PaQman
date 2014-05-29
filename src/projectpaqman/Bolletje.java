@@ -28,13 +28,22 @@ public class Bolletje extends Spelelement {
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        if(vakje != null){
-            for(Spelelement element : vakje.getElementen()){
-                if(element instanceof Paqman){
-                    delete();
-                    break;
-                }
-            }  
+        if(gameEvent.getEventType().equals(EventType.MOVE)){
+            if(vakje != null){
+                for(Spelelement element : vakje.getElementen()){
+                    if(element instanceof Paqman){
+                        delete();
+                        break;
+                    }
+                }  
+            }
         }
+    }
+    
+    @Override
+    protected void delete(){
+        vakje.removeElement(this);
+        setVakje(null);
+        gameEventListener.gameEventOccurred(new GameEvent(EventType.EATBOLLETJE));
     }
 }

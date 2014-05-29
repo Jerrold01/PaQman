@@ -19,6 +19,7 @@ public class BeweegDronken implements BeweegStrategy {
     private Windrichting laatsteWindrichting;
     private Windrichting windrichting;
     
+    @Override
     public void move(Spelelement spelelement, GameEventListener gameEventListener ){
         
         int windrichtingInt = new Random().nextInt(Windrichting.values().length);
@@ -31,7 +32,6 @@ public class BeweegDronken implements BeweegStrategy {
                 nieuwVakje.addElement(spelelement);
                 spelelement.vakje.removeElement(spelelement);
                 spelelement.setVakje(nieuwVakje);
-                gameEventListener.gameEventOccurred(new GameEvent(EventType.REPAINT));
             }
             else{
                 move(spelelement, gameEventListener);
