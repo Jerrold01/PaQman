@@ -74,7 +74,7 @@ public class Game implements GameEventListener {
         this.gepauzeerd = gepauzeerd;
     }
     
-    public void restart(){
+    private void restart(){
         Game newGame = new Game();
     }
     
@@ -82,18 +82,10 @@ public class Game implements GameEventListener {
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
             case HERSTART:
-                if(getGestart()){
-                    
-                }else{
-
-                }
+                restart();
                 break;
             case PAUZEER:
-                if(getGepauzeerd()){
-
-                }else{
-
-                }
+                //pauzeer();
                 break;
             case EATBOLLETJE:
                 aantal_punten += 10;
@@ -112,15 +104,13 @@ public class Game implements GameEventListener {
                 break;
             case DEAD:
                 if(aantal_levens != 0){
-                aantal_levens--;
-                menu.setLevens(aantal_levens);
+                    aantal_levens--;
+                    menu.setLevens(aantal_levens);
                 }
                 else{
                     restart();
                 }
-                
                 break;
-            
         }
     }
 }

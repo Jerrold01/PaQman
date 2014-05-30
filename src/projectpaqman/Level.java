@@ -24,10 +24,11 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private Spelelement temporaryElement;
     private Timer timer = new Timer(500, this);
     private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
+    
     private Vakje[][] vakjes;
-    private String[][] layout = {
+    private String[][] level_1 = {
         {"m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"},
-        {"m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
+        {"m", "p", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "m", "m", "m", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "b", "b", "b", "b", "m"},
         {"m", "x", "x", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "m", "m", "m", "b", "m"},
@@ -39,13 +40,13 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         {"m", "x", "b", "m", "x", "x", "x", "x", "b", "b", "b", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "m", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "b", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
         {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "m", "x", "x", "x", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "m"},
-        {"m", "x", "x", "m", "m", "m", "m", "m", "m", "m", "m", "x", "x", "x", "m", "m", "x", "m", "m", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
+        {"m", "x", "x", "m", "m", "m", "m", "m", "m", "m", "m", "s", "x", "x", "m", "m", "x", "m", "m", "x", "x", "m", "x", "x", "b", "m", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "x", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "x", "x", "x", "x", "x", "b", "b", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "m", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "b", "b", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "b", "b", "x", "m", "x", "b", "x", "m", "m", "x", "x", "m", "m", "b", "m", "x", "x", "x", "m", "m", "m", "m", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
-        {"m", "x", "m", "p", "x", "gs", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
+        {"m", "x", "m", "x", "x", "gs", "x", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "m", "b", "m", "x", "x", "x", "x", "x", "x", "b", "m", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "m", "m", "m", "m", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "b", "x", "x", "m", "x", "x", "x", "x", "b", "m", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "m", "b", "x", "m"},
         {"m", "x", "m", "x", "x", "x", "m", "x", "x", "x", "m", "x", "x", "x", "x", "m", "b", "b", "b", "b", "b", "m", "x", "m", "m", "m", "m", "m", "x", "x", "x", "b", "b", "b", "b", "b", "m", "x", "x", "m"},
@@ -77,11 +78,10 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
      * Deze functie voegt tevens een KeyListener toe aan Paqman.
      */
     private void init(){
-        
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
                 vakjes[x][y] = new Vakje(x, y);
-                switch(layout[y][x]){
+                switch(level_1[y][x]){
                     case "m":
                         vakjes[x][y].setMuur(true);
                         break;
@@ -92,7 +92,9 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                         aantalBolletjes++;
                         break;
                     case "s":
-                        vakjes[x][y].addElement(new Superbolletje(vakjes[x][y], this));
+                        Superbolletje superbolletje = new Superbolletje(vakjes[x][y], this);
+                        vakjes[x][y].addElement(superbolletje);
+                        gameEventListeners.add(superbolletje);
                         break;
                     case "p":
                         Paqman paqman = new Paqman(vakjes[x][y], this);
@@ -152,6 +154,9 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         }
     }
     
+    /**
+     * De functie waarmee een kers random op het veld gespawned kan worden.
+     */
     private void spawnKers(){
         double posX = Math.random()*vakjes.length;
         double posY = Math.random()*vakjes[0].length;
@@ -173,7 +178,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
             }
         }
     }
-    
+
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
@@ -191,11 +196,18 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 aantalBolletjesGegeten++;
                 if(Math.round(aantalBolletjes/2) == aantalBolletjesGegeten){
                     spawnKers();
+                }else if(aantalBolletjes == aantalBolletjesGegeten){
+                    //nextLevel();
                 }
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.EATBOLLETJE));
                 }
                 break;
+            case EATSUPERBOLLETJE:
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSUPERBOLLETJE));
+                }
+                break;                
             case EATKERS:
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.EATKERS));

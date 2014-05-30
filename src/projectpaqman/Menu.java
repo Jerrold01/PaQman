@@ -53,10 +53,10 @@ public class Menu extends JPanel {
     }
     
     public void setPauzeknop(){
-        if(startknop.getText().equalsIgnoreCase("Pauzeer")){
-            startknop.setText("Hervat");
+        if(pauzeknop.getText().equalsIgnoreCase("Pauzeer")){
+            pauzeknop.setText("Hervat");
         }else{
-            startknop.setText("Pauzeer");
+            pauzeknop.setText("Pauzeer");
         }        
     }
     
@@ -72,6 +72,7 @@ public class Menu extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent){
             gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));
+            setPauzeknop();
         }
     }
     
@@ -79,6 +80,8 @@ public class Menu extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent){
             gameEventListener.gameEventOccurred(new GameEvent(EventType.HERSTART));
+            setStartknop();
+            
         }
     }
 }

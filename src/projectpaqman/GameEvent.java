@@ -13,8 +13,6 @@ package projectpaqman;
 public class GameEvent{
     
     private EventType eventType;
-    private boolean waarde;
-    private int getal;
     
     GameEvent(EventType eventType){
         this.eventType = eventType;
@@ -30,25 +28,7 @@ public class GameEvent{
         }
     }
     
-    GameEvent(EventType eventType, boolean waarde){
-        this.eventType = eventType;
-        this.waarde = waarde;
-    }
-    
-    GameEvent(EventType eventType, int waarde){
-        this.eventType = eventType;
-        this.getal = waarde;
-    }
-    
     public EventType getEventType(){
         return eventType;
-    }
-    
-    public boolean getWaarde(){
-        return waarde;
-    }
-    
-    public int getGetal(){
-        return getal;
     }
 }

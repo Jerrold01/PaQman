@@ -33,8 +33,11 @@ public class Spook extends Spelelement implements GameEventListener{
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        if(gameEvent.getEventType().equals(EventType.TIMER)){
-            move();            
+        switch(gameEvent.getEventType()){
+            case TIMER:
+                move();
+                break;
+            case 
         }
     }
 }
