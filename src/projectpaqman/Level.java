@@ -98,6 +98,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                         Paqman paqman = new Paqman(vakjes[x][y], this);
                         vakjes[x][y].addElement(paqman);
                         this.addKeyListener(paqman);
+                        gameEventListeners.add(paqman);
                         break;
                     case "gd":
                         Spook spook = new Spook(vakjes[x][y], this, new BeweegDronken());
@@ -200,6 +201,10 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.EATKERS));
                 }
                 break;
+            case DEAD:
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                }
         }
         repaint();
     }

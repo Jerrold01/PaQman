@@ -18,6 +18,16 @@ public class GameEvent{
     
     GameEvent(EventType eventType){
         this.eventType = eventType;
+        switch(eventType){
+            case PAUZEER:
+                try{
+                    Thread.sleep(5000);
+                }
+                catch(InterruptedException e){
+                    System.out.println(e);
+                    
+                }
+        }
     }
     
     GameEvent(EventType eventType, boolean waarde){

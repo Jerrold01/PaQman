@@ -74,6 +74,10 @@ public class Game implements GameEventListener {
         this.gepauzeerd = gepauzeerd;
     }
     
+    public void restart(){
+        Game newGame = new Game();
+    }
+    
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
@@ -107,9 +111,16 @@ public class Game implements GameEventListener {
                 menu.setPunten(aantal_punten);
                 break;
             case DEAD:
+                if(aantal_levens != 0){
                 aantal_levens--;
                 menu.setLevens(aantal_levens);
+                }
+                else{
+                    restart();
+                }
+                
                 break;
+            
         }
     }
 }

@@ -16,8 +16,11 @@ import java.util.HashMap;
  */
 public class Paqman extends Spelelement implements KeyListener {
     
+    Vakje startVakje;
+    
     public Paqman(Vakje vakje, GameEventListener gameEventListener){
         super(vakje, gameEventListener);
+        this.startVakje = vakje;
     }
     
     private void move(Windrichting windrichting){
@@ -57,6 +60,13 @@ public class Paqman extends Spelelement implements KeyListener {
         }
         gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
     }
+    
+    public void respawn(){
+        vakje.removeElement(this);
+        startVakje.addElement(this);
+        vakje = startVakje;
+        gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+    }
 
     @Override
     public void keyPressed(KeyEvent event){
@@ -70,6 +80,15 @@ public class Paqman extends Spelelement implements KeyListener {
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        
+        if(gameEvent.getEventType().equals(EventType.MOVE)){
+            if(vakje != null){
+                   for(Spelelement element : vakje.getElementen()){
+                    if(element instanceof Spook){
+                        respawn();
+                        break;
+                    }
+                }  
+            }
+        }
     }
 }
