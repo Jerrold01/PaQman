@@ -41,7 +41,24 @@ public class Paqman extends Spelelement implements KeyListener {
         g.setColor(Color.BLACK);
         g.drawOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
     }
+    
+    @Override
+    protected void respawn(){
+        vakje.removeElement(this);
+        startVakje.addElement(this);
+        vakje = startVakje;
+    }
 
+    @Override
+    public void keyPressed(KeyEvent event){
+
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent event){
+
+    }
+    
     @Override
     public void keyReleased(KeyEvent event){
             switch(event.getKeyCode()){
@@ -61,34 +78,11 @@ public class Paqman extends Spelelement implements KeyListener {
         gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
     }
     
-    public void respawn(){
-        vakje.removeElement(this);
-        startVakje.addElement(this);
-        vakje = startVakje;
-        gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
-    }
-
-    @Override
-    public void keyPressed(KeyEvent event){
-
-    }
-    
-    @Override
-    public void keyTyped(KeyEvent event){
-
-    }
-    
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        if(gameEvent.getEventType().equals(EventType.MOVE)){
-            if(vakje != null){
-                   for(Spelelement element : vakje.getElementen()){
-                    if(element instanceof Spook){
-                        respawn();
-                        break;
-                    }
-                }  
-            }
+        switch(gameEvent.getEventType()){
+            case DEAD:
+                respawn();
         }
     }
 }

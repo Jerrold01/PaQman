@@ -16,7 +16,7 @@ import javax.swing.*;
 public class MainFrame extends JFrame {
 
     public MainFrame(LayoutManager layoutManager){
-        setSize(new Dimension(1000, 810));
+        setSize(new Dimension(1015, 825));
         setTitle("PaQman");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
      

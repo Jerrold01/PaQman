@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class Spook extends Spelelement implements GameEventListener{
     
-    BeweegStrategy beweegstrategy;
+    private BeweegStrategy beweegstrategy;
     
     public Spook(Vakje vakje, GameEventListener gameEventListener, BeweegStrategy beweegStrategy){
         super(vakje, gameEventListener);
@@ -36,11 +36,29 @@ public class Spook extends Spelelement implements GameEventListener{
         switch(gameEvent.getEventType()){
             case TIMER:
                 move();
+                if(vakje != null){
+                    for(Spelelement element : vakje.getElementen()){
+                        if(element instanceof Paqman){
+                            gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                            break;
+                        }
+                    }
+                }
                 break;
-            case 
+            case MOVE:
+                if(vakje != null){
+                   for(Spelelement element : vakje.getElementen()){
+                    if(element instanceof Paqman){
+                        gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                        break;
+                    }
+                }  
+            } 
         }
     }
+
 }
+
   
     
 

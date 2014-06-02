@@ -31,5 +31,7 @@ public abstract class Spelelement implements GameEventListener{
         setVakje(null);
     }
     
-    public abstract void draw(Graphics g);
+    protected void respawn(){}
+    
+    protected abstract void draw(Graphics g);
 }
