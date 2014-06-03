@@ -6,7 +6,6 @@
 
 package projectpaqman;
 
-import java.util.HashMap;
 
 /**
  *

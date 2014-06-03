@@ -12,10 +12,20 @@ package projectpaqman;
  */
 public class GameEvent{
     
+    private Object source;
     private EventType eventType;
     
     GameEvent(EventType eventType){
         this.eventType = eventType;
+    }
+    
+    GameEvent(Object source, EventType eventType){
+        this.source = source;
+        this.eventType = eventType;
+    }
+    
+    public Object getSource(){
+        return source;
     }
     
     public EventType getEventType(){

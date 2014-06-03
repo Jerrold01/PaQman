@@ -75,17 +75,26 @@ public class Menu extends JPanel {
     public class pauzeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));
-            setPauzeknop();
+            if(startknop.getText().equalsIgnoreCase("Herstart")){
+                if(pauzeknop.getText().equalsIgnoreCase("Pauzeer")){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));                
+                }else{
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.START));
+                }
+                setPauzeknop();
+            }
         }
     }
     
     public class startClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            gameEventListener.gameEventOccurred(new GameEvent(EventType.HERSTART));
+            if(startknop.getText().equalsIgnoreCase("Start")){
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.START));                
+            }else{
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.HERSTART));
+            }
             setStartknop();
-            
         }
     }
 }

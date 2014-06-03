@@ -17,19 +17,25 @@ import java.util.HashMap;
 public class Paqman extends Spelelement implements KeyListener {
     
     Vakje startVakje;
+    boolean gestart;
+    boolean gepauzeerd;
     
     public Paqman(Vakje vakje, GameEventListener gameEventListener){
         super(vakje, gameEventListener);
         this.startVakje = vakje;
+        this.gestart = false;
+        this.gepauzeerd = false;
     }
     
     private void move(Windrichting windrichting){
-        HashMap<Windrichting, Vakje> buren = vakje.getBuren();
-        Vakje nieuwVakje = buren.get(windrichting);
-        if(!nieuwVakje.getMuur()){
-            nieuwVakje.addElement(this);
-            vakje.removeElement(this);
-            vakje = nieuwVakje;
+        if(gestart && !gepauzeerd){
+            HashMap<Windrichting, Vakje> buren = vakje.getBuren();
+            Vakje nieuwVakje = buren.get(windrichting);
+            if(!nieuwVakje.getMuur()){
+                nieuwVakje.addElement(this);
+                vakje.removeElement(this);
+                vakje = nieuwVakje;
+            }
         }
     }
     
@@ -80,9 +86,17 @@ public class Paqman extends Spelelement implements KeyListener {
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        switch(gameEvent.getEventType()){
+        switch(gameEvent.getEventType()){ 
             case DEAD:
                 respawn();
+                break;
+            case START:
+                gestart = true;
+                gepauzeerd = false;
+                break;
+            case PAUZEER:
+                gepauzeerd = true;
+                break;
         }
     }
 }

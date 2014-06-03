@@ -29,7 +29,8 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private Spelelement temporaryElement;
     private JLabel gametext;
     private Timer timer = new Timer(500, this);
-    private Timer textTimer = new Timer(3000, this);
+    private Timer textTimer = new Timer(1000, this);
+    private Timer sbTimer = new Timer(10000, this);
     
     private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
     private Vakje[][] vakjes;
@@ -43,6 +44,8 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     public Level(int level_nummer, int lengte, int breedte) {
         this.setBackground(Color.WHITE);
         this.level_nummer = level_nummer;
+        this.aantalBolletjes = 0;
+        this.aantalBolletjesGegeten = 0;
         this.vakjes = new Vakje[lengte / 25][breedte / 25];
         this.setFocusable(true);
         this.requestFocus();
@@ -55,7 +58,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
      * Deze functie voegt tevens een KeyListener toe aan Paqman.
      */
     private void init(){
-        setLevel(1);
+        setLevel(level_nummer);
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
                 vakjes[x][y] = new Vakje(x, y);
@@ -96,18 +99,22 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
             }
         }
         setBuren();
-        timer.start();
-        setGameText("Level " + level_nummer);
+        System.out.println("Heeft level " + level_nummer + " gestart.");
     }
     
     public int getLevel(){
         return level_nummer;
     }
     
+    /**
+     * 
+     * @param getal Het nummer van het level wat ingeladen moet worden.
+     * De functie die het level inlaadt aan de hand van een tekstbestand. Het tekstbestand moet in de gamemap staan in de vorm \level_(nummer).txt.
+     */
     private void setLevel(int getal){
         List<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get("C:\\Users\\Jerrold\\Documents\\NetBeansProjects\\Paqman\\src\\projectpaqman\\level_" + getal + ".txt"), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get("/Users/kevinwareman/NetBeansProjects/PaQman/src/projectpaqman/level_" + getal + ".txt"), StandardCharsets.UTF_8);
         } catch (IOException ex) {
             System.out.println("Kon het level niet inladen." + ex);
         }
@@ -116,6 +123,20 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         for(int i =0; i<lines.size(); i++){
             layout[i] = lines.get(i).split("[ ]+");
         }
+        setGameText("Level " + level_nummer);
+    }
+    
+    /**
+     * De functie waarmee de game na initialisatie daadwerkelijk gestart wordt.
+     */
+    private void startGame(){
+        timer.start();
+        this.requestFocus();
+    }
+    
+    private void pauzeerGame(){
+        timer.stop();
+        setGameText("Gepauzeerd");
     }
     
     public void addGameEventListener(GameEventListener gameEventListener){
@@ -179,6 +200,16 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         }
     }
     
+    /**
+     * De functie die de timer start als Paqman een superbolletje eet en hem onverslaanbaar maakt.
+     */
+    private void onverslaanbaar(){
+        sbTimer.start();
+    }
+    
+    /**
+     * De functie waarmee het level wordt beeïndigd.
+     */
     public void delete(){
         try {
             this.finalize();
@@ -207,6 +238,23 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
+            case START:
+                startGame();
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.START));
+                }                
+                break;
+            case PAUZEER:
+                pauzeerGame();
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));
+                }
+                break;
+            case DEAD:
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                }
+                break;
             case MOVE:
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
@@ -233,8 +281,9 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 }
                 break;
             case EATSUPERBOLLETJE:
+                onverslaanbaar();
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSUPERBOLLETJE));
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.ONVERSLAANBAAR));
                 }
                 break;                
             case EATKERS:
@@ -242,10 +291,11 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.EATKERS));
                 }
                 break;
-            case DEAD:
+            case EATSPOOK:
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
                 }
+                break;                
         }
         repaint();
     }
@@ -254,6 +304,14 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     public void actionPerformed(ActionEvent actionEvent){
         if(actionEvent.getSource().equals(textTimer)){
             setGameText(null);
+            textTimer.stop();
+        }
+        
+        if(actionEvent.getSource().equals(sbTimer)){
+            for(GameEventListener gameEventListener: gameEventListeners){
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.ONVERSLAANBAAR));
+            }            
+            sbTimer.stop();
         }
         
         if(actionEvent.getSource().equals(timer)){

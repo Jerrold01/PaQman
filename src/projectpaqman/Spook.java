@@ -14,22 +14,40 @@ import java.awt.*;
 public class Spook extends Spelelement implements GameEventListener{
     
     private BeweegStrategy beweegstrategy;
+    private Vakje startVakje;
+    private boolean onverslaanbaar;
     
     public Spook(Vakje vakje, GameEventListener gameEventListener, BeweegStrategy beweegStrategy){
         super(vakje, gameEventListener);
         this.beweegstrategy = beweegStrategy;
+        this.startVakje = vakje;
     }
     
     private void move(){
         beweegstrategy.move(this, gameEventListener);
     } 
     
+    public void setOnverslaanbaar(boolean onverslaanbaar){
+        this.onverslaanbaar = onverslaanbaar;
+    }
+    
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.GREEN);
+        if(onverslaanbaar){
+            g.setColor(Color.GREEN);
+        }else{
+            g.setColor(Color.RED);
+        }
         g.drawRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
         g.fillRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
     }    
+    
+    @Override
+    protected void respawn(){
+        vakje.removeElement(this);
+        startVakje.addElement(this);
+        vakje = startVakje;
+    }
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
@@ -39,21 +57,37 @@ public class Spook extends Spelelement implements GameEventListener{
                 if(vakje != null){
                     for(Spelelement element : vakje.getElementen()){
                         if(element instanceof Paqman){
-                            gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
-                            break;
+                            if(onverslaanbaar){
+                                gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
+                            }else{
+                                gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                            }
+                            respawn();
                         }
                     }
                 }
                 break;
             case MOVE:
                 if(vakje != null){
-                   for(Spelelement element : vakje.getElementen()){
-                    if(element instanceof Paqman){
-                        gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
-                        break;
-                    }
-                }  
-            } 
+                    for(int i=0; i<vakje.getElementen().size(); i++){
+                        if(vakje.getElementen().get(i) instanceof Paqman){
+                            if(onverslaanbaar){
+                                gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
+                            }else{
+                                gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                            }
+                            respawn();
+                        }
+                    }  
+                }
+                break;
+            case ONVERSLAANBAAR:
+                if(onverslaanbaar){
+                    onverslaanbaar = false;
+                }else{
+                    onverslaanbaar = true;
+                }
+                break;
         }
     }
 

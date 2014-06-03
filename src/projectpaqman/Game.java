@@ -33,18 +33,6 @@ public class Game implements GameEventListener {
         resetStats();
     }
     
-    private void resetStats(){
-        aantal_levens = 3;
-        aantal_punten = 0;
-        onverslaanbaar = false;
-        gestart = false;
-        gepauzeerd = false;
-        
-        menu.setLevens(aantal_levens);
-        menu.setPunten(aantal_punten);
-        menu.setLevel(level.getLevel());
-    }
-    
     private void createComponents(){
         frame = new MainFrame(new BorderLayout());          
         menu = new Menu(this);  
@@ -57,6 +45,18 @@ public class Game implements GameEventListener {
         level.requestFocus();
         frame.setVisible(true);
         setGestart(true);
+    }
+    
+    private void resetStats(){
+        aantal_levens = 3;
+        aantal_punten = 0;
+        onverslaanbaar = false;
+        gestart = false;
+        gepauzeerd = false;
+        
+        menu.setLevens(aantal_levens);
+        menu.setPunten(aantal_punten);
+        menu.setLevel(level.getLevel());
     }
     
     public boolean getOnverslaanbaar(){
@@ -87,9 +87,22 @@ public class Game implements GameEventListener {
         this.aantal_punten = aantal_punten;
     }
     
+    private void nextLevel(){
+        Level newLevel = new Level(level.getLevel()+1, 1000, 750);
+        frame.remove(level);
+        level.delete();
+        level = newLevel;
+        level.addGameEventListener(this);
+        frame.add(level);
+        menu.setLevel(level.getLevel());        
+        level.gameEventOccurred(new GameEvent(this, EventType.START));
+    }
+    
     private void restart(){
+        frame.remove(level);
         level.delete();
         level = new Level(1, 1000, 750);
+        level.addGameEventListener(this);
         frame.add(level, BorderLayout.CENTER);
         resetStats();
     }
@@ -97,18 +110,51 @@ public class Game implements GameEventListener {
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
+            case START:
+                if(!gestart){
+                    setGestart(true);
+                    level.gameEventOccurred(new GameEvent(this, EventType.START));
+                }
+                setGepauzeerd(false);
+                break;
             case HERSTART:
                 restart();
+                level.gameEventOccurred(gameEvent);
                 break;
             case PAUZEER:
-                //pauzeer();
+                if(!gepauzeerd){
+                    setGepauzeerd(true);
+                    level.gameEventOccurred(gameEvent);
+                }
+                setGestart(false);
+                break;
+            case NEXTLEVEL:
+                if(level.getLevel() < 3){
+                    nextLevel();
+                }else{
+                    //Game Success
+                }
+                break;
+            case ONVERSLAANBAAR:
+                if(onverslaanbaar){
+                    setOnverslaanbaar(false);
+                }else{
+                    setOnverslaanbaar(true);
+                }
+                break;
+            case DEAD:
+                if(aantal_levens > 1){
+                    aantal_levens--;
+                    menu.setLevens(aantal_levens);
+                }
+                else{
+                    restart();
+                    menu.setStartknop();
+                }
                 break;
             case EATBOLLETJE:
                 aantal_punten += 10;
                 menu.setPunten(aantal_punten);
-                break;
-            case EATSUPERBOLLETJE:
-                setOnverslaanbaar(true);
                 break;
             case EATKERS:
                 aantal_punten += 100;
@@ -118,21 +164,6 @@ public class Game implements GameEventListener {
                 aantal_punten += 200;
                 menu.setPunten(aantal_punten);
                 break;
-            case DEAD:
-                if(aantal_levens > 1){
-                    aantal_levens--;
-                    menu.setLevens(aantal_levens);
-                }
-                else{
-                    restart();
-                }
-                break;
-            case NEXTLEVEL:
-                if(level.getLevel() != 3){
-                    level = new Level(level.getLevel()+1, 1000, 750);
-                }else{
-                    //GameSucces
-                }
         }
     }
 }
