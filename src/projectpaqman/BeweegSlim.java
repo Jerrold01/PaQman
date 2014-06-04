@@ -14,42 +14,49 @@ import java.util.*;
  */
 public class BeweegSlim implements BeweegStrategy {
     
-    Queue<Vakje> queue = new LinkedList();
-    
     @Override
     public void move(Spelelement spelelement, GameEventListener gameEventListener){
-        //Vakje paqman = findPaqman(spelelement);
+        Vakje nieuwVakje = nextVakje(spelelement);
+        nieuwVakje.addElement(spelelement);
+        spelelement.vakje.removeElement(spelelement);
+        spelelement.vakje = nieuwVakje;
     }
     
-    public Vakje findPaqman(Spelelement spelelement){
-        Vakje paqman = null;
-        ArrayList<Vakje> checklist = new ArrayList();
-        Boolean check = false;
-        queue.offer(spelelement.vakje);
+    public Vakje nextVakje(Spelelement spelelement){
+        Node paqman = null;
+        Queue<Node> queue = new LinkedList();
+        Node root = new Node(spelelement.vakje);
+        queue.offer(root);
         while(!queue.isEmpty() && paqman == null){
-            Vakje vakje = queue.poll();
-            checklist.add(vakje);
+            Node node = queue.poll();
+            Vakje vakje = node.getData();
             for(Spelelement element : vakje.getElementen()){
                 if(element instanceof Paqman){
-                    paqman = vakje;
+                    paqman = node;
                 }
             }
 
             for(HashMap.Entry<Windrichting, Vakje> buurman : vakje.getBuren().entrySet()){
                 if(!buurman.getValue().getMuur()){
-                    for(Vakje vak : checklist){
-                        if(buurman.getValue().equals(vak)){
-                            check = true;               
+                    Iterator<Node> it = queue.iterator();
+                    boolean check = false;
+                    while(it.hasNext()){
+                        Vakje queueVakje = it.next().getData();
+                        if(queueVakje.equals(buurman.getValue())){
+                           check = true;
                         }
-                    } 
+                    }
                     
                     if(!check){
-                        queue.offer(buurman.getValue());  
+                        Node child = new Node(buurman.getValue());
+                        child.setParent(node);
+                        queue.offer(child);
                     }
-                    check = false;
                 }
             }
         }
-        return paqman;
+        
+        Node nextNode = paqman.getNextNode();
+        return nextNode.getData();
     }
 }

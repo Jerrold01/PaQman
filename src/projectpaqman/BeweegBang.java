@@ -6,8 +6,6 @@
 
 package projectpaqman;
 
-import java.util.HashMap;
-
 /**
  *
  * @author kevinwareman

@@ -114,7 +114,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private void setLevel(int getal){
         List<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get("/Users/kevinwareman/NetBeansProjects/PaQman/src/projectpaqman/level_" + getal + ".txt"), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get("C:\\Users\\Jerrold Hogervorst\\Documents\\NetBeansProjects\\paqman\\src\\projectpaqman\\level_" + getal + ".txt"), StandardCharsets.UTF_8);
         } catch (IOException ex) {
             System.out.println("Kon het level niet inladen." + ex);
         }
@@ -201,13 +201,6 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     }
     
     /**
-     * De functie die de timer start als Paqman een superbolletje eet en hem onverslaanbaar maakt.
-     */
-    private void onverslaanbaar(){
-        sbTimer.start();
-    }
-    
-    /**
      * De functie waarmee het level wordt beeïndigd.
      */
     public void delete(){
@@ -281,7 +274,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 }
                 break;
             case EATSUPERBOLLETJE:
-                onverslaanbaar();
+                sbTimer.start();
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.ONVERSLAANBAAR));
                 }

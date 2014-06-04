@@ -41,7 +41,6 @@ public class BeweegDronken implements BeweegStrategy {
         else{
             move(spelelement, gameEventListener);
         }
-        
     }
     
     public boolean isTegenovergesteldeWindrichting(Windrichting windrichting, Windrichting LaatsteWindrichting){

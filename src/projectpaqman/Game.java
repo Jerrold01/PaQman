@@ -20,7 +20,6 @@ public class Game implements GameEventListener {
     
     private int aantal_levens;
     private int aantal_punten;
-    private boolean onverslaanbaar;
     private boolean gestart;
     private boolean gepauzeerd;
     
@@ -44,47 +43,18 @@ public class Game implements GameEventListener {
   
         level.requestFocus();
         frame.setVisible(true);
-        setGestart(true);
+        gestart = true;
     }
     
     private void resetStats(){
         aantal_levens = 3;
         aantal_punten = 0;
-        onverslaanbaar = false;
         gestart = false;
         gepauzeerd = false;
         
         menu.setLevens(aantal_levens);
         menu.setPunten(aantal_punten);
         menu.setLevel(level.getLevel());
-    }
-    
-    public boolean getOnverslaanbaar(){
-        return onverslaanbaar;
-    }
-    
-    public void setOnverslaanbaar(boolean onverslaanbaar){
-        this.onverslaanbaar = onverslaanbaar;
-    }
-    
-    public boolean getGestart(){
-        return gestart;
-    }
-    
-    public void setGestart(boolean gestart){
-        this.gestart = gestart;
-    }
-    
-    public boolean getGepauzeerd(){
-        return gepauzeerd;
-    }
-    
-    public void setGepauzeerd(boolean gepauzeerd){
-        this.gepauzeerd = gepauzeerd;
-    }
-    
-    public void setPunten(int aantal_punten){
-        this.aantal_punten = aantal_punten;
     }
     
     private void nextLevel(){
@@ -112,10 +82,10 @@ public class Game implements GameEventListener {
         switch(gameEvent.getEventType()){
             case START:
                 if(!gestart){
-                    setGestart(true);
+                    gestart = true;
                     level.gameEventOccurred(new GameEvent(this, EventType.START));
                 }
-                setGepauzeerd(false);
+                gepauzeerd = false;
                 break;
             case HERSTART:
                 restart();
@@ -123,23 +93,16 @@ public class Game implements GameEventListener {
                 break;
             case PAUZEER:
                 if(!gepauzeerd){
-                    setGepauzeerd(true);
+                    gepauzeerd = true;
                     level.gameEventOccurred(gameEvent);
                 }
-                setGestart(false);
+                gestart = false;
                 break;
             case NEXTLEVEL:
                 if(level.getLevel() < 3){
                     nextLevel();
                 }else{
                     //Game Success
-                }
-                break;
-            case ONVERSLAANBAAR:
-                if(onverslaanbaar){
-                    setOnverslaanbaar(false);
-                }else{
-                    setOnverslaanbaar(true);
                 }
                 break;
             case DEAD:

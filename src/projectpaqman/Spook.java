@@ -21,18 +21,15 @@ public class Spook extends Spelelement implements GameEventListener{
         super(vakje, gameEventListener);
         this.beweegstrategy = beweegStrategy;
         this.startVakje = vakje;
+        this.onverslaanbaar = false;
     }
     
     private void move(){
         beweegstrategy.move(this, gameEventListener);
-    } 
-    
-    public void setOnverslaanbaar(boolean onverslaanbaar){
-        this.onverslaanbaar = onverslaanbaar;
     }
     
     @Override
-    public void draw(Graphics g) {
+    protected void draw(Graphics g) {
         if(onverslaanbaar){
             g.setColor(Color.GREEN);
         }else{
@@ -55,8 +52,8 @@ public class Spook extends Spelelement implements GameEventListener{
             case TIMER:
                 move();
                 if(vakje != null){
-                    for(Spelelement element : vakje.getElementen()){
-                        if(element instanceof Paqman){
+                    for(int i=0; i<vakje.getElementen().size(); i++){
+                        if(vakje.getElementen().get(i) instanceof Paqman){
                             if(onverslaanbaar){
                                 gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
                             }else{
