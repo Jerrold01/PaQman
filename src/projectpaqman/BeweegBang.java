@@ -6,6 +6,8 @@
 
 package projectpaqman;
 
+import java.util.*;
+
 /**
  *
  * @author kevinwareman
@@ -14,7 +16,87 @@ public class BeweegBang implements BeweegStrategy {
     
     @Override
     public void move(Spelelement spelelement, GameEventListener gameEventListener){
-        
+       
+        Vakje nieuwVakje = nextVakje(spelelement);
+        nieuwVakje.addElement(spelelement);
+        spelelement.vakje.removeElement(spelelement);
+        spelelement.vakje = nieuwVakje;
     }
     
+    private Vakje nextVakje(Spelelement spelelement){
+        Node paqman = null;
+        Queue<Node> queue = new LinkedList();
+        Node root = new Node(spelelement.vakje);
+        queue.offer(root);
+        while(!queue.isEmpty() && paqman == null){
+            Node node = queue.poll();
+            Vakje vakje = node.getData();
+            for(Spelelement element : vakje.getElementen()){
+                if(element instanceof Paqman){
+                    paqman = node;
+                }
+            }
+
+            for(HashMap.Entry<Windrichting, Vakje> buurman : vakje.getBuren().entrySet()){
+                if(!buurman.getValue().getMuur()){
+                    Iterator<Node> it = queue.iterator();
+                    boolean check = false;
+                    while(it.hasNext()){
+                        Vakje queueVakje = it.next().getData();
+                        if(queueVakje.equals(buurman.getValue())){
+                           check = true;
+                        }
+                    }
+                    
+                    if(!check){
+                        Node child = new Node(buurman.getValue());
+                        child.setParent(node);
+                        queue.offer(child);
+                    }
+                }
+            }
+        }
+        
+        Vakje nextVakje = paqman.getNextNode().getData();
+        return reverseDirection(spelelement, nextVakje);
+    }
+    
+    private Vakje reverseDirection(Spelelement spelelement, Vakje vakje){
+        Vakje nextVakje;
+        if(spelelement.vakje.getBuren().get(Windrichting.NOORD).equals(vakje)){
+            nextVakje = spelelement.vakje.getBuren().get(Windrichting.ZUID);
+            if(nextVakje.getMuur()){
+                nextVakje = spelelement.vakje.getBuren().get(Windrichting.WEST);
+                if(nextVakje.getMuur()){
+                    nextVakje = reverseDirection(spelelement, nextVakje);
+                }
+            }
+        }else if(spelelement.vakje.getBuren().get(Windrichting.ZUID).equals(vakje)){
+            nextVakje = spelelement.vakje.getBuren().get(Windrichting.NOORD);
+            if(nextVakje.getMuur()){
+                nextVakje = spelelement.vakje.getBuren().get(Windrichting.OOST);
+                if(nextVakje.getMuur()){
+                    nextVakje = reverseDirection(spelelement, nextVakje);
+                }
+            }
+        }else if(spelelement.vakje.getBuren().get(Windrichting.WEST).equals(vakje)){
+            nextVakje = spelelement.vakje.getBuren().get(Windrichting.OOST);
+            if(nextVakje.getMuur()){
+                nextVakje = spelelement.vakje.getBuren().get(Windrichting.ZUID);
+                if(nextVakje.getMuur()){
+                    nextVakje = reverseDirection(spelelement, nextVakje);
+                }
+            }
+        }else{
+            nextVakje = spelelement.vakje.getBuren().get(Windrichting.WEST);
+            if(nextVakje.getMuur()){
+                nextVakje = spelelement.vakje.getBuren().get(Windrichting.NOORD);
+                if(nextVakje.getMuur()){
+                    nextVakje = reverseDirection(spelelement, nextVakje);
+                }
+            }
+        }
+        
+        return nextVakje;
+    }
 }

@@ -139,6 +139,12 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         setGameText("Gepauzeerd");
     }
     
+    private void gameOver(){
+        setGameText("Hoera! Je hebt PaQman uitgespeeld.");
+        sbTimer.stop();
+        timer.stop();
+    }
+    
     public void addGameEventListener(GameEventListener gameEventListener){
         gameEventListeners.add(gameEventListener);
     }
@@ -248,6 +254,9 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
                 }
                 break;
+            case GAMEOVER:
+                gameOver();
+                break;
             case MOVE:
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
@@ -267,7 +276,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 //Kijk of de helft van alle bolletjes zijn opgegeten en spawn een kers, of dat alle bolletjes zijn opgegeten en start het nieuwe level.
                 if(Math.round(aantalBolletjes/2) == aantalBolletjesGegeten){
                     spawnKers();
-                }else if(aantalBolletjes == aantalBolletjesGegeten){
+                }else if(aantalBolletjes-100 == aantalBolletjesGegeten){
                     for(GameEventListener gameEventListener: gameEventListeners){
                         gameEventListener.gameEventOccurred(new GameEvent(EventType.NEXTLEVEL));
                     }
@@ -288,7 +297,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
                 }
-                break;                
+                break;   
         }
         repaint();
     }

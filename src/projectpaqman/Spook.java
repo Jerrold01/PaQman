@@ -25,7 +25,17 @@ public class Spook extends Spelelement implements GameEventListener{
     }
     
     private void move(){
-        beweegstrategy.move(this, gameEventListener);
+        if(onverslaanbaar && beweegstrategy instanceof BeweegSlim){
+            beweegstrategy = new BeweegBang();
+            beweegstrategy.move(this, gameEventListener);
+            beweegstrategy = new BeweegSlim();
+        }else if(onverslaanbaar && beweegstrategy instanceof BeweegDronken){
+            beweegstrategy = new BeweegBang();
+            beweegstrategy.move(this, gameEventListener);
+            beweegstrategy = new BeweegDronken();
+        }else{
+            beweegstrategy.move(this, gameEventListener);           
+        }
     }
     
     @Override

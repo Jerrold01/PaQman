@@ -102,7 +102,8 @@ public class Game implements GameEventListener {
                 if(level.getLevel() < 3){
                     nextLevel();
                 }else{
-                    //Game Success
+                    level.gameEventOccurred(new GameEvent(EventType.GAMEOVER));
+                    gepauzeerd = true;
                 }
                 break;
             case DEAD:

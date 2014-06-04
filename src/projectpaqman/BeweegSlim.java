@@ -56,7 +56,6 @@ public class BeweegSlim implements BeweegStrategy {
             }
         }
         
-        Node nextNode = paqman.getNextNode();
-        return nextNode.getData();
+        return paqman.getNextNode().getData();
     }
 }
