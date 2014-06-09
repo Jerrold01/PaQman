@@ -17,17 +17,16 @@ import java.util.Random;
 public class BeweegDronken implements BeweegStrategy {
     
     private Windrichting laatsteWindrichting;
-    private Windrichting windrichting;
     
     @Override
     public void move(Spelelement spelelement, GameEventListener gameEventListener ){
         
         int windrichtingInt = new Random().nextInt(Windrichting.values().length);
-        windrichting = Windrichting.values()[windrichtingInt];
+        Windrichting windrichting = Windrichting.values()[windrichtingInt];
         HashMap<Windrichting, Vakje> buren = spelelement.vakje.getBuren();
         Vakje nieuwVakje = buren.get(windrichting); 
         
-        if(!isTegenovergesteldeWindrichting(windrichting, laatsteWindrichting)){
+        if(!isTegenovergesteldeWindrichting(windrichting)){
             if(!nieuwVakje.getMuur()){
                 nieuwVakje.addElement(spelelement);
                 spelelement.vakje.removeElement(spelelement);
@@ -43,7 +42,7 @@ public class BeweegDronken implements BeweegStrategy {
         }
     }
     
-    public boolean isTegenovergesteldeWindrichting(Windrichting windrichting, Windrichting LaatsteWindrichting){
+    private boolean isTegenovergesteldeWindrichting(Windrichting windrichting){
         if(laatsteWindrichting != null){
             switch(windrichting){
                 case NOORD:

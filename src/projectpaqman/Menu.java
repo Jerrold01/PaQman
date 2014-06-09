@@ -21,6 +21,7 @@ public class Menu extends JPanel {
     private JLabel aantal_punten;
     private JLabel aantal_levens;
     private JLabel level_naam;
+    private JLabel powerup_naam;
     private GameEventListener gameEventListener;
     
     public Menu(GameEventListener gameEventListener){
@@ -33,6 +34,7 @@ public class Menu extends JPanel {
         level_naam = new JLabel();
         aantal_punten = new JLabel();
         aantal_levens = new JLabel();
+        powerup_naam = new JLabel();
         
         pauzeknop.addActionListener(new pauzeClickListener());
         startknop.addActionListener(new startClickListener());
@@ -70,6 +72,10 @@ public class Menu extends JPanel {
     
     public void setLevel(int level_nummer){
         this.level_naam.setText("Level: " + String.valueOf(level_nummer));
+    }
+    
+    public void setPowerup(String powerup_naam){
+        this.powerup_naam.setText("Powerup: " + powerup_naam);
     }
     
     public class pauzeClickListener implements ActionListener{

@@ -32,7 +32,7 @@ public class Node {
         return getNextNode(this);
     }
     
-    public Node getNextNode(Node node){
+    private Node getNextNode(Node node){
         if(node.getParent().getParent() != null){
             return getNextNode(node.getParent());
         }else{
