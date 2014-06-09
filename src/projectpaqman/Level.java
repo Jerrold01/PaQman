@@ -31,6 +31,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private Timer timer = new Timer(500, this);
     private Timer textTimer = new Timer(1000, this);
     private Timer sbTimer = new Timer(10000, this);
+    private Timer puTimer = new Timer(7500, this);
     
     private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
     private Vakje[][] vakjes;
@@ -207,11 +208,66 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     }
     
     /**
+     * De functie waarmee een kers random op het veld gespawned kan worden.
+     */
+    public void spawnPowerup(){
+        double posX = Math.random()*vakjes.length;
+        double posY = Math.random()*vakjes[0].length;
+        if(!vakjes[(int)posX][(int)posY].getMuur()){
+            Powerup powerup = new Powerup(vakjes[(int)posX][(int)posY], this);
+            vakjes[(int)posX][(int)posY].addElement(powerup);
+            temporaryElement = powerup;
+        }else{
+            spawnPowerup();
+        }
+    }
+
+    /**
+     * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
+     */
+    private void setMurenLoper(boolean waarde){
+        if(waarde){
+            int aantalTransparanteMuren = 0;
+            while(aantalTransparanteMuren<20){
+                double posX = Math.random()*vakjes.length;
+                double posY = Math.random()*vakjes[0].length;
+                if(vakjes[(int)posX][(int)posY].getMuur()){
+                    if((int)posX != 0 && (int)posY != 0 && (int)posX != vakjes.length-1 && (int)posY != vakjes[0].length-1){
+                        vakjes[(int)posX][(int)posY].setTransparent(true);
+                        aantalTransparanteMuren++;
+                    }
+                }
+            }
+        }else{
+            for (int x = 0; x < vakjes.length; x++) {
+                for (int y = 0; y < vakjes[x].length; y++) {
+                    vakjes[x][y].setTransparent(false);
+                }
+            }
+        }
+    }
+    
+    /**
+     * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
+     */
+    private void spawnPaqmanHelper(){
+        double posX = Math.random()*vakjes.length;
+        double posY = Math.random()*vakjes[0].length;
+        if(!vakjes[(int)posX][(int)posY].getMuur()){
+            PaqmanHelper paqmanHelper = new PaqmanHelper(vakjes[(int)posX][(int)posY], this);
+            vakjes[(int)posX][(int)posY].addElement(paqmanHelper);
+            temporaryElement = paqmanHelper;
+        }else{
+            spawnPaqmanHelper();
+        }
+    }
+    
+    /**
      * De functie waarmee het level wordt beeïndigd.
      */
     public void delete(){
         try {
-            this.finalize();
+            gameEventListeners.clear();
             System.out.println("Heeft het level afgesloten.");
         } catch (Throwable e){
             System.out.println("Kan het level niet afsluiten.");
@@ -240,18 +296,18 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
             case START:
                 startGame();
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.START));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }                
                 break;
             case PAUZEER:
                 pauzeerGame();
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }
                 break;
             case DEAD:
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }
                 break;
             case GAMEOVER:
@@ -259,7 +315,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 break;
             case MOVE:
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }
                 
                 if(temporaryElement != null){
@@ -267,16 +323,34 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     temporaryElement = null;
                 }
                 break;
+            case POWERUP:
+                if(gameEvent.getPowerup() != null){
+                    puTimer.start();
+                }
+                
+                for(GameEventListener gameEventListener: gameEventListeners){
+                    gameEventListener.gameEventOccurred(gameEvent);
+                }
+                
+                switch(gameEvent.getPowerup()){
+                    case MURENLOPER:
+                        setMurenLoper(true);
+                        break;
+                    default:
+                        setMurenLoper(false);
+                        break;
+                }
+                break;
             case EATBOLLETJE:
                 aantalBolletjesGegeten++;
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATBOLLETJE));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }
                 
                 //Kijk of de helft van alle bolletjes zijn opgegeten en spawn een kers, of dat alle bolletjes zijn opgegeten en start het nieuwe level.
                 if(Math.round(aantalBolletjes/2) == aantalBolletjesGegeten){
                     spawnKers();
-                }else if(aantalBolletjes-100 == aantalBolletjesGegeten){
+                }else if(aantalBolletjes == aantalBolletjesGegeten){
                     for(GameEventListener gameEventListener: gameEventListeners){
                         gameEventListener.gameEventOccurred(new GameEvent(EventType.NEXTLEVEL));
                     }
@@ -290,14 +364,14 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 break;                
             case EATKERS:
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATKERS));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }
                 break;
             case EATSPOOK:
                 for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
+                    gameEventListener.gameEventOccurred(gameEvent);
                 }
-                break;   
+                break;
         }
         repaint();
     }
@@ -314,6 +388,13 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 gameEventListener.gameEventOccurred(new GameEvent(EventType.ONVERSLAANBAAR));
             }            
             sbTimer.stop();
+        }
+        
+        if(actionEvent.getSource().equals(puTimer)){
+            for(GameEventListener gameEventListener: gameEventListeners){
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.POWERUP));
+            }            
+            puTimer.stop();            
         }
         
         if(actionEvent.getSource().equals(timer)){

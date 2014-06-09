@@ -22,6 +22,7 @@ public class Game implements GameEventListener {
     private int aantal_punten;
     private boolean gestart;
     private boolean gepauzeerd;
+    private boolean puntenverdubbelaar;
     
     public static void main(String[] args) {
         Game game = new Game();
@@ -51,6 +52,7 @@ public class Game implements GameEventListener {
         aantal_punten = 0;
         gestart = false;
         gepauzeerd = false;
+        puntenverdubbelaar = false;
         
         menu.setLevens(aantal_levens);
         menu.setPunten(aantal_punten);
@@ -116,16 +118,63 @@ public class Game implements GameEventListener {
                     menu.setStartknop();
                 }
                 break;
+            case POWERUP:
+                if(gameEvent.getPowerup() != null){
+                    switch(gameEvent.getPowerup()){
+                        case PUNTENVERDUBBELAAR:
+                            puntenverdubbelaar = true;
+                            menu.setPowerup(gameEvent.getPowerup().name());
+                            break;
+                        default:
+                            menu.setPowerup(gameEvent.getPowerup().name());
+                            break;                           
+                    }
+                }
+                else{
+                    puntenverdubbelaar = false;
+                    menu.setPowerup(null);
+                }
+                break;
             case EATBOLLETJE:
-                aantal_punten += 10;
+                if(puntenverdubbelaar){
+                    aantal_punten += 20;    
+                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-20)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                        level.spawnPowerup();
+                    }
+                }else{
+                    aantal_punten += 10;    
+                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-10)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                        level.spawnPowerup();
+                    }
+                }
                 menu.setPunten(aantal_punten);
                 break;
             case EATKERS:
-                aantal_punten += 100;
+                if(puntenverdubbelaar){
+                    aantal_punten += 200;    
+                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-200)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                        level.spawnPowerup();
+                    }
+                }else{
+                    aantal_punten += 100;    
+                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-100)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                        level.spawnPowerup();
+                    }
+                }
                 menu.setPunten(aantal_punten);
                 break;
             case EATSPOOK:
-                aantal_punten += 200;
+                if(puntenverdubbelaar){
+                    aantal_punten += 400;    
+                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-400)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                        level.spawnPowerup();
+                    }
+                }else{
+                    aantal_punten += 200;    
+                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-200)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                        level.spawnPowerup();
+                    }
+                }
                 menu.setPunten(aantal_punten);
                 break;
         }

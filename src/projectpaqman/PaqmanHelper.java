@@ -6,33 +6,41 @@
 
 package projectpaqman;
 
+import java.awt.*;
 import java.util.*;
 
 /**
  *
- * @author kevinwareman
+ * @author Kevin
  */
-public class BeweegSlim implements BeweegStrategy {
+public class PaqmanHelper extends Spelelement {
+    /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+    public PaqmanHelper(Vakje vakje, GameEventListener gameEventListener){
+        super(vakje, gameEventListener);
+    }
     
-    @Override
-    public void move(Spelelement spelelement, GameEventListener gameEventListener){
-        Vakje nieuwVakje = nextVakje(spelelement);
-        nieuwVakje.addElement(spelelement);
-        spelelement.vakje.removeElement(spelelement);
-        spelelement.vakje = nieuwVakje;
+    private void move(){
+        Vakje nieuwVakje = nextVakje(this);
+        nieuwVakje.addElement(this);
+        this.vakje.removeElement(this);
+        this.vakje = nieuwVakje;
     }
     
     public Vakje nextVakje(Spelelement spelelement){
-        Node paqman = null;
+        Node spook = null;
         Queue<Node> queue = new LinkedList();
         Node root = new Node(spelelement.vakje);
         queue.offer(root);
-        while(!queue.isEmpty() && paqman == null){
+        while(!queue.isEmpty() && spook == null){
             Node node = queue.poll();
             Vakje vakje = node.getData();
             for(Spelelement element : vakje.getElementen()){
-                if(element instanceof Paqman){
-                    paqman = node;
+                if(element instanceof Spook){
+                    spook = node;
                 }
             }
 
@@ -56,13 +64,27 @@ public class BeweegSlim implements BeweegStrategy {
             }
         }
         
-        if(paqman == null){
-            int windrichtingInt = new Random().nextInt(Windrichting.values().length);
-            Windrichting windrichting = Windrichting.values()[windrichtingInt];
-            HashMap<Windrichting, Vakje> buren = spelelement.vakje.getBuren();
-            return buren.get(windrichting); 
-        }else{
-            return paqman.getNextNode().getData();
+        return spook.getNextNode().getData();
+    }
+    
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(Color.YELLOW);
+        g.drawRoundRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23, 20, 20);
+        g.setColor(Color.BLACK);        
+        g.fillRoundRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23, 20, 20);
+    }
+    
+    @Override
+    public void gameEventOccurred(GameEvent gameEvent){
+        if(gameEvent.getEventType().equals(EventType.TIMER)){
+            move();
         }
+    }
+    
+    @Override
+    protected void delete(){
+        vakje.removeElement(this);
+        setVakje(null);
     }
 }

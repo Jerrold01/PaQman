@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class Vakje {
     
     private boolean muur;
+    private boolean transparant;
     private final int posX;
     private final int posY;
     private ArrayList<Spelelement> elementen = new ArrayList();
@@ -25,6 +26,7 @@ public class Vakje {
     public Vakje(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
+        this.transparant = false;
     }
     
     public int getPosX(){
@@ -67,12 +69,23 @@ public class Vakje {
         this.muur = muur;
     }
     
+    public boolean getTransparent(){
+        return transparant;
+    }
+    
+    public void setTransparent(boolean transparant){
+        this.transparant = transparant;
+    }
+    
     public void draw(Graphics g){
         g.setColor(Color.BLACK);
         g.drawRect(posX*25, posY*25, 25, 25);
         
         //Als het vakje een muur is, vullen we deze op.
-        if(muur){
+        if(muur && (!transparant)){
+            g.fillRect(posX*25, posY*25, 25, 25);
+        }else if(muur && transparant){
+            g.setColor(Color.LIGHT_GRAY);
             g.fillRect(posX*25, posY*25, 25, 25);
         }
         

@@ -31,7 +31,7 @@ public class Paqman extends Spelelement implements KeyListener {
         if(gestart && !gepauzeerd){
             HashMap<Windrichting, Vakje> buren = vakje.getBuren();
             Vakje nieuwVakje = buren.get(windrichting);
-            if(!nieuwVakje.getMuur()){
+            if(!nieuwVakje.getMuur() || nieuwVakje.getTransparent()){
                 nieuwVakje.addElement(this);
                 vakje.removeElement(this);
                 vakje = nieuwVakje;
@@ -41,11 +41,10 @@ public class Paqman extends Spelelement implements KeyListener {
     
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.drawOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
-        g.fillOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
         g.setColor(Color.BLACK);
         g.drawOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
+        g.setColor(Color.YELLOW);
+        g.fillOval(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23);
     }
     
     @Override

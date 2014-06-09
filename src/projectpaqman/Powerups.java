@@ -11,5 +11,5 @@ package projectpaqman;
  * @author kevinwareman
  */
 public enum Powerups {
-    PaqmanHelper, Puntenverdubbelaar, Spookjesvriezer, Murenloper
+    PUNTENVERDUBBELAAR, SPOOKJESVRIEZER, MURENLOPER
 }

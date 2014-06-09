@@ -18,6 +18,8 @@ public class Menu extends JPanel {
 
     private JButton startknop; //Tevens herstartknop
     private JButton pauzeknop;
+    private JButton storeknop;
+    
     private JLabel aantal_punten;
     private JLabel aantal_levens;
     private JLabel level_naam;
@@ -31,11 +33,13 @@ public class Menu extends JPanel {
         
         startknop = new JButton("Start");
         pauzeknop = new JButton("Pauzeer");
+        storeknop = new JButton("Winkel");
         level_naam = new JLabel();
         aantal_punten = new JLabel();
         aantal_levens = new JLabel();
         powerup_naam = new JLabel();
         
+        storeknop.addActionListener(new storeClickListener());
         pauzeknop.addActionListener(new pauzeClickListener());
         startknop.addActionListener(new startClickListener());
         
@@ -44,6 +48,7 @@ public class Menu extends JPanel {
         this.add(aantal_punten);
         this.add(aantal_levens);
         this.add(level_naam);
+        this.add(powerup_naam);
     }
     
     public void setStartknop(){
@@ -75,9 +80,20 @@ public class Menu extends JPanel {
     }
     
     public void setPowerup(String powerup_naam){
-        this.powerup_naam.setText("Powerup: " + powerup_naam);
+        if(powerup_naam == null){
+            this.powerup_naam.setText(null);
+        }else{
+            this.powerup_naam.setText("Powerup: " + powerup_naam);
+        }
     }
-    
+ 
+    public class storeClickListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent actionEvent){
+            //Blabalabla open de winkel
+        }
+    }
+        
     public class pauzeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
