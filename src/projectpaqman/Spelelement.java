@@ -29,6 +29,7 @@ public abstract class Spelelement implements GameEventListener{
     protected void delete(){
         vakje.removeElement(this);
         setVakje(null);
+        gameEventListener = null;
     }
     
     protected void respawn(){}

@@ -27,13 +27,13 @@ public class Menu extends JPanel {
     private GameEventListener gameEventListener;
     
     public Menu(GameEventListener gameEventListener){
-        this.setPreferredSize(new Dimension(600, 40));
-        this.setBackground(Color.LIGHT_GRAY); 
+        setPreferredSize(new Dimension(600, 40));
+        setBackground(Color.LIGHT_GRAY); 
         this.gameEventListener = gameEventListener;
         
         startknop = new JButton("Start");
         pauzeknop = new JButton("Pauzeer");
-        storeknop = new JButton("Winkel");
+        storeknop = new JButton("Store");
         level_naam = new JLabel();
         aantal_punten = new JLabel();
         aantal_levens = new JLabel();
@@ -43,12 +43,13 @@ public class Menu extends JPanel {
         pauzeknop.addActionListener(new pauzeClickListener());
         startknop.addActionListener(new startClickListener());
         
-        this.add(startknop);
-        this.add(pauzeknop);
-        this.add(aantal_punten);
-        this.add(aantal_levens);
-        this.add(level_naam);
-        this.add(powerup_naam);
+        add(startknop);
+        add(pauzeknop);
+        add(storeknop);
+        add(aantal_punten);
+        add(aantal_levens);
+        add(level_naam);
+        add(powerup_naam);
     }
     
     public void setStartknop(){
@@ -90,7 +91,7 @@ public class Menu extends JPanel {
     public class storeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            //Blabalabla open de winkel
+            gameEventListener.gameEventOccurred(new GameEvent(EventType.STORE));
         }
     }
         

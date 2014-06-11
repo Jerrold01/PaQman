@@ -69,18 +69,21 @@ public class Paqman extends Spelelement implements KeyListener {
             switch(event.getKeyCode()){
             case KeyEvent.VK_UP: 
                 this.move(Windrichting.NOORD);
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
                 break;
             case KeyEvent.VK_DOWN:
                 this.move(Windrichting.ZUID);
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
                 break;
             case KeyEvent.VK_LEFT:
                 this.move(Windrichting.WEST);
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
                 break;
             case KeyEvent.VK_RIGHT:
                 this.move(Windrichting.OOST);
+                gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
                 break;
         }
-        gameEventListener.gameEventOccurred(new GameEvent(EventType.MOVE));
     }
     
     @Override

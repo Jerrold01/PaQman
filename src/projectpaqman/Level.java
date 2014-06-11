@@ -115,7 +115,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private void setLevel(int getal){
         List<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get("/Users/kevinwareman/NetBeansProjects/PaQman/src/projectpaqman/level_" + getal + ".txt"), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get("././src/projectpaqman/level_" + getal + ".txt"), StandardCharsets.UTF_8);
         } catch (IOException ex) {
             System.out.println("Kon het level niet inladen." + ex);
         }
@@ -138,12 +138,6 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private void pauzeerGame(){
         timer.stop();
         setGameText("Gepauzeerd");
-    }
-    
-    private void gameOver(){
-        setGameText("Hoera! Je hebt PaQman uitgespeeld.");
-        sbTimer.stop();
-        timer.stop();
     }
     
     public void addGameEventListener(GameEventListener gameEventListener){
@@ -310,9 +304,6 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     gameEventListener.gameEventOccurred(gameEvent);
                 }
                 break;
-            case GAMEOVER:
-                gameOver();
-                break;
             case MOVE:
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(gameEvent);
@@ -324,9 +315,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 }
                 break;
             case POWERUP:
-                if(gameEvent.getPowerup() != null){
-                    puTimer.start();
-                }
+                puTimer.start();
                 
                 for(GameEventListener gameEventListener: gameEventListeners){
                     gameEventListener.gameEventOccurred(gameEvent);
@@ -335,9 +324,6 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 switch(gameEvent.getPowerup()){
                     case MURENLOPER:
                         setMurenLoper(true);
-                        break;
-                    default:
-                        setMurenLoper(false);
                         break;
                 }
                 break;
@@ -372,6 +358,9 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     gameEventListener.gameEventOccurred(gameEvent);
                 }
                 break;
+            case PAQMANHELPER:
+                spawnPaqmanHelper();
+                break;
         }
         repaint();
     }
@@ -393,7 +382,8 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         if(actionEvent.getSource().equals(puTimer)){
             for(GameEventListener gameEventListener: gameEventListeners){
                 gameEventListener.gameEventOccurred(new GameEvent(EventType.POWERUP));
-            }            
+            }   
+            setMurenLoper(false);
             puTimer.stop();            
         }
         

@@ -81,10 +81,4 @@ public class PaqmanHelper extends Spelelement {
             move();
         }
     }
-    
-    @Override
-    protected void delete(){
-        vakje.removeElement(this);
-        setVakje(null);
-    }
 }

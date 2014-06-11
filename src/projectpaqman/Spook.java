@@ -153,7 +153,6 @@ public class Spook extends Spelelement implements GameEventListener{
                 break;
         }
     }
-
 }
 
   

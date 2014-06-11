@@ -15,13 +15,13 @@ import javax.swing.*;
  */
 public class MainFrame extends JFrame {
 
-    public MainFrame(LayoutManager layoutManager){
+    public MainFrame(){
         setSize(new Dimension(1015, 825));
         setTitle("PaQman");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
      
         setLocationRelativeTo(null);
         setBackground(Color.WHITE);
-        setLayout(layoutManager);
+        setLayout(new BorderLayout());
     }
 }

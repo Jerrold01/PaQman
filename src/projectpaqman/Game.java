@@ -7,6 +7,7 @@
 package projectpaqman;
 
 import java.awt.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Game implements GameEventListener {
     private MainFrame frame;
     private Level level;
     private Menu menu;
+    private Store store;
     
     private int aantal_levens;
     private int aantal_punten;
@@ -34,9 +36,10 @@ public class Game implements GameEventListener {
     }
     
     private void createComponents(){
-        frame = new MainFrame(new BorderLayout());          
+        frame = new MainFrame();          
         menu = new Menu(this);  
         level = new Level(1, 1000, 750);
+        store = new Store(this);
         level.addGameEventListener(this);
         
         frame.add(menu, BorderLayout.NORTH);
@@ -57,6 +60,7 @@ public class Game implements GameEventListener {
         menu.setLevens(aantal_levens);
         menu.setPunten(aantal_punten);
         menu.setLevel(level.getLevel());
+        menu.setPowerup(null);
     }
     
     private void nextLevel(){
@@ -65,6 +69,7 @@ public class Game implements GameEventListener {
         level.delete();
         level = newLevel;
         level.addGameEventListener(this);
+        
         frame.add(level);
         menu.setLevel(level.getLevel());        
         level.gameEventOccurred(new GameEvent(this, EventType.START));
@@ -75,6 +80,7 @@ public class Game implements GameEventListener {
         level.delete();
         level = new Level(1, 1000, 750);
         level.addGameEventListener(this);
+        
         frame.add(level, BorderLayout.CENTER);
         resetStats();
     }
@@ -104,8 +110,16 @@ public class Game implements GameEventListener {
                 if(level.getLevel() < 3){
                     nextLevel();
                 }else{
-                    level.gameEventOccurred(new GameEvent(EventType.GAMEOVER));
+                    JOptionPane.showMessageDialog(null, "Hoera, je hebt de game uitgespeeld! \n + Je had " + aantal_punten + " punten en " + aantal_levens + "levens .");
+                    restart();
+                }
+                break;
+            case STORE:
+                store.setVisible(true);
+                if(gestart){
                     gepauzeerd = true;
+                    level.gameEventOccurred(new GameEvent(EventType.PAUZEER));
+                    menu.setPauzeknop();
                 }
                 break;
             case DEAD:
@@ -176,6 +190,25 @@ public class Game implements GameEventListener {
                     }
                 }
                 menu.setPunten(aantal_punten);
+                break;
+            case PAQMANHELPER:
+                if(aantal_punten >= 1500){
+                    aantal_punten -= 1500;
+                    level.gameEventOccurred(gameEvent); 
+                    menu.setPunten(aantal_punten);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Je hebt nog niet genoeg punten voor deze aankoop.", "Puntentekort", JOptionPane.PLAIN_MESSAGE);
+                }
+                break;
+            case EXTRALEVEN:
+                if(aantal_punten >= 2000){
+                    aantal_punten -= 2000;
+                    aantal_levens++;
+                    menu.setPunten(aantal_punten);
+                    menu.setLevens(aantal_levens);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Je hebt nog niet genoeg punten voor deze aankoop.", "Puntentekort", JOptionPane.PLAIN_MESSAGE);
+                }
                 break;
         }
     }

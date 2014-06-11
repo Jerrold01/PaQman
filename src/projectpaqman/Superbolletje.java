@@ -34,15 +34,17 @@ public class Superbolletje extends Spelelement {
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        if(gameEvent.getEventType().equals(EventType.MOVE)){
-            if(vakje != null){
-                for(Spelelement element : vakje.getElementen()){
-                    if(element instanceof Paqman){
-                        delete();
-                        break;
+        switch(gameEvent.getEventType()){
+            case MOVE:
+                if(vakje != null){
+                    for(Spelelement element : vakje.getElementen()){
+                        if(element instanceof Paqman){
+                            delete();
+                            break;
+                        }
                     }
-                }  
-            }
+                }
+                break;
         }
     }
 }
