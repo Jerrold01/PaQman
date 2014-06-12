@@ -8,6 +8,7 @@ package projectpaqman;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Random;
 /**
  *
  * @author Jerrold
@@ -73,25 +74,51 @@ public class Spook extends Spelelement implements GameEventListener{
         }
         
         for(HashMap.Entry<Windrichting, Vakje> buurman : startVakje.getBuren().entrySet()){
-            for(int j=0; j<buurman.getValue().getElementen().size(); j++){
-                if(buurman.getValue().getElementen().get(j) instanceof Paqman && buurman.getValue().getElementen().get(j) instanceof PaqmanHelper){
-                    gevaar = true;
+                    for(Spelelement element: buurman.getValue().getElementen()){
+                    if(element instanceof Paqman || element instanceof PaqmanHelper){
+                        gevaar = true;
+                    }
+                }            
+            for(HashMap.Entry<Windrichting, Vakje> buur : buurman.getValue().getBuren().entrySet()){
+                for(Spelelement element: buur.getValue().getElementen()){
+                    if(element instanceof Paqman || element instanceof PaqmanHelper){
+                        gevaar = true;
+                    }
                 }
+                for(HashMap.Entry<Windrichting, Vakje> buurmannen : buur.getValue().getBuren().entrySet()){
+                    for(Spelelement element: buurmannen.getValue().getElementen()){
+                        if(element instanceof Paqman || element instanceof PaqmanHelper){
+                            gevaar = true;
+                        }
+                    }
             }
+            }
+            
         }
         
         if(gevaar){
-            for(HashMap.Entry<Windrichting, Vakje> buurman : startVakje.getBuren().entrySet()){
-                for(int j=0; j<buurman.getValue().getElementen().size(); j++){
-                    if(!buurman.getValue().getMuur()){
-                        return getRespawnVakje(startVakje);                            
-                    }
-                }
-            }           
+            return getRespawnVakje(getRandomVakje(startVakje));
         }else{
             return startVakje;
         }
-        return null;
+    }
+    
+    private Vakje getRandomVakje(Vakje vakje){
+        for(int i=0; i< 40; i++){
+            int windrichtingInt = new Random().nextInt(Windrichting.values().length);
+            Windrichting windrichting = Windrichting.values()[windrichtingInt];
+            HashMap<Windrichting, Vakje> buren = vakje.getBuren();
+            vakje = buren.get(windrichting);
+            if(vakje != null){
+                if(vakje.getMuur() && i == 39){
+                    i--;
+                }                
+            }
+            else if(vakje == null && i == 39){
+                i--;
+            }
+        }
+        return vakje;
     }
     
     @Override
