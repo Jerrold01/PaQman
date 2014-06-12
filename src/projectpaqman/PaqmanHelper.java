@@ -30,7 +30,7 @@ public class PaqmanHelper extends Spelelement {
         this.vakje = nieuwVakje;
     }
     
-    public Vakje nextVakje(Spelelement spelelement){
+    private Vakje nextVakje(Spelelement spelelement){
         Node spook = null;
         Queue<Node> queue = new LinkedList();
         Node root = new Node(spelelement.vakje);

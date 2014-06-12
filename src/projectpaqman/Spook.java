@@ -14,8 +14,8 @@ import java.util.*;
  */
 public class Spook extends Spelelement implements GameEventListener{
     
-    private BeweegStrategy beweegstrategy;
     private Vakje startVakje;
+    private BeweegStrategy beweegstrategy;
     private boolean onverslaanbaar;
     private boolean spookjesvriezer;
     
@@ -64,12 +64,12 @@ public class Spook extends Spelelement implements GameEventListener{
         vakje = nieuwVakje;
     }
     
-    private Vakje getRespawnVakje(Vakje startVakje){
+    private Vakje getRespawnVakje(Vakje vakje){
         boolean gevaar = false;
         int i = 0;
         ArrayList<Vakje> checkList = new ArrayList();
         Queue<Vakje> queue = new LinkedList();
-        queue.add(startVakje);
+        queue.add(vakje);
         
         while(i<64 && gevaar == false){
             Vakje current = queue.poll();

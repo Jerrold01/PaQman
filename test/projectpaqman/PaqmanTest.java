@@ -91,5 +91,30 @@ public class PaqmanTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of respawn method, of class Paqman.
+     */
+    @Test
+    public void testRespawn() {
+        System.out.println("respawn");
+        Paqman instance = null;
+        instance.respawn();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of gameEventOccurred method, of class Paqman.
+     */
+    @Test
+    public void testGameEventOccurred() {
+        System.out.println("gameEventOccurred");
+        GameEvent gameEvent = null;
+        Paqman instance = null;
+        instance.gameEventOccurred(gameEvent);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

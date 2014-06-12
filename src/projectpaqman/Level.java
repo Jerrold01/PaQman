@@ -28,6 +28,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     
     private Spelelement temporaryElement;
     private JLabel gametext;
+    
     private Timer timer = new Timer(500, this);
     private Timer textTimer = new Timer(1000, this);
     private Timer sbTimer = new Timer(10000, this);
@@ -215,6 +216,21 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
             spawnPowerup();
         }
     }
+    
+    /**
+     * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
+     */
+    private void spawnPaqmanHelper(){
+        double posX = Math.random()*vakjes.length;
+        double posY = Math.random()*vakjes[0].length;
+        if(!vakjes[(int)posX][(int)posY].getMuur()){
+            PaqmanHelper paqmanHelper = new PaqmanHelper(vakjes[(int)posX][(int)posY], this);
+            vakjes[(int)posX][(int)posY].addElement(paqmanHelper);
+            temporaryElement = paqmanHelper;
+        }else{
+            spawnPaqmanHelper();
+        }
+    }
 
     /**
      * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
@@ -238,21 +254,6 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                     vakjes[x][y].setTransparent(false);
                 }
             }
-        }
-    }
-    
-    /**
-     * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
-     */
-    private void spawnPaqmanHelper(){
-        double posX = Math.random()*vakjes.length;
-        double posY = Math.random()*vakjes[0].length;
-        if(!vakjes[(int)posX][(int)posY].getMuur()){
-            PaqmanHelper paqmanHelper = new PaqmanHelper(vakjes[(int)posX][(int)posY], this);
-            vakjes[(int)posX][(int)posY].addElement(paqmanHelper);
-            temporaryElement = paqmanHelper;
-        }else{
-            spawnPaqmanHelper();
         }
     }
     

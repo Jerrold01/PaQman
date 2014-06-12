@@ -26,7 +26,7 @@ public class BeweegDronken implements BeweegStrategy {
         HashMap<Windrichting, Vakje> buren = spelelement.vakje.getBuren();
         Vakje nieuwVakje = buren.get(windrichting); 
         
-        if(!isTegenovergesteldeWindrichting(windrichting)){
+        if(!isReverseDirection(windrichting)){
             if(!nieuwVakje.getMuur()){
                 nieuwVakje.addElement(spelelement);
                 spelelement.vakje.removeElement(spelelement);
@@ -42,7 +42,7 @@ public class BeweegDronken implements BeweegStrategy {
         }
     }
     
-    private boolean isTegenovergesteldeWindrichting(Windrichting windrichting){
+    private boolean isReverseDirection(Windrichting windrichting){
         if(laatsteWindrichting != null){
             switch(windrichting){
                 case NOORD:

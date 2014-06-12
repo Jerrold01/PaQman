@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author kevinwareman
  */
-public class GameEventTest {
+public class NodeTest {
     
-    public GameEventTest() {
+    public NodeTest() {
     }
     
     @BeforeClass
@@ -38,49 +38,56 @@ public class GameEventTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     /**
-     * Test of getSource method, of class GameEvent.
+     * Test of getData method, of class Node.
      */
     @Test
-    public void testGetSource() {
-        System.out.println("getSource");
-        GameEvent instance = null;
-        Object expResult = null;
-        Object result = instance.getSource();
+    public void testGetData() {
+        System.out.println("getData");
+        Node instance = null;
+        Vakje expResult = null;
+        Vakje result = instance.getData();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getPowerup method, of class GameEvent.
+     * Test of getParent method, of class Node.
      */
     @Test
-    public void testGetPowerup() {
-        System.out.println("getPowerup");
-        GameEvent instance = null;
-        Powerups expResult = null;
-        Powerups result = instance.getPowerup();
+    public void testGetParent() {
+        System.out.println("getParent");
+        Node instance = null;
+        Node expResult = null;
+        Node result = instance.getParent();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getEventType method, of class GameEvent.
+     * Test of setParent method, of class Node.
      */
     @Test
-    public void testGetEventType() {
-        System.out.println("getEventType");
-        GameEvent instance = null;
-        EventType expResult = null;
-        EventType result = instance.getEventType();
+    public void testSetParent() {
+        System.out.println("setParent");
+        Node parent = null;
+        Node instance = null;
+        instance.setParent(parent);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getNextNode method, of class Node.
+     */
+    @Test
+    public void testGetNextNode() {
+        System.out.println("getNextNode");
+        Node instance = null;
+        Node expResult = null;
+        Node result = instance.getNextNode();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

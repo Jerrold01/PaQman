@@ -74,5 +74,29 @@ public class SpelelementTest {
         public void draw(Graphics g) {
         }
     }
+
+    /**
+     * Test of delete method, of class Spelelement.
+     */
+    @Test
+    public void testDelete() {
+        System.out.println("delete");
+        Spelelement instance = null;
+        instance.delete();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of respawn method, of class Spelelement.
+     */
+    @Test
+    public void testRespawn() {
+        System.out.println("respawn");
+        Spelelement instance = null;
+        instance.respawn();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

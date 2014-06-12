@@ -7,6 +7,7 @@
 package projectpaqman;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -112,6 +113,84 @@ public class LevelTest {
         GameEvent event = null;
         Level instance = null;
         instance.gameEventOccurred(event);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getLevel method, of class Level.
+     */
+    @Test
+    public void testGetLevel() {
+        System.out.println("getLevel");
+        Level instance = null;
+        int expResult = 0;
+        int result = instance.getLevel();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getGameText method, of class Level.
+     */
+    @Test
+    public void testGetGameText() {
+        System.out.println("getGameText");
+        Level instance = null;
+        String expResult = "";
+        String result = instance.getGameText();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setGameText method, of class Level.
+     */
+    @Test
+    public void testSetGameText() {
+        System.out.println("setGameText");
+        String tekst = "";
+        Level instance = null;
+        instance.setGameText(tekst);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of spawnPowerup method, of class Level.
+     */
+    @Test
+    public void testSpawnPowerup() {
+        System.out.println("spawnPowerup");
+        Level instance = null;
+        instance.spawnPowerup();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of delete method, of class Level.
+     */
+    @Test
+    public void testDelete() {
+        System.out.println("delete");
+        Level instance = null;
+        instance.delete();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of actionPerformed method, of class Level.
+     */
+    @Test
+    public void testActionPerformed() {
+        System.out.println("actionPerformed");
+        ActionEvent actionEvent = null;
+        Level instance = null;
+        instance.actionPerformed(actionEvent);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

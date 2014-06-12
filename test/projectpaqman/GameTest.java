@@ -145,5 +145,30 @@ public class GameTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of main method, of class Game.
+     */
+    @Test
+    public void testMain() {
+        System.out.println("main");
+        String[] args = null;
+        Game.main(args);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of gameEventOccurred method, of class Game.
+     */
+    @Test
+    public void testGameEventOccurred() {
+        System.out.println("gameEventOccurred");
+        GameEvent gameEvent = null;
+        Game instance = new Game();
+        instance.gameEventOccurred(gameEvent);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

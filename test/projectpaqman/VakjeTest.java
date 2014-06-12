@@ -7,6 +7,7 @@
 package projectpaqman;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -158,6 +159,47 @@ public class VakjeTest {
         boolean expResult = false;
         boolean result = instance.getMuur();
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getElementen method, of class Vakje.
+     */
+    @Test
+    public void testGetElementen() {
+        System.out.println("getElementen");
+        Vakje instance = null;
+        ArrayList<Spelelement> expResult = null;
+        ArrayList<Spelelement> result = instance.getElementen();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getTransparent method, of class Vakje.
+     */
+    @Test
+    public void testGetTransparent() {
+        System.out.println("getTransparent");
+        Vakje instance = null;
+        boolean expResult = false;
+        boolean result = instance.getTransparent();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setTransparent method, of class Vakje.
+     */
+    @Test
+    public void testSetTransparent() {
+        System.out.println("setTransparent");
+        boolean transparant = false;
+        Vakje instance = null;
+        instance.setTransparent(transparant);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

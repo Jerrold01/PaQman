@@ -43,5 +43,19 @@ public class BeweegBangTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of move method, of class BeweegBang.
+     */
+    @Test
+    public void testMove() {
+        System.out.println("move");
+        Spelelement spelelement = null;
+        GameEventListener gameEventListener = null;
+        BeweegBang instance = new BeweegBang();
+        instance.move(spelelement, gameEventListener);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -6,6 +6,7 @@
 
 package projectpaqman;
 
+import java.awt.Graphics;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author kevinwareman
  */
-public class GameEventTest {
+public class KersTest {
     
-    public GameEventTest() {
+    public KersTest() {
     }
     
     @BeforeClass
@@ -38,50 +39,40 @@ public class GameEventTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of draw method, of class Kers.
+     */
     @Test
-    public void testSomeMethod() {
+    public void testDraw() {
+        System.out.println("draw");
+        Graphics g = null;
+        Kers instance = null;
+        instance.draw(g);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getSource method, of class GameEvent.
+     * Test of gameEventOccurred method, of class Kers.
      */
     @Test
-    public void testGetSource() {
-        System.out.println("getSource");
-        GameEvent instance = null;
-        Object expResult = null;
-        Object result = instance.getSource();
-        assertEquals(expResult, result);
+    public void testGameEventOccurred() {
+        System.out.println("gameEventOccurred");
+        GameEvent gameEvent = null;
+        Kers instance = null;
+        instance.gameEventOccurred(gameEvent);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getPowerup method, of class GameEvent.
+     * Test of delete method, of class Kers.
      */
     @Test
-    public void testGetPowerup() {
-        System.out.println("getPowerup");
-        GameEvent instance = null;
-        Powerups expResult = null;
-        Powerups result = instance.getPowerup();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getEventType method, of class GameEvent.
-     */
-    @Test
-    public void testGetEventType() {
-        System.out.println("getEventType");
-        GameEvent instance = null;
-        EventType expResult = null;
-        EventType result = instance.getEventType();
-        assertEquals(expResult, result);
+    public void testDelete() {
+        System.out.println("delete");
+        Kers instance = null;
+        instance.delete();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

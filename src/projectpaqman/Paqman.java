@@ -16,9 +16,9 @@ import java.util.HashMap;
  */
 public class Paqman extends Spelelement implements KeyListener {
     
-    Vakje startVakje;
-    boolean gestart;
-    boolean gepauzeerd;
+    private Vakje startVakje;
+    private boolean gestart;
+    private boolean gepauzeerd;
     
     public Paqman(Vakje vakje, GameEventListener gameEventListener){
         super(vakje, gameEventListener);

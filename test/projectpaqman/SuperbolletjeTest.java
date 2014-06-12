@@ -51,5 +51,30 @@ public class SuperbolletjeTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of delete method, of class Superbolletje.
+     */
+    @Test
+    public void testDelete() {
+        System.out.println("delete");
+        Superbolletje instance = null;
+        instance.delete();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of gameEventOccurred method, of class Superbolletje.
+     */
+    @Test
+    public void testGameEventOccurred() {
+        System.out.println("gameEventOccurred");
+        GameEvent gameEvent = null;
+        Superbolletje instance = null;
+        instance.gameEventOccurred(gameEvent);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
