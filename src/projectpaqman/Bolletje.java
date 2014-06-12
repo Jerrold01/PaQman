@@ -22,8 +22,9 @@ public class Bolletje extends Spelelement {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
-        g.drawOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 7, 7);
-        g.fillOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 7, 7);
+        g.fillOval(vakje.getPosX()*25+10, vakje.getPosY()*25+10, 5, 5);
+        g.setColor(Color.BLACK);
+        g.drawOval(vakje.getPosX()*25+10, vakje.getPosY()*25+10, 5, 5);
     }
     
     @Override

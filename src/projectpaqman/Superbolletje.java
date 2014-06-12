@@ -23,6 +23,8 @@ public class Superbolletje extends Spelelement {
         g.setColor(Color.LIGHT_GRAY);
         g.drawOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
         g.fillOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
+        g.setColor(Color.BLACK);
+        g.drawOval(vakje.getPosX()*25+5, vakje.getPosY()*25+5, 15, 15);
     }
     
     @Override

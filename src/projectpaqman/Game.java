@@ -38,7 +38,7 @@ public class Game implements GameEventListener {
     private void createComponents(){
         frame = new MainFrame();          
         menu = new Menu(this);  
-        level = new Level(1, 1000, 750);
+        level = new Level(1);
         store = new Store(this);
         level.addGameEventListener(this);
         
@@ -64,7 +64,7 @@ public class Game implements GameEventListener {
     }
     
     private void nextLevel(){
-        Level newLevel = new Level(level.getLevel()+1, 1000, 750);
+        Level newLevel = new Level(level.getLevel()+1);
         frame.remove(level);
         level.delete();
         level = newLevel;
@@ -78,7 +78,7 @@ public class Game implements GameEventListener {
     private void restart(){
         frame.remove(level);
         level.delete();
-        level = new Level(1, 1000, 750);
+        level = new Level(1);
         level.addGameEventListener(this);
         
         frame.add(level, BorderLayout.CENTER);

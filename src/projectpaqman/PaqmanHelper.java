@@ -69,10 +69,10 @@ public class PaqmanHelper extends Spelelement {
     
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.drawRoundRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23, 20, 20);
         g.setColor(Color.BLACK);        
         g.fillRoundRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23, 20, 20);
+        g.setColor(Color.YELLOW);
+        g.drawRoundRect(vakje.getPosX()*25+1, vakje.getPosY()*25+1, 23, 23, 20, 20);
     }
     
     @Override

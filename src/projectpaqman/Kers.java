@@ -24,9 +24,18 @@ public class Kers extends Spelelement {
     
     @Override
     public void draw(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillOval(vakje.getPosX()*25+6, vakje.getPosY()*25, 11, 11);
+        g.setColor(Color.BLACK);
+        g.drawOval(vakje.getPosX()*25+6, vakje.getPosY()*25, 11, 11);
+        
         g.setColor(Color.RED);
-        g.drawOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 7, 7);
-        g.fillOval(vakje.getPosX()*25+9, vakje.getPosY()*25+9, 7, 7);
+        g.fillOval(vakje.getPosX()*25, vakje.getPosY()*25+12, 11, 11 );
+        g.setColor(Color.BLACK);
+        g.drawOval(vakje.getPosX()*25, vakje.getPosY()*25+12, 11, 11);        
+        g.fillOval(vakje.getPosX()*25+12, vakje.getPosY()*25+12, 11, 11);
+        g.setColor(Color.BLACK);
+        g.drawOval(vakje.getPosX()*25+12, vakje.getPosY()*25+12, 11, 11);
     }
     
     @Override

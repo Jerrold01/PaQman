@@ -88,7 +88,7 @@ public class BeweegSlim implements BeweegStrategy {
         Vakje paqman = null;
         HashMap<Vakje, Integer> M = new HashMap(); //Vakjes met bijbehorende stappen tot de startcel.
         Queue<Vakje> Q = new LinkedList(); //De vakjes die nog gecheckt moeten worden in de wachtrij.
-        ArrayList<Vakje> S = new ArrayList(); //Het definitieve kortste pad.
+        ArrayList<Vakje> S = new ArrayList(); //Alle gecheckte vakjes.
         HashMap<Vakje, Vakje> P = new HashMap(); //De vakjes met de voorganger.
         
         M.put(spelelement.vakje, 0);
@@ -105,7 +105,7 @@ public class BeweegSlim implements BeweegStrategy {
             
             for(HashMap.Entry<Windrichting, Vakje> buurman : current.getBuren().entrySet()){
                 if(!buurman.getValue().getMuur()){
-                    if(!Q.contains(buurman.getValue())){
+                    if(!S.contains(buurman.getValue()) && !Q.contains(buurman.getValue())){
                         M.put(buurman.getValue(), M.get(current)+1);
                         Q.offer(buurman.getValue());
                         P.put(buurman.getValue(), current);
@@ -118,7 +118,8 @@ public class BeweegSlim implements BeweegStrategy {
             return getRandomNextVakje(spelelement.vakje);
         }else{
             Vakje nieuwVakje = paqman;
-            for(int i=0; i < M.get(nieuwVakje)-1; i++){
+            int aantalStappen = M.get(nieuwVakje)-1;
+            for(int i=0; i < aantalStappen; i++){
                 nieuwVakje = P.get(nieuwVakje);
             }
             return nieuwVakje;

@@ -42,12 +42,11 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
      * @param lengte De lengte in pixels x van het level.
      * @param breedte  De breedte in pixels y van het level.
      */
-    public Level(int level_nummer, int lengte, int breedte) {
+    public Level(int level_nummer) {
         this.setBackground(Color.WHITE);
         this.level_nummer = level_nummer;
         this.aantalBolletjes = 0;
         this.aantalBolletjesGegeten = 0;
-        this.vakjes = new Vakje[lengte / 25][breedte / 25];
         this.setFocusable(true);
         this.requestFocus();
         this.gametext = new JLabel();
@@ -60,6 +59,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
      */
     private void init(){
         setLevel(level_nummer);
+        this.vakjes = new Vakje[layout[0].length][layout.length];
         for (int x = 0; x < vakjes.length; x++) {
             for (int y = 0; y < vakjes[x].length; y++) {
                 vakjes[x][y] = new Vakje(x, y);

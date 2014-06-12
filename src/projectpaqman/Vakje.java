@@ -77,16 +77,20 @@ public class Vakje {
         this.transparant = transparant;
     }
     
-    public void draw(Graphics g){
+    public void draw(Graphics g){  
         g.setColor(Color.BLACK);
-        g.drawRect(posX*25, posY*25, 25, 25);
         
         //Als het vakje een muur is, vullen we deze op.
         if(muur && (!transparant)){
             g.fillRect(posX*25, posY*25, 25, 25);
+            g.drawRect(posX*25, posY*25, 25, 25);
         }else if(muur && transparant){
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(posX*25, posY*25, 25, 25);
+            g.setColor(Color.BLACK);
+            g.fillRect(posX*25, posY*25, 25, 25);
+        }else{
+            g.drawRect(posX*25, posY*25, 25, 25);
         }
         
         //Als het vakje een element bevat, moet dit element zichzelf gaan tekenen.
