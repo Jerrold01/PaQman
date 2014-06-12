@@ -81,14 +81,14 @@ public class Vakje {
         g.setColor(Color.BLACK);
         
         //Als het vakje een muur is, vullen we deze op.
-        if(muur && (!transparant)){
+        if(muur && !transparant){
             g.fillRect(posX*25, posY*25, 25, 25);
             g.drawRect(posX*25, posY*25, 25, 25);
         }else if(muur && transparant){
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(posX*25, posY*25, 25, 25);
             g.setColor(Color.BLACK);
-            g.fillRect(posX*25, posY*25, 25, 25);
+            g.drawRect(posX*25, posY*25, 25, 25);
         }else{
             g.drawRect(posX*25, posY*25, 25, 25);
         }

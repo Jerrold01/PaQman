@@ -7,8 +7,7 @@
 package projectpaqman;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 /**
  *
  * @author Jerrold
@@ -67,33 +66,27 @@ public class Spook extends Spelelement implements GameEventListener{
     
     private Vakje getRespawnVakje(Vakje startVakje){
         boolean gevaar = false;
-        for(int i=0; i<startVakje.getElementen().size(); i++){
-            if(startVakje.getElementen().get(i) instanceof Paqman && startVakje.getElementen().get(i) instanceof PaqmanHelper){
-                gevaar = true;
-            } 
-        }
+        int i = 0;
+        ArrayList<Vakje> checkList = new ArrayList();
+        Queue<Vakje> queue = new LinkedList();
+        queue.add(startVakje);
         
-        for(HashMap.Entry<Windrichting, Vakje> buurman : startVakje.getBuren().entrySet()){
-                    for(Spelelement element: buurman.getValue().getElementen()){
-                    if(element instanceof Paqman || element instanceof PaqmanHelper){
-                        gevaar = true;
-                    }
-                }            
-            for(HashMap.Entry<Windrichting, Vakje> buur : buurman.getValue().getBuren().entrySet()){
-                for(Spelelement element: buur.getValue().getElementen()){
-                    if(element instanceof Paqman || element instanceof PaqmanHelper){
-                        gevaar = true;
+        while(i<64 && gevaar == false){
+            Vakje current = queue.poll();
+            if(!current.getMuur()){
+                if(!checkList.contains(current) && !queue.contains(current)){
+                    for(HashMap.Entry<Windrichting, Vakje> buurman : current.getBuren().entrySet()){            
+                        for(Spelelement element: buurman.getValue().getElementen()){
+                            if(element instanceof Paqman || element instanceof PaqmanHelper){
+                                gevaar = true;
+                            }
+                        } 
+                        queue.add(buurman.getValue());
+                        checkList.add(current);
                     }
                 }
-                for(HashMap.Entry<Windrichting, Vakje> buurmannen : buur.getValue().getBuren().entrySet()){
-                    for(Spelelement element: buurmannen.getValue().getElementen()){
-                        if(element instanceof Paqman || element instanceof PaqmanHelper){
-                            gevaar = true;
-                        }
-                    }
+                i++;
             }
-            }
-            
         }
         
         if(gevaar){
@@ -115,7 +108,7 @@ public class Spook extends Spelelement implements GameEventListener{
                 }                
             }
             else if(vakje == null && i == 39){
-                i--;
+                return getRandomVakje(startVakje);
             }
         }
         return vakje;

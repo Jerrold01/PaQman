@@ -225,7 +225,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
             while(aantalTransparanteMuren<20){
                 double posX = Math.random()*vakjes.length;
                 double posY = Math.random()*vakjes[0].length;
-                if(vakjes[(int)posX][(int)posY].getMuur()){
+                if(vakjes[(int)posX][(int)posY].getMuur() && !vakjes[(int)posX][(int)posY].getTransparent()){
                     if((int)posX != 0 && (int)posY != 0 && (int)posX != vakjes.length-1 && (int)posY != vakjes[0].length-1){
                         vakjes[(int)posX][(int)posY].setTransparent(true);
                         aantalTransparanteMuren++;

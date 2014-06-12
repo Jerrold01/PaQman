@@ -22,9 +22,9 @@ public class Powerup extends Spelelement {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.ORANGE);
-        g.fillRect(vakje.getPosX()*25+8, vakje.getPosY()*25, 9, 8);
-        g.fillRect(vakje.getPosX()*25, vakje.getPosY()*25+8, 25, 9);
-        g.fillRect(vakje.getPosX()*25+8, vakje.getPosY()*25+17, 9, 8);
+        g.fillRect(vakje.getPosX()*25+12, vakje.getPosY()*25+8, 5, 4);
+        g.fillRect(vakje.getPosX()*25+8, vakje.getPosY()*25+12, 13, 5);
+        g.fillRect(vakje.getPosX()*25+12, vakje.getPosY()*25+17, 5, 4);
     }
     
     @Override

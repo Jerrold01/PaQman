@@ -157,7 +157,7 @@ public class Game implements GameEventListener {
                     }
                 }else{
                     aantal_punten += 10;    
-                    if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-10)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
+                    if(aantal_punten >= 10 && String.valueOf(Math.abs((long)aantal_punten-10)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
                         level.spawnPowerup();
                     }
                 }
