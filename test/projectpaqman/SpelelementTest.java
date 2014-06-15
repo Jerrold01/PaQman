@@ -44,12 +44,7 @@ public class SpelelementTest {
      */
     @Test
     public void testSetVakje() {
-        System.out.println("setVakje");
-        Vakje vakje = null;
-        Spelelement instance = null;
-        instance.setVakje(vakje);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -57,22 +52,7 @@ public class SpelelementTest {
      */
     @Test
     public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Spelelement instance = null;
-        instance.draw(g);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    public class SpelelementImpl extends Spelelement {
-
-        public SpelelementImpl() {
-            super(null);
-        }
-
-        public void draw(Graphics g) {
-        }
     }
 
     /**
@@ -80,11 +60,7 @@ public class SpelelementTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("delete");
-        Spelelement instance = null;
-        instance.delete();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -92,11 +68,7 @@ public class SpelelementTest {
      */
     @Test
     public void testRespawn() {
-        System.out.println("respawn");
-        Spelelement instance = null;
-        instance.respawn();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

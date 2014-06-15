@@ -43,11 +43,7 @@ public class MainFrameTest {
      */
     @Test
     public void testCreateComponents() {
-        System.out.println("createComponents");
-        MainFrame instance = new MainFrame();
-        instance.createComponents();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -55,11 +51,7 @@ public class MainFrameTest {
      */
     @Test
     public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        MainFrame.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

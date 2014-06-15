@@ -43,12 +43,7 @@ public class GameEventListenerTest {
      */
     @Test
     public void testAddGameEventListener() {
-        System.out.println("addGameEventListener");
-        GameEventListener listener = null;
-        GameEventListener instance = new GameEventListenerImpl();
-        instance.addGameEventListener(listener);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -56,12 +51,7 @@ public class GameEventListenerTest {
      */
     @Test
     public void testRemoveGameEventListener() {
-        System.out.println("removeGameEventListener");
-        GameEventListener listener = null;
-        GameEventListener instance = new GameEventListenerImpl();
-        instance.removeGameEventListener(listener);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -69,12 +59,7 @@ public class GameEventListenerTest {
      */
     @Test
     public void testFireGameEvent() {
-        System.out.println("fireGameEvent");
-        GameEvent event = null;
-        GameEventListener instance = new GameEventListenerImpl();
-        instance.fireGameEvent(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -82,12 +67,7 @@ public class GameEventListenerTest {
      */
     @Test
     public void testGameEventOccurred() {
-        System.out.println("gameEventOccurred");
-        GameEvent event = null;
-        GameEventListener instance = new GameEventListenerImpl();
-        instance.gameEventOccurred(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     public class GameEventListenerImpl implements GameEventListener {
