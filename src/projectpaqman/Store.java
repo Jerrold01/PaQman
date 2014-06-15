@@ -46,6 +46,10 @@ public class Store extends JFrame {
         add(extralevenknop);
     }
     
+    public void setGameEventListener(GameEventListener gameEventListener){
+        this.gameEventListener = gameEventListener;
+    }
+    
     public class paqmanHelperListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){

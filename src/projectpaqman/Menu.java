@@ -87,6 +87,10 @@ public class Menu extends JPanel {
             this.powerup_naam.setText("Powerup: " + powerup_naam);
         }
     }
+    
+    public void setGameEventListener(GameEventListener gameEventListener){
+        this.gameEventListener = gameEventListener;
+    }
  
     public class storeClickListener implements ActionListener{
         @Override

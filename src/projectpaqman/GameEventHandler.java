@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class GameEventHandler implements GameEventListener{
     
     private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
+    private Spelelement elementToAdd;
         
     public void addGameEventListener(GameEventListener gameEventListener){
         gameEventListeners.add(gameEventListener);
@@ -28,17 +29,26 @@ public class GameEventHandler implements GameEventListener{
         gameEventListeners.clear();
     }
     
+    public void setElementToAdd(Spelelement spelelement){
+        elementToAdd = spelelement;
+    }
+    
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
             case EATSUPERBOLLETJE:
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));
+                for(int i=0; i<gameEventListeners.size(); i++){
+                    gameEventListeners.get(i).gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));
                 }
                 break;                
             default:
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
+                for(int i=0; i<gameEventListeners.size(); i++){
+                    gameEventListeners.get(i).gameEventOccurred(gameEvent);
+                }
+                
+                if(elementToAdd != null){
+                    gameEventListeners.add(elementToAdd);
+                    elementToAdd = null;
                 }
                 break;
         }

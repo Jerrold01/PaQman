@@ -24,8 +24,7 @@ public class Level extends JPanel implements GameEventListener{
     private int aantalBolletjes;
     private int aantalBolletjesGegeten;
     
-    private Spelelement temporaryElement;
-    private JLabel gametext;
+    private JLabel text;
     
     private Vakje[][] vakjes;
     private String[][] layout;
@@ -43,7 +42,7 @@ public class Level extends JPanel implements GameEventListener{
         aantalBolletjesGegeten = 0;
         setFocusable(true);
         requestFocus();
-        gametext = new JLabel();
+        text = new JLabel();
         this.gameEventHandler = gameEventHandler;
         gameEventHandler.addGameEventListener(this);
         init();
@@ -124,24 +123,24 @@ public class Level extends JPanel implements GameEventListener{
     /**
      * De functie waarmee de game na initialisatie daadwerkelijk gestart wordt.
      */
-    private void startGame(){
+    private void startLevel(){
         requestFocus();
-        setGameText("Level " + level_nummer);
+        setLevelText("Level " + level_nummer);
     }
     
-    private void pauzeerGame(){
-        setGameText("Gepauzeerd");
+    private void pauzeerLevel(){
+        setLevelText("Gepauzeerd");
     }
     
-    public String getGameText(){
-        return this.gametext.getText();
+    public String getLevelText(){
+        return this.text.getText();
     }
     
-    public void setGameText(String tekst){
+    public void setLevelText(String tekst){
         if(tekst != null){
             gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.TEXTTIMER));            
         }
-        this.gametext.setText(tekst);
+        this.text.setText(tekst);
     }
     
     /**
@@ -182,7 +181,7 @@ public class Level extends JPanel implements GameEventListener{
         if(!vakjes[(int)posX][(int)posY].getMuur()){
             Kers kers = new Kers(vakjes[(int)posX][(int)posY], gameEventHandler);
             vakjes[(int)posX][(int)posY].addElement(kers);
-            temporaryElement = kers;
+            gameEventHandler.setElementToAdd(kers);
         }else{
             spawnKers();
         }
@@ -197,7 +196,7 @@ public class Level extends JPanel implements GameEventListener{
         if(!vakjes[(int)posX][(int)posY].getMuur()){
             Powerup powerup = new Powerup(vakjes[(int)posX][(int)posY], gameEventHandler);
             vakjes[(int)posX][(int)posY].addElement(powerup);
-            temporaryElement = powerup;
+            gameEventHandler.setElementToAdd(powerup);
         }else{
             spawnPowerup();
         }
@@ -212,7 +211,7 @@ public class Level extends JPanel implements GameEventListener{
         if(!vakjes[(int)posX][(int)posY].getMuur()){
             PaqmanHelper paqmanHelper = new PaqmanHelper(vakjes[(int)posX][(int)posY], gameEventHandler);
             vakjes[(int)posX][(int)posY].addElement(paqmanHelper);
-            temporaryElement = paqmanHelper;
+            gameEventHandler.setElementToAdd(paqmanHelper);
         }else{
             spawnPaqmanHelper();
         }
@@ -263,10 +262,10 @@ public class Level extends JPanel implements GameEventListener{
             }
         }
         
-        if(gametext.getText() != null){
+        if(text.getText() != null){
             g.setColor(Color.DARK_GRAY);
             g.setFont(new Font("Tahoma", Font.BOLD, 80));
-            g.drawString(getGameText(), 375, 375);
+            g.drawString(getLevelText(), 375, 375);
         }
     }
 
@@ -274,22 +273,14 @@ public class Level extends JPanel implements GameEventListener{
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
             case START:
-                startGame();              
+                startLevel();              
                 break;
             case PAUZEER:
-                pauzeerGame();
+                pauzeerLevel();
                 break;
             case TEXTTIMER:
-                if(getGameText() != null){
-                    setGameText(null);   
-                }
-                break;
-            case DEAD:
-                break;
-            case MOVE:                
-                if(temporaryElement != null){
-                    gameEventHandler.addGameEventListener(temporaryElement);
-                    temporaryElement = null;
+                if(getLevelText() != null){
+                    setLevelText(null);   
                 }
                 break;
             case POWERUP:

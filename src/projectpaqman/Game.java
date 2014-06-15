@@ -38,11 +38,13 @@ public class Game implements GameEventListener {
     }
     
     private void createComponents(){
-        frame = new MainFrame();          
-        menu = new Menu(this);  
-        store = new Store(this);
         gameEventHandler = new GameEventHandler();
         gameEventHandler.addGameEventListener(this);
+                
+        frame = new MainFrame();   
+        menu = new Menu(gameEventHandler);  
+        store = new Store(gameEventHandler);
+
         timerHandler = new TimerHandler(gameEventHandler);
         level = new Level(1, gameEventHandler);
         
@@ -69,13 +71,16 @@ public class Game implements GameEventListener {
     
     private void nextLevel(){
         gameEventHandler = new GameEventHandler();
+        gameEventHandler.addGameEventListener(this);
+        menu.setGameEventListener(gameEventHandler);
+        store.setGameEventListener(gameEventHandler);
+        timerHandler.setGameEventListener(gameEventHandler);
         Level newLevel = new Level(level.getLevel()+1, gameEventHandler);
+        
         frame.remove(level);
         level.delete();
-        level = newLevel;
-        gameEventHandler.addGameEventListener(this);
-        gameEventHandler.addGameEventListener(level);
         
+        level = newLevel;
         frame.add(level);
         menu.setLevel(level.getLevel());        
         gameEventHandler.gameEventOccurred(new GameEvent(this, GameEventType.START));
@@ -83,11 +88,14 @@ public class Game implements GameEventListener {
     
     private void restart(){
         gameEventHandler = new GameEventHandler();
+        gameEventHandler.addGameEventListener(this);
+        menu.setGameEventListener(gameEventHandler);
+        store.setGameEventListener(gameEventHandler);
+        timerHandler.setGameEventListener(gameEventHandler);
+        
         frame.remove(level);
         level.delete();
-        level = new Level(1, new GameEventHandler());
-        gameEventHandler.addGameEventListener(this);
-        gameEventHandler.addGameEventListener(level);
+        level = new Level(1, gameEventHandler);
         
         frame.add(level, BorderLayout.CENTER);
         resetStats();
@@ -106,12 +114,10 @@ public class Game implements GameEventListener {
                 break;
             case HERSTART:
                 restart();
-                gameEventHandler.gameEventOccurred(gameEvent);
                 break;
             case PAUZEER:
                 if(!gepauzeerd){
                     gepauzeerd = true;
-                    gameEventHandler.gameEventOccurred(gameEvent);
                 }
                 gestart = false;
                 timerHandler.stopGameTimer();
@@ -125,8 +131,7 @@ public class Game implements GameEventListener {
                 }
                 break;
             case TEXTTIMER:
-                String tekst = level.getGameText();
-                if(level.getGameText().isEmpty()){
+                if(level.getLevelText().isEmpty()){
                     timerHandler.startTextTimer();
                 }
                 break;

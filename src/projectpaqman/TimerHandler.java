@@ -19,14 +19,14 @@ public class TimerHandler implements ActionListener {
     private Timer textTimer;
     private Timer sbTimer;
     private Timer puTimer; 
-    private GameEventListener gameEventHandler;
+    private GameEventListener gameEventListener;
     
-    public TimerHandler(GameEventHandler gameEventHandler){
+    public TimerHandler(GameEventListener gameEventListener){
         gameTimer = new Timer(500, this);
         textTimer = new Timer(1000, this);
         sbTimer = new Timer(10000, this);
         puTimer = new Timer(7500, this);    
-        this.gameEventHandler = gameEventHandler;
+        this.gameEventListener = gameEventListener;
     }
     
     public void startGameTimer(){
@@ -61,19 +61,23 @@ public class TimerHandler implements ActionListener {
         puTimer.stop();
     }
     
+    public void setGameEventListener(GameEventListener gameEventListener){
+        this.gameEventListener = gameEventListener;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent actionEvent){
         if(actionEvent.getSource().equals(textTimer)){
             stopTextTimer();
-            gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.TEXTTIMER));
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.TEXTTIMER));
         }else if(actionEvent.getSource().equals(sbTimer)){
-            gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));          
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));          
             stopSbTimer();
         }else if(actionEvent.getSource().equals(puTimer)){
-            gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.POWERUP));
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.POWERUP));
             stopPuTimer();           
         }else if(actionEvent.getSource().equals(gameTimer)){
-            gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.TIMER));
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.TIMER));
         }
     }
 }
