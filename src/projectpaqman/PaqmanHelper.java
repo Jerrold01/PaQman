@@ -77,7 +77,7 @@ public class PaqmanHelper extends Spelelement {
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        if(gameEvent.getEventType().equals(EventType.TIMER)){
+        if(gameEvent.getEventType().equals(GameEventType.TIMER)){
             move();
         }
     }

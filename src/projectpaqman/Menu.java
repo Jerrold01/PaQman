@@ -91,7 +91,7 @@ public class Menu extends JPanel {
     public class storeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            gameEventListener.gameEventOccurred(new GameEvent(EventType.STORE));
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.STORE));
         }
     }
         
@@ -100,9 +100,9 @@ public class Menu extends JPanel {
         public void actionPerformed(ActionEvent actionEvent){
             if(startknop.getText().equalsIgnoreCase("Herstart")){
                 if(pauzeknop.getText().equalsIgnoreCase("Pauzeer")){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.PAUZEER));                
+                    gameEventListener.gameEventOccurred(new GameEvent(GameEventType.PAUZEER));                
                 }else{
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.START));
+                    gameEventListener.gameEventOccurred(new GameEvent(GameEventType.START));
                 }
                 setPauzeknop();
             }
@@ -113,9 +113,9 @@ public class Menu extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent){
             if(startknop.getText().equalsIgnoreCase("Start")){
-                gameEventListener.gameEventOccurred(new GameEvent(EventType.START));                
+                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.START));                
             }else{
-                gameEventListener.gameEventOccurred(new GameEvent(EventType.HERSTART));
+                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.HERSTART));
             }
             setStartknop();
         }

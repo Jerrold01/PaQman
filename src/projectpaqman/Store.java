@@ -49,14 +49,14 @@ public class Store extends JFrame {
     public class paqmanHelperListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            gameEventListener.gameEventOccurred(new GameEvent(EventType.PAQMANHELPER));
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.PAQMANHELPER));
         }
     }
     
     public class extraLevenListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
-            gameEventListener.gameEventOccurred(new GameEvent(EventType.EXTRALEVEN));
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.EXTRALEVEN));
         }
     }
 }

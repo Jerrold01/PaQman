@@ -48,6 +48,6 @@ public class Powerup extends Spelelement {
         vakje.removeElement(this);
         setVakje(null);
         int powerupInt = new Random().nextInt(Powerups.values().length);
-        gameEventListener.gameEventOccurred(new GameEvent(Powerups.values()[powerupInt], EventType.POWERUP));
+        gameEventListener.gameEventOccurred(new GameEvent(Powerups.values()[powerupInt], GameEventType.POWERUP));
     } 
 }

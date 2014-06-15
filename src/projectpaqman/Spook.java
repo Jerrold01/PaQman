@@ -92,7 +92,7 @@ public class Spook extends Spelelement implements GameEventListener{
         if(gevaar){
             return getRespawnVakje(getRandomVakje(startVakje));
         }else{
-            return startVakje;
+            return vakje;
         }
     }
     
@@ -107,7 +107,7 @@ public class Spook extends Spelelement implements GameEventListener{
                     i--;
                 }                
             }
-            else if(vakje == null && i == 39){
+            else if(vakje == null){
                 return getRandomVakje(startVakje);
             }
         }
@@ -126,9 +126,9 @@ public class Spook extends Spelelement implements GameEventListener{
                     for(int i=0; i<vakje.getElementen().size(); i++){
                         if(vakje.getElementen().get(i) instanceof Paqman){
                             if(onverslaanbaar){
-                                gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
+                                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.EATSPOOK));
                             }else{
-                                gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.DEAD));
                             }
                             respawn();
                         } else if(vakje.getElementen().get(i) instanceof PaqmanHelper){
@@ -142,9 +142,9 @@ public class Spook extends Spelelement implements GameEventListener{
                     for(int i=0; i<vakje.getElementen().size(); i++){
                         if(vakje.getElementen().get(i) instanceof Paqman){
                             if(onverslaanbaar){
-                                gameEventListener.gameEventOccurred(new GameEvent(EventType.EATSPOOK));
+                                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.EATSPOOK));
                             }else{
-                                gameEventListener.gameEventOccurred(new GameEvent(EventType.DEAD));
+                                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.DEAD));
                             }
                             respawn();
                         } else if(vakje.getElementen().get(i) instanceof PaqmanHelper){

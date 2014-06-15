@@ -14,18 +14,18 @@ public class GameEvent{
     
     private Object source;
     private Powerups powerup;
-    private EventType eventType;
+    private GameEventType eventType;
     
-    GameEvent(EventType eventType){
+    GameEvent(GameEventType eventType){
         this.eventType = eventType;
     }
     
-    GameEvent(Object source, EventType eventType){
+    GameEvent(Object source, GameEventType eventType){
         this.source = source;
         this.eventType = eventType;
     }
     
-    GameEvent(Powerups powerup, EventType eventType){
+    GameEvent(Powerups powerup, GameEventType eventType){
         this.powerup = powerup;
         this.eventType = eventType;
     }
@@ -38,7 +38,7 @@ public class GameEvent{
         return powerup;
     }
     
-    public EventType getEventType(){
+    public GameEventType getEventType(){
         return eventType;
     }
 }

@@ -6,11 +6,9 @@
 package projectpaqman;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.io.IOException;
 import java.nio.charset.*;
 import java.nio.file.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
@@ -20,7 +18,7 @@ import javax.swing.*;
  *
  * @author Jerrold
  */
-public class Level extends JPanel implements GameEventListener, ActionListener{
+public class Level extends JPanel implements GameEventListener{
 
     private int level_nummer;
     private int aantalBolletjes;
@@ -29,34 +27,31 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     private Spelelement temporaryElement;
     private JLabel gametext;
     
-    private Timer timer = new Timer(500, this);
-    private Timer textTimer = new Timer(1000, this);
-    private Timer sbTimer = new Timer(10000, this);
-    private Timer puTimer = new Timer(7500, this);
-    
-    private ArrayList<GameEventListener> gameEventListeners = new ArrayList();
     private Vakje[][] vakjes;
     private String[][] layout;
-    
+    private GameEventHandler gameEventHandler;
+
     /**
      * @param level_nummer Het nummer van het level wat ingeladen moet worden.
-     * @param lengte De lengte in pixels x van het level.
-     * @param breedte  De breedte in pixels y van het level.
+     * @param gameEventHandler Het centrale afhandelingspunt van game events welke gebruikt moet worden.
+     *
      */
-    public Level(int level_nummer) {
-        this.setBackground(Color.WHITE);
+    public Level(int level_nummer, GameEventHandler gameEventHandler) {
+        setBackground(Color.WHITE);
         this.level_nummer = level_nummer;
-        this.aantalBolletjes = 0;
-        this.aantalBolletjesGegeten = 0;
-        this.setFocusable(true);
-        this.requestFocus();
-        this.gametext = new JLabel();
+        aantalBolletjes = 0;
+        aantalBolletjesGegeten = 0;
+        setFocusable(true);
+        requestFocus();
+        gametext = new JLabel();
+        this.gameEventHandler = gameEventHandler;
+        gameEventHandler.addGameEventListener(this);
         init();
     }
     
     /**
      * De functie die alle vakjes,de bijbehorende elementen en de bijbehorende buren initialiseert.
-     * Deze functie voegt tevens een KeyListener toe aan Paqman.
+     * Deze functie voegt tevens een Paqman als KeyListener toe aan het level.
      */
     private void init(){
         setLevel(level_nummer);
@@ -69,31 +64,31 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                         vakjes[x][y].setMuur(true);
                         break;
                     case "b": 
-                        Bolletje bolletje = new Bolletje(vakjes[x][y], this);
+                        Bolletje bolletje = new Bolletje(vakjes[x][y], gameEventHandler);
                         vakjes[x][y].addElement(bolletje);
-                        gameEventListeners.add(bolletje);
+                        gameEventHandler.addGameEventListener(bolletje);
                         aantalBolletjes++;
                         break;
                     case "s":
-                        Superbolletje superbolletje = new Superbolletje(vakjes[x][y], this);
+                        Superbolletje superbolletje = new Superbolletje(vakjes[x][y], gameEventHandler);
                         vakjes[x][y].addElement(superbolletje);
-                        gameEventListeners.add(superbolletje);
+                        gameEventHandler.addGameEventListener(superbolletje);
                         break;
                     case "p":
-                        Paqman paqman = new Paqman(vakjes[x][y], this);
+                        Paqman paqman = new Paqman(vakjes[x][y], gameEventHandler);
                         vakjes[x][y].addElement(paqman);
                         this.addKeyListener(paqman);
-                        gameEventListeners.add(paqman);
+                        gameEventHandler.addGameEventListener(paqman);
                         break;
                     case "gd":
-                        Spook spook = new Spook(vakjes[x][y], this, new BeweegDronken());
+                        Spook spook = new Spook(vakjes[x][y], gameEventHandler, new BeweegDronken());
                         vakjes[x][y].addElement(spook);
-                        gameEventListeners.add(spook);
+                        gameEventHandler.addGameEventListener(spook);
                         break;
                     case "gs":
-                        Spook slimSpook = new Spook(vakjes[x][y], this, new BeweegSlim());
+                        Spook slimSpook = new Spook(vakjes[x][y], gameEventHandler, new BeweegSlim());
                         vakjes[x][y].addElement(slimSpook);
-                        gameEventListeners.add(slimSpook);
+                        gameEventHandler.addGameEventListener(slimSpook);
                         break;
                     default:
                         break;
@@ -101,7 +96,6 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
             }
         }
         setBuren();
-        System.out.println("Heeft level " + level_nummer + " gestart.");
     }
     
     public int getLevel(){
@@ -125,28 +119,18 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         for(int i =0; i<lines.size(); i++){
             layout[i] = lines.get(i).split("[ ]+");
         }
-        setGameText("Level " + level_nummer);
     }
     
     /**
      * De functie waarmee de game na initialisatie daadwerkelijk gestart wordt.
      */
     private void startGame(){
-        timer.start();
-        this.requestFocus();
+        requestFocus();
+        setGameText("Level " + level_nummer);
     }
     
     private void pauzeerGame(){
-        timer.stop();
         setGameText("Gepauzeerd");
-    }
-    
-    public void addGameEventListener(GameEventListener gameEventListener){
-        gameEventListeners.add(gameEventListener);
-    }
-    
-    public void removeGameEventListener(GameEventListener gameEventListener){
-        gameEventListeners.remove(gameEventListener);
     }
     
     public String getGameText(){
@@ -154,8 +138,10 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     }
     
     public void setGameText(String tekst){
+        if(tekst != null){
+            gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.TEXTTIMER));            
+        }
         this.gametext.setText(tekst);
-        textTimer.start();
     }
     
     /**
@@ -194,7 +180,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         double posX = Math.random()*vakjes.length;
         double posY = Math.random()*vakjes[0].length;
         if(!vakjes[(int)posX][(int)posY].getMuur()){
-            Kers kers = new Kers(vakjes[(int)posX][(int)posY], this);
+            Kers kers = new Kers(vakjes[(int)posX][(int)posY], gameEventHandler);
             vakjes[(int)posX][(int)posY].addElement(kers);
             temporaryElement = kers;
         }else{
@@ -209,7 +195,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         double posX = Math.random()*vakjes.length;
         double posY = Math.random()*vakjes[0].length;
         if(!vakjes[(int)posX][(int)posY].getMuur()){
-            Powerup powerup = new Powerup(vakjes[(int)posX][(int)posY], this);
+            Powerup powerup = new Powerup(vakjes[(int)posX][(int)posY], gameEventHandler);
             vakjes[(int)posX][(int)posY].addElement(powerup);
             temporaryElement = powerup;
         }else{
@@ -224,7 +210,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
         double posX = Math.random()*vakjes.length;
         double posY = Math.random()*vakjes[0].length;
         if(!vakjes[(int)posX][(int)posY].getMuur()){
-            PaqmanHelper paqmanHelper = new PaqmanHelper(vakjes[(int)posX][(int)posY], this);
+            PaqmanHelper paqmanHelper = new PaqmanHelper(vakjes[(int)posX][(int)posY], gameEventHandler);
             vakjes[(int)posX][(int)posY].addElement(paqmanHelper);
             temporaryElement = paqmanHelper;
         }else{
@@ -262,8 +248,7 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
      */
     public void delete(){
         try {
-            gameEventListeners.clear();
-            System.out.println("Heeft het level afgesloten.");
+            gameEventHandler.clearGameEventListeners();
         } catch (Throwable e){
             System.out.println("Kan het level niet afsluiten.");
         }
@@ -289,74 +274,38 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
             case START:
-                startGame();
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
-                }                
+                startGame();              
                 break;
             case PAUZEER:
                 pauzeerGame();
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
+                break;
+            case TEXTTIMER:
+                if(getGameText() != null){
+                    setGameText(null);   
                 }
                 break;
             case DEAD:
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
-                }
                 break;
-            case MOVE:
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
-                }
-                
+            case MOVE:                
                 if(temporaryElement != null){
-                    gameEventListeners.add(temporaryElement);
+                    gameEventHandler.addGameEventListener(temporaryElement);
                     temporaryElement = null;
                 }
                 break;
             case POWERUP:
-                puTimer.start();
-                
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
+                if(gameEvent.getPowerup() != null){
+                    setMurenLoper(true);
+                }else{
+                    setMurenLoper(false);    
                 }
-                
-                switch(gameEvent.getPowerup()){
-                    case MURENLOPER:
-                        setMurenLoper(true);
-                        break;
-                }
-                break;
             case EATBOLLETJE:
                 aantalBolletjesGegeten++;
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
-                }
                 
                 //Kijk of de helft van alle bolletjes zijn opgegeten en spawn een kers, of dat alle bolletjes zijn opgegeten en start het nieuwe level.
                 if(Math.round(aantalBolletjes/2) == aantalBolletjesGegeten){
                     spawnKers();
                 }else if(aantalBolletjes == aantalBolletjesGegeten){
-                    for(GameEventListener gameEventListener: gameEventListeners){
-                        gameEventListener.gameEventOccurred(new GameEvent(EventType.NEXTLEVEL));
-                    }
-                }
-                break;
-            case EATSUPERBOLLETJE:
-                sbTimer.start();
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(new GameEvent(EventType.ONVERSLAANBAAR));
-                }
-                break;                
-            case EATKERS:
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
-                }
-                break;
-            case EATSPOOK:
-                for(GameEventListener gameEventListener: gameEventListeners){
-                    gameEventListener.gameEventOccurred(gameEvent);
+                    gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.NEXTLEVEL));
                 }
                 break;
             case PAQMANHELPER:
@@ -364,35 +313,5 @@ public class Level extends JPanel implements GameEventListener, ActionListener{
                 break;
         }
         repaint();
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent actionEvent){
-        if(actionEvent.getSource().equals(textTimer)){
-            setGameText(null);
-            textTimer.stop();
-        }
-        
-        if(actionEvent.getSource().equals(sbTimer)){
-            for(GameEventListener gameEventListener: gameEventListeners){
-                gameEventListener.gameEventOccurred(new GameEvent(EventType.ONVERSLAANBAAR));
-            }            
-            sbTimer.stop();
-        }
-        
-        if(actionEvent.getSource().equals(puTimer)){
-            for(GameEventListener gameEventListener: gameEventListeners){
-                gameEventListener.gameEventOccurred(new GameEvent(EventType.POWERUP));
-            }   
-            setMurenLoper(false);
-            puTimer.stop();            
-        }
-        
-        if(actionEvent.getSource().equals(timer)){
-            for(GameEventListener gameEventListener: gameEventListeners){
-                gameEventListener.gameEventOccurred(new GameEvent(EventType.TIMER));
-                repaint();
-            }
-        }
     }
 }
