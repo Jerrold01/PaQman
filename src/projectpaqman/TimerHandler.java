@@ -71,11 +71,11 @@ public class TimerHandler implements ActionListener {
             stopTextTimer();
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.TEXTTIMER));
         }else if(actionEvent.getSource().equals(sbTimer)){
-            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));          
             stopSbTimer();
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));          
         }else if(actionEvent.getSource().equals(puTimer)){
-            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.POWERUP));
-            stopPuTimer();           
+            stopPuTimer(); 
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.POWERUP));          
         }else if(actionEvent.getSource().equals(gameTimer)){
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.TIMER));
         }
