@@ -44,12 +44,7 @@ public class SuperbolletjeTest {
      */
     @Test
     public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Superbolletje instance = null;
-        instance.draw(g);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -57,11 +52,7 @@ public class SuperbolletjeTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("delete");
-        Superbolletje instance = null;
-        instance.delete();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -69,12 +60,7 @@ public class SuperbolletjeTest {
      */
     @Test
     public void testGameEventOccurred() {
-        System.out.println("gameEventOccurred");
-        GameEvent gameEvent = null;
-        Superbolletje instance = null;
-        instance.gameEventOccurred(gameEvent);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

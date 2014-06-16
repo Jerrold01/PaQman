@@ -44,12 +44,6 @@ public class KersTest {
      */
     @Test
     public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Kers instance = null;
-        instance.draw(g);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,12 +51,6 @@ public class KersTest {
      */
     @Test
     public void testGameEventOccurred() {
-        System.out.println("gameEventOccurred");
-        GameEvent gameEvent = null;
-        Kers instance = null;
-        instance.gameEventOccurred(gameEvent);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -70,11 +58,6 @@ public class KersTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("delete");
-        Kers instance = null;
-        instance.delete();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

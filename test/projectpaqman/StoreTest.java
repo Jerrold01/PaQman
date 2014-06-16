@@ -40,8 +40,14 @@ public class StoreTest {
 
     @Test
     public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+    }
+
+    /**
+     * Test of setGameEventListener method, of class Store.
+     */
+    @Test
+    public void testSetGameEventListener() {
     }
     
 }

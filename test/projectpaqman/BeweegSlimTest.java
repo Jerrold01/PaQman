@@ -39,23 +39,32 @@ public class BeweegSlimTest {
     }
 
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testNextVakje() {
+        //Test eerste fysieke testgeval
+        Level testlevel_1 = new Level(5, new GameEventHandler());
+        Spook spook = null;
+        
+        for(Spelelement element : testlevel_1.getVakje(1, 1).getElementen()){
+            if(element instanceof Spook){
+                spook = (Spook)element;
+            }
+        }
+        
+        spook.gameEventOccurred(new GameEvent(GameEventType.TIMER));
+        assert(spook.vakje.equals(testlevel_1.getVakje(1, 2)));
+        
+        
+        //Test tweede fysieke testgeval
+        Level testlevel_2 = new Level(6, new GameEventHandler());
+        spook = null;
+        
+        for(Spelelement element : testlevel_2.getVakje(1, 3).getElementen()){
+            if(element instanceof Spook){
+                spook = (Spook)element;
+            }
+        }
+        
+        spook.gameEventOccurred(new GameEvent(GameEventType.TIMER));
+        assert(spook.vakje.equals(testlevel_2.getVakje(1, 2)));
     }
-
-    /**
-     * Test of move method, of class BeweegSlim.
-     */
-    @Test
-    public void testMove() {
-        System.out.println("move");
-        Spelelement spelelement = null;
-        GameEventListener gameEventListener = null;
-        BeweegSlim instance = new BeweegSlim();
-        instance.move(spelelement, gameEventListener);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

@@ -43,13 +43,6 @@ public class NodeTest {
      */
     @Test
     public void testGetData() {
-        System.out.println("getData");
-        Node instance = null;
-        Vakje expResult = null;
-        Vakje result = instance.getData();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,13 +50,6 @@ public class NodeTest {
      */
     @Test
     public void testGetParent() {
-        System.out.println("getParent");
-        Node instance = null;
-        Node expResult = null;
-        Node result = instance.getParent();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -71,12 +57,6 @@ public class NodeTest {
      */
     @Test
     public void testSetParent() {
-        System.out.println("setParent");
-        Node parent = null;
-        Node instance = null;
-        instance.setParent(parent);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,13 +64,6 @@ public class NodeTest {
      */
     @Test
     public void testGetNextNode() {
-        System.out.println("getNextNode");
-        Node instance = null;
-        Node expResult = null;
-        Node result = instance.getNextNode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

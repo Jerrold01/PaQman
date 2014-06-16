@@ -144,6 +144,16 @@ public class Level extends JPanel implements GameEventListener{
     }
     
     /**
+     * Functie om het vakje terug te krijgen wat zich op positie x, y bevindt.
+     * @param x De x-coordinaat van het vakje.
+     * @param y De y-coordinaat van het vakje.
+     * @return Het vakje wat je wil hebben.
+     */
+    public Vakje getVakje(int x, int y){
+        return vakjes[x][y];
+    }
+    
+    /**
      * De functie waarmee alle buren van de vakjes, die binnen de constructor van klasse Level worden aangemaakt, worden meegegeven.
      */
     private void setBuren(){
@@ -252,6 +262,11 @@ public class Level extends JPanel implements GameEventListener{
             System.out.println("Kan het level niet afsluiten.");
         }
     }
+
+    /**
+     * De functie waarmee het level alle vakjes en evt. tekent.
+     * @param g 
+     */
     
     @Override
     public void paintComponent(Graphics g) {

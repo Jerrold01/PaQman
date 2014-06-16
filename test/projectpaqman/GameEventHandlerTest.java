@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author kevinwareman
  */
-public class GameEventTest {
+public class GameEventHandlerTest {
     
-    public GameEventTest() {
+    public GameEventHandlerTest() {
     }
     
     @BeforeClass
@@ -38,33 +38,39 @@ public class GameEventTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of addGameEventListener method, of class GameEventHandler.
+     */
     @Test
-    public void testSomeMethod() {
-
+    public void testAddGameEventListener() {
     }
 
     /**
-     * Test of getSource method, of class GameEvent.
+     * Test of removeGameEventListener method, of class GameEventHandler.
      */
     @Test
-    public void testGetSource() {
-
+    public void testRemoveGameEventListener() {
     }
 
     /**
-     * Test of getPowerup method, of class GameEvent.
+     * Test of clearGameEventListeners method, of class GameEventHandler.
      */
     @Test
-    public void testGetPowerup() {
-
+    public void testClearGameEventListeners() {
     }
 
     /**
-     * Test of getEventType method, of class GameEvent.
+     * Test of setElementToAdd method, of class GameEventHandler.
      */
     @Test
-    public void testGetEventType() {
-        
+    public void testSetElementToAdd() {
+    }
+
+    /**
+     * Test of gameEventOccurred method, of class GameEventHandler.
+     */
+    @Test
+    public void testGameEventOccurred() {
     }
     
 }

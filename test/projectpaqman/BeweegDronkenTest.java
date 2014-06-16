@@ -40,8 +40,7 @@ public class BeweegDronkenTest {
 
     @Test
     public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -49,13 +48,7 @@ public class BeweegDronkenTest {
      */
     @Test
     public void testMove() {
-        System.out.println("move");
-        Spelelement spelelement = null;
-        GameEventListener gameEventListener = null;
-        BeweegDronken instance = new BeweegDronken();
-        instance.move(spelelement, gameEventListener);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

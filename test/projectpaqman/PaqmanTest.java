@@ -45,12 +45,6 @@ public class PaqmanTest {
      */
     @Test
     public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Paqman instance = null;
-        instance.draw(g);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,12 +52,6 @@ public class PaqmanTest {
      */
     @Test
     public void testKeyReleased() {
-        System.out.println("keyReleased");
-        KeyEvent event = null;
-        Paqman instance = null;
-        instance.keyReleased(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -71,12 +59,6 @@ public class PaqmanTest {
      */
     @Test
     public void testKeyPressed() {
-        System.out.println("keyPressed");
-        KeyEvent event = null;
-        Paqman instance = null;
-        instance.keyPressed(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,12 +66,6 @@ public class PaqmanTest {
      */
     @Test
     public void testKeyTyped() {
-        System.out.println("keyTyped");
-        KeyEvent event = null;
-        Paqman instance = null;
-        instance.keyTyped(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -97,11 +73,6 @@ public class PaqmanTest {
      */
     @Test
     public void testRespawn() {
-        System.out.println("respawn");
-        Paqman instance = null;
-        instance.respawn();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -109,12 +80,6 @@ public class PaqmanTest {
      */
     @Test
     public void testGameEventOccurred() {
-        System.out.println("gameEventOccurred");
-        GameEvent gameEvent = null;
-        Paqman instance = null;
-        instance.gameEventOccurred(gameEvent);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

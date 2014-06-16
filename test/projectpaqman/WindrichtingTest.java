@@ -43,12 +43,7 @@ public class WindrichtingTest {
      */
     @Test
     public void testValues() {
-        System.out.println("values");
-        Windrichting[] expResult = null;
-        Windrichting[] result = Windrichting.values();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -56,13 +51,7 @@ public class WindrichtingTest {
      */
     @Test
     public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        Windrichting expResult = null;
-        Windrichting result = Windrichting.valueOf(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

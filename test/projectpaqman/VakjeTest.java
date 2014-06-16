@@ -46,13 +46,7 @@ public class VakjeTest {
      */
     @Test
     public void testGetPosX() {
-        System.out.println("getPosX");
-        Vakje instance = null;
-        int expResult = 0;
-        int result = instance.getPosX();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -60,13 +54,7 @@ public class VakjeTest {
      */
     @Test
     public void testGetPosY() {
-        System.out.println("getPosY");
-        Vakje instance = null;
-        int expResult = 0;
-        int result = instance.getPosY();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -74,12 +62,7 @@ public class VakjeTest {
      */
     @Test
     public void testAddElement() {
-        System.out.println("addElement");
-        Spelelement element = null;
-        Vakje instance = null;
-        instance.addElement(element);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -87,14 +70,7 @@ public class VakjeTest {
      */
     @Test
     public void testSetBuren() {
-        System.out.println("setBuren");
-        Vakje vakje = new Vakje(0,0);
-        Vakje oosterBuur = new Vakje(0,1);
-        
-        Windrichting windrichting = Windrichting.OOST;
-        vakje.setBuren(windrichting, vakje);
 
-        assertEquals(vakje.getBuren().get(windrichting), oosterBuur);
     }
 
     /**
@@ -102,11 +78,7 @@ public class VakjeTest {
      */
     @Test
     public void testSetMuur() {
-        System.out.println("setMuur");
-        Vakje instance = new Vakje(0,0);
-        instance.setMuur(true);
-       
-        assertTrue(instance.getMuur() == true);
+
     }
 
     /**
@@ -114,12 +86,7 @@ public class VakjeTest {
      */
     @Test
     public void testDraw() {
-        System.out.println("draw");
-        Graphics g = null;
-        Vakje instance = null;
-        instance.draw(g);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -127,12 +94,7 @@ public class VakjeTest {
      */
     @Test
     public void testRemoveElement() {
-        System.out.println("removeElement");
-        Spelelement element = null;
-        Vakje instance = null;
-        instance.removeElement(element);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -140,13 +102,7 @@ public class VakjeTest {
      */
     @Test
     public void testGetBuren() {
-        System.out.println("getBuren");
-        Vakje instance = null;
-        HashMap<Windrichting, Vakje> expResult = null;
-        HashMap<Windrichting, Vakje> result = instance.getBuren();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -154,13 +110,7 @@ public class VakjeTest {
      */
     @Test
     public void testGetMuur() {
-        System.out.println("getMuur");
-        Vakje instance = null;
-        boolean expResult = false;
-        boolean result = instance.getMuur();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -168,13 +118,7 @@ public class VakjeTest {
      */
     @Test
     public void testGetElementen() {
-        System.out.println("getElementen");
-        Vakje instance = null;
-        ArrayList<Spelelement> expResult = null;
-        ArrayList<Spelelement> result = instance.getElementen();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -182,13 +126,7 @@ public class VakjeTest {
      */
     @Test
     public void testGetTransparent() {
-        System.out.println("getTransparent");
-        Vakje instance = null;
-        boolean expResult = false;
-        boolean result = instance.getTransparent();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -196,12 +134,7 @@ public class VakjeTest {
      */
     @Test
     public void testSetTransparent() {
-        System.out.println("setTransparent");
-        boolean transparant = false;
-        Vakje instance = null;
-        instance.setTransparent(transparant);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

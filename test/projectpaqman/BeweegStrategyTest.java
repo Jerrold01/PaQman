@@ -49,19 +49,5 @@ public class BeweegStrategyTest {
      */
     @Test
     public void testMove() {
-        System.out.println("move");
-        Spelelement spelelement = null;
-        GameEventListener gameEventListener = null;
-        BeweegStrategy instance = new BeweegStrategyImpl();
-        instance.move(spelelement, gameEventListener);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    public class BeweegStrategyImpl implements BeweegStrategy {
-
-        public void move(Spelelement spelelement, GameEventListener gameEventListener) {
-        }
-    }
-    
+    }    
 }

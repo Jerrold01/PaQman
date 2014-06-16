@@ -43,12 +43,7 @@ public class EventTypeTest {
      */
     @Test
     public void testValues() {
-        System.out.println("values");
-        EventType[] expResult = null;
-        EventType[] result = EventType.values();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -56,13 +51,7 @@ public class EventTypeTest {
      */
     @Test
     public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        EventType expResult = null;
-        EventType result = EventType.valueOf(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

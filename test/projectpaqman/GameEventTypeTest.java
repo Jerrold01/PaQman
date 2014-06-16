@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author kevinwareman
  */
-public class GameEventTest {
+public class GameEventTypeTest {
     
-    public GameEventTest() {
+    public GameEventTypeTest() {
     }
     
     @BeforeClass
@@ -38,33 +38,18 @@ public class GameEventTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of values method, of class GameEventType.
+     */
     @Test
-    public void testSomeMethod() {
-
+    public void testValues() {
     }
 
     /**
-     * Test of getSource method, of class GameEvent.
+     * Test of valueOf method, of class GameEventType.
      */
     @Test
-    public void testGetSource() {
-
-    }
-
-    /**
-     * Test of getPowerup method, of class GameEvent.
-     */
-    @Test
-    public void testGetPowerup() {
-
-    }
-
-    /**
-     * Test of getEventType method, of class GameEvent.
-     */
-    @Test
-    public void testGetEventType() {
-        
+    public void testValueOf() {
     }
     
 }
