@@ -58,6 +58,6 @@ public class Kers extends Spelelement {
     protected void delete(){
         vakje.removeElement(this);
         setVakje(null);
-        gameEventListener.gameEventOccurred(new GameEvent(EventType.EATKERS));
+        gameEventListener.gameEventOccurred(new GameEvent(GameEventType.EATKERS));
     }
 }

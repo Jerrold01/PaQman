@@ -31,7 +31,7 @@ public class Bolletje extends Spelelement {
     protected void delete(){
         vakje.removeElement(this);
         setVakje(null);
-        gameEventListener.gameEventOccurred(new GameEvent(EventType.EATBOLLETJE));
+        gameEventListener.gameEventOccurred(new GameEvent(GameEventType.EATBOLLETJE));
     }
     
     @Override
