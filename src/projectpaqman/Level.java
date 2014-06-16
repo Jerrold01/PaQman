@@ -95,6 +95,7 @@ public class Level extends JPanel implements GameEventListener{
             }
         }
         setBuren();
+        setLevelText("Level " + level_nummer);
     }
     
     public int getLevel(){
@@ -125,7 +126,6 @@ public class Level extends JPanel implements GameEventListener{
      */
     private void startLevel(){
         requestFocus();
-        setLevelText("Level " + level_nummer);
     }
     
     private void pauzeerLevel(){
@@ -205,7 +205,7 @@ public class Level extends JPanel implements GameEventListener{
     /**
      * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
      */
-    private void spawnPaqmanHelper(){
+    public void spawnPaqmanHelper(){
         double posX = Math.random()*vakjes.length;
         double posY = Math.random()*vakjes[0].length;
         if(!vakjes[(int)posX][(int)posY].getMuur()){
@@ -275,6 +275,9 @@ public class Level extends JPanel implements GameEventListener{
             case START:
                 startLevel();              
                 break;
+            case HERSTART:
+                startLevel();
+                break;
             case PAUZEER:
                 pauzeerLevel();
                 break;
@@ -284,11 +287,12 @@ public class Level extends JPanel implements GameEventListener{
                 }
                 break;
             case POWERUP:
-                if(gameEvent.getPowerup() != null){
+                if(gameEvent.getPowerup() != null && gameEvent.getPowerup().equals(Powerups.MURENLOPER)){
                     setMurenLoper(true);
                 }else{
                     setMurenLoper(false);    
                 }
+                break;
             case EATBOLLETJE:
                 aantalBolletjesGegeten++;
                 
@@ -298,9 +302,6 @@ public class Level extends JPanel implements GameEventListener{
                 }else if(aantalBolletjes == aantalBolletjesGegeten){
                     gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.NEXTLEVEL));
                 }
-                break;
-            case PAQMANHELPER:
-                spawnPaqmanHelper();
                 break;
         }
         repaint();

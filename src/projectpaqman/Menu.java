@@ -96,6 +96,10 @@ public class Menu extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent){
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.STORE));
+            if(startknop.getText().equalsIgnoreCase("Herstart")){
+                gameEventListener.gameEventOccurred(new GameEvent(GameEventType.PAUZEER));
+                setPauzeknop();
+            }
         }
     }
         

@@ -171,6 +171,9 @@ public class Spook extends Spelelement implements GameEventListener{
                     onverslaanbaar = true;
                 }
                 break;
+            case EATSUPERBOLLETJE:
+                onverslaanbaar = true;
+                break;
         }
     }
 }

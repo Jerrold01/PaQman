@@ -35,12 +35,7 @@ public class GameEventHandler implements GameEventListener{
     
     @Override
     public void gameEventOccurred(GameEvent gameEvent){
-        switch(gameEvent.getEventType()){
-            case EATSUPERBOLLETJE:
-                for(int i=0; i<gameEventListeners.size(); i++){
-                    gameEventListeners.get(i).gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));
-                }
-                break;                
+        switch(gameEvent.getEventType()){               
             default:
                 for(int i=0; i<gameEventListeners.size(); i++){
                     gameEventListeners.get(i).gameEventOccurred(gameEvent);

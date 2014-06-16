@@ -53,12 +53,20 @@ public class TimerHandler implements ActionListener {
         sbTimer.stop();
     }
     
+    public boolean isSbTimerRunning(){
+        return sbTimer.isRunning();
+    }
+    
     public void startPuTimer(){
         puTimer.start();
     }
     
     public void stopPuTimer(){
         puTimer.stop();
+    }
+    
+    public boolean isPuTimerRunning(){
+        return puTimer.isRunning();
     }
     
     public void setGameEventListener(GameEventListener gameEventListener){
@@ -68,14 +76,14 @@ public class TimerHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent){
         if(actionEvent.getSource().equals(textTimer)){
-            stopTextTimer();
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.TEXTTIMER));
+            stopTextTimer();
         }else if(actionEvent.getSource().equals(sbTimer)){
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));       
             stopSbTimer();
-            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.ONVERSLAANBAAR));          
         }else if(actionEvent.getSource().equals(puTimer)){
+            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.POWERUP));
             stopPuTimer(); 
-            gameEventListener.gameEventOccurred(new GameEvent(GameEventType.POWERUP));          
         }else if(actionEvent.getSource().equals(gameTimer)){
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.TIMER));
         }

@@ -24,8 +24,6 @@ public class Game implements GameEventListener {
     
     private int aantal_levens;
     private int aantal_punten;
-    private boolean gestart;
-    private boolean gepauzeerd;
     private boolean puntenverdubbelaar;
     
     public static void main(String[] args) {
@@ -53,14 +51,11 @@ public class Game implements GameEventListener {
   
         level.requestFocus();
         frame.setVisible(true);
-        gestart = true;
     }
     
     private void resetStats(){
         aantal_levens = 3;
         aantal_punten = 0;
-        gestart = false;
-        gepauzeerd = false;
         puntenverdubbelaar = false;
         
         menu.setLevens(aantal_levens);
@@ -72,9 +67,10 @@ public class Game implements GameEventListener {
     private void nextLevel(){
         gameEventHandler = new GameEventHandler();
         gameEventHandler.addGameEventListener(this);
+        timerHandler = new TimerHandler(gameEventHandler);
+        timerHandler.setGameEventListener(gameEventHandler);
         menu.setGameEventListener(gameEventHandler);
         store.setGameEventListener(gameEventHandler);
-        timerHandler.setGameEventListener(gameEventHandler);
         Level newLevel = new Level(level.getLevel()+1, gameEventHandler);
         
         frame.remove(level);
@@ -89,9 +85,10 @@ public class Game implements GameEventListener {
     private void restart(){
         gameEventHandler = new GameEventHandler();
         gameEventHandler.addGameEventListener(this);
+        timerHandler = new TimerHandler(gameEventHandler);
+        timerHandler.setGameEventListener(gameEventHandler);
         menu.setGameEventListener(gameEventHandler);
         store.setGameEventListener(gameEventHandler);
-        timerHandler.setGameEventListener(gameEventHandler);
         
         frame.remove(level);
         level.delete();
@@ -105,43 +102,26 @@ public class Game implements GameEventListener {
     public void gameEventOccurred(GameEvent gameEvent){
         switch(gameEvent.getEventType()){
             case START:
-                if(!gestart){
-                    gestart = true;
-                    gameEventHandler.gameEventOccurred(new GameEvent(this, GameEventType.START));
-                }
-                gepauzeerd = false;
                 timerHandler.startGameTimer();
+                timerHandler.startTextTimer();
                 break;
             case HERSTART:
                 restart();
                 break;
             case PAUZEER:
-                if(!gepauzeerd){
-                    gepauzeerd = true;
-                }
-                gestart = false;
                 timerHandler.stopGameTimer();
+                timerHandler.stopTextTimer();
                 break;
             case NEXTLEVEL:
                 if(level.getLevel() < 3){
                     nextLevel();
                 }else{
-                    JOptionPane.showMessageDialog(null, "Hoera, je hebt de game uitgespeeld! \n + Je had " + aantal_punten + " punten en " + aantal_levens + "levens .");
+                    JOptionPane.showMessageDialog(null, "Hoera, je hebt de game uitgespeeld! \n Je had " + aantal_punten + " punten en " + aantal_levens + " levens.");
                     restart();
-                }
-                break;
-            case TEXTTIMER:
-                if(level.getLevelText().isEmpty()){
-                    timerHandler.startTextTimer();
                 }
                 break;
             case STORE:
                 store.setVisible(true);
-                if(gestart){
-                    gepauzeerd = true;
-                    gameEventHandler.gameEventOccurred(new GameEvent(GameEventType.PAUZEER));
-                    menu.setPauzeknop();
-                }
                 break;
             case DEAD:
                 if(aantal_levens > 1){
@@ -155,6 +135,7 @@ public class Game implements GameEventListener {
                 break;
             case POWERUP:
                 if(gameEvent.getPowerup() != null){
+                    timerHandler.stopPuTimer();
                     timerHandler.startPuTimer();
                     switch(gameEvent.getPowerup()){
                         case PUNTENVERDUBBELAAR:
@@ -186,6 +167,7 @@ public class Game implements GameEventListener {
                 menu.setPunten(aantal_punten);
                 break;
             case EATSUPERBOLLETJE:
+                timerHandler.stopSbTimer();
                 timerHandler.startSbTimer();
                 break;
             case EATKERS:
@@ -219,7 +201,7 @@ public class Game implements GameEventListener {
             case PAQMANHELPER:
                 if(aantal_punten >= 1500){
                     aantal_punten -= 1500;
-                    gameEventHandler.gameEventOccurred(gameEvent); 
+                    level.spawnPaqmanHelper();
                     menu.setPunten(aantal_punten);
                 }else{
                     JOptionPane.showMessageDialog(null, "Je hebt nog niet genoeg punten voor deze aankoop.", "Puntentekort", JOptionPane.PLAIN_MESSAGE);
