@@ -131,6 +131,7 @@ public class Game implements GameEventListener {
                 else{
                     restart();
                     menu.setStartknop();
+                    JOptionPane.showMessageDialog(null, "GAME OVER \n Je hebt geen levens meer");
                 }
                 break;
             case POWERUP:
