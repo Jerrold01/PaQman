@@ -15,7 +15,7 @@ import java.util.*;
 public class BeweegBang implements BeweegStrategy {
     
     @Override
-    public void move(Spelelement spelelement, GameEventListener gameEventListener){
+    public void move(Spelelement spelelement){
        
         Vakje nieuwVakje = nextVakje(spelelement);
         nieuwVakje.addElement(spelelement);
@@ -23,6 +23,7 @@ public class BeweegBang implements BeweegStrategy {
         spelelement.vakje = nieuwVakje;
     }
     
+    //returned het eerstvolgende vakje terug welke het sneltste is richging paqman
     private Vakje nextVakje(Spelelement spelelement){
         Node paqman = null;
         Queue<Node> queue = new LinkedList();
@@ -61,6 +62,7 @@ public class BeweegBang implements BeweegStrategy {
         return reverseDirection(spelelement, nextVakje);
     }
     
+    //returned het tegenovergestelde vakje van het eerste vakje van het kortste pad algoritme richting paqman.
     private Vakje reverseDirection(Spelelement spelelement, Vakje vakje){
         Vakje nextVakje;
         if(spelelement.vakje.getBuren().get(Windrichting.NOORD).equals(vakje)){

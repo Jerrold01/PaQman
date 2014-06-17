@@ -27,18 +27,21 @@ public class Spook extends Spelelement implements GameEventListener{
         this.spookjesvriezer = false;
     }
     
+    /**
+     * De methode die bepaalt hoet het spook moet lopen.
+     */
     private void move(){
         if(!spookjesvriezer){
             if(onverslaanbaar && beweegstrategy instanceof BeweegSlim){
                 beweegstrategy = new BeweegBang();
-                beweegstrategy.move(this, gameEventListener);
+                beweegstrategy.move(this);
                 beweegstrategy = new BeweegSlim();
             }else if(onverslaanbaar && beweegstrategy instanceof BeweegDronken){
                 beweegstrategy = new BeweegBang();
-                beweegstrategy.move(this, gameEventListener);
+                beweegstrategy.move(this);
                 beweegstrategy = new BeweegDronken();
             }else{
-                beweegstrategy.move(this, gameEventListener);           
+                beweegstrategy.move(this);           
             }
         }
     }
@@ -64,6 +67,11 @@ public class Spook extends Spelelement implements GameEventListener{
         vakje = nieuwVakje;
     }
     
+    /**
+     * Methode die het respawnvakje terug geeft van een spook.
+     * @param vakje Het startvakje van het spook welke moet worden gerespawned.
+     * @return Het respawn vakje van het spook.
+     */
     private Vakje getRespawnVakje(Vakje vakje){
         boolean gevaar = false;
         int i = 0;
@@ -96,6 +104,11 @@ public class Spook extends Spelelement implements GameEventListener{
         }
     }
     
+    /**
+     * De methode die een willekeurig vakje terug geeft 
+     * @param vakje Het vakje waarmee moet worden begonnen om van daaruit een willekeurig ander vakje terug te geven.
+     * @return Een random vakje 
+     */
     private Vakje getRandomVakje(Vakje vakje){
         for(int i=0; i< 40; i++){
             int windrichtingInt = new Random().nextInt(Windrichting.values().length);

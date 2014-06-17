@@ -228,7 +228,8 @@ public class Level extends JPanel implements GameEventListener{
     }
 
     /**
-     * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
+     * De methode die tot 20 muren tijdelijk transparant of dit ongedaan maakt.
+     * @param waarde De waarde (true of false) wat bepaald of ze wel(true) of niet(false) transparant moeten worden gemaakt.
      */
     private void setMurenLoper(boolean waarde){
         if(waarde){
@@ -253,7 +254,7 @@ public class Level extends JPanel implements GameEventListener{
     }
     
     /**
-     * De functie waarmee het level wordt beeïndigd.
+     * De functie waarmee het level wordt beeïndigd en verwijderd.
      */
     public void delete(){
         try {
@@ -265,9 +266,8 @@ public class Level extends JPanel implements GameEventListener{
 
     /**
      * De functie waarmee het level alle vakjes en evt. tekst tekent.
-     * @param g 
+     * @param g Het graphics object
      */
-    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

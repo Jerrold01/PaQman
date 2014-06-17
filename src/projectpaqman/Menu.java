@@ -52,6 +52,9 @@ public class Menu extends JPanel {
         add(powerup_naam);
     }
     
+    /**
+     * Verandert de tekst van de startknop naar herstart of start, afhankelijk van de huidige tekst.
+     */
     public void setStartknop(){
         if(startknop.getText().equalsIgnoreCase("Start")){
             startknop.setText("Herstart");
@@ -60,6 +63,9 @@ public class Menu extends JPanel {
         }
     }
     
+    /**
+     * Verandert de tekst van de pauzeknop naar pauzeer of hervat, afhankelijk van de huidige tekst.
+     */
     public void setPauzeknop(){
         if(pauzeknop.getText().equalsIgnoreCase("Pauzeer")){
             pauzeknop.setText("Hervat");
@@ -68,18 +74,34 @@ public class Menu extends JPanel {
         }        
     }
     
+    /**
+     * Verandert de tekst van het JLabel naar het aantal punten.
+     * @param aantal_punten Het aantal punten wat getoond moet worden op het scherm.
+     */
     public void setPunten(int aantal_punten){
         this.aantal_punten.setText("Punten: " + String.valueOf(aantal_punten));
     }
     
+    /**
+     * Verandert de tekst van het JLabel naar het aantal levens.
+     * @param aantal_levens Het aantal levens wat getoond moet worden op het scherm.
+     */
     public void setLevens(int aantal_levens){
         this.aantal_levens.setText("Levens: " + String.valueOf(aantal_levens));
     }
     
+    /**
+     * Verandert de tekst van het JLabel naar het level nummer.
+     * @param level_nummer Het level nummer welke getoond moet worden.
+     */
     public void setLevel(int level_nummer){
         this.level_naam.setText("Level: " + String.valueOf(level_nummer));
     }
     
+    /**
+     * Verandert de tekst van het JLabel naar de juiste powerup
+     * @param powerup_naam De naam van de power up welke getoond moet worden.
+     */
     public void setPowerup(String powerup_naam){
         if(powerup_naam == null){
             this.powerup_naam.setText(null);
@@ -88,10 +110,17 @@ public class Menu extends JPanel {
         }
     }
     
+    /**
+     * Verandert de gameEventListener waarnaar events moeten worden gestuurd.
+     * @param gameEventListener De gameEventListner waarnaar events moeten worden gestuurd.
+     */
     public void setGameEventListener(GameEventListener gameEventListener){
         this.gameEventListener = gameEventListener;
     }
  
+    /**
+     * De listener die kijkt of er op de store button wordt geklikt.
+     */
     public class storeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
@@ -103,6 +132,9 @@ public class Menu extends JPanel {
         }
     }
         
+    /**
+     * De listener die kijkt of er op de pauze button wordt geklikt.
+     */
     public class pauzeClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
@@ -117,6 +149,9 @@ public class Menu extends JPanel {
         }
     }
     
+    /**
+     * De listener die kijkt of er op de start button wordt geklikt.
+     */
     public class startClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){

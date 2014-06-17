@@ -154,6 +154,7 @@ public class Game implements GameEventListener {
                 }
                 break;
             case EATBOLLETJE:
+                //Kijk of er momenteen een puntenverdubbelaar actief is. Zo ja worden alle gekregen punten verdubbeld.
                 if(puntenverdubbelaar){
                     aantal_punten += 20;    
                     if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-20)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
@@ -172,6 +173,7 @@ public class Game implements GameEventListener {
                 timerHandler.startSbTimer();
                 break;
             case EATKERS:
+                //Kijk of er momenteen een puntenverdubbelaar actief is. Zo ja worden alle gekregen punten verdubbeld.
                 if(puntenverdubbelaar){
                     aantal_punten += 200;    
                     if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-200)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
@@ -186,6 +188,7 @@ public class Game implements GameEventListener {
                 menu.setPunten(aantal_punten);
                 break;
             case EATSPOOK:
+                //Kijk of er momenteen een puntenverdubbelaar actief is. Zo ja worden alle gekregen punten verdubbeld.
                 if(puntenverdubbelaar){
                     aantal_punten += 400;    
                     if(aantal_punten >= 1000 && String.valueOf(Math.abs((long)aantal_punten-400)).charAt(0) != String.valueOf(Math.abs((long)aantal_punten)).charAt(0)){
@@ -200,6 +203,7 @@ public class Game implements GameEventListener {
                 menu.setPunten(aantal_punten);
                 break;
             case PAQMANHELPER:
+                //Kijkt of de speler genoeg punten heeft om paqmanhelper te kopen. Zo niet krijgt de speler een melding.
                 if(aantal_punten >= 1500){
                     aantal_punten -= 1500;
                     level.spawnPaqmanHelper();
@@ -209,6 +213,7 @@ public class Game implements GameEventListener {
                 }
                 break;
             case EXTRALEVEN:
+                //Kijkt of de speler genoeg punten heeft om een extra leven te kopen. Zo niet krijgt de speler een melding.
                 if(aantal_punten >= 2000){
                     aantal_punten -= 2000;
                     aantal_levens++;

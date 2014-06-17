@@ -15,13 +15,18 @@ import java.util.*;
 public class BeweegSlim implements BeweegStrategy {
     
     @Override
-    public void move(Spelelement spelelement, GameEventListener gameEventListener){
+    public void move(Spelelement spelelement){
         Vakje nieuwVakje = nextVakjeDijkstra(spelelement);
         nieuwVakje.addElement(spelelement);
         spelelement.vakje.removeElement(spelelement);
         spelelement.vakje = nieuwVakje;
     }
     
+        /**
+     * Functie om het eerstvolgende vakje terug te geven welke het snelste pad reconstrueert volgens een BDS algortitme.
+     * @param paqman De node waar het vakje van paqman in komt zodra hij is gevonden
+     * @return Het eerstvolgende vakje waar het spook zich naartoe moet bewegen.
+     */
     private Vakje nextVakje(Spelelement spelelement){
         Node paqman = null;
         Queue<Node> queue = new LinkedList();

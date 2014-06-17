@@ -19,7 +19,7 @@ public class BeweegDronken implements BeweegStrategy {
     private Windrichting laatsteWindrichting;
     
     @Override
-    public void move(Spelelement spelelement, GameEventListener gameEventListener ){
+    public void move(Spelelement spelelement){
         
         int windrichtingInt = new Random().nextInt(Windrichting.values().length);
         Windrichting windrichting = Windrichting.values()[windrichtingInt];
@@ -33,15 +33,16 @@ public class BeweegDronken implements BeweegStrategy {
                 spelelement.setVakje(nieuwVakje);
             }
             else{
-                move(spelelement, gameEventListener);
+                move(spelelement);
             }
             this.laatsteWindrichting = windrichting;
         }
         else{
-            move(spelelement, gameEventListener);
+            move(spelelement);
         }
     }
     
+    //Kijkt of het de gekregen windrichting de tegenovergestelde richting is van het laatst gelopen windrichting.
     private boolean isReverseDirection(Windrichting windrichting){
         if(laatsteWindrichting != null){
             switch(windrichting){

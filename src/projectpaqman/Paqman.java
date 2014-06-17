@@ -27,6 +27,10 @@ public class Paqman extends Spelelement implements KeyListener {
         this.gepauzeerd = false;
     }
     
+    /**
+     * De methode waarmee paqman op een nieuw vakje wordt gezet
+     * @param windrichting De kant welke paqman moet bewegen.
+     */
     private void move(Windrichting windrichting){
         if(gestart && !gepauzeerd){
             HashMap<Windrichting, Vakje> buren = vakje.getBuren();

@@ -28,10 +28,19 @@ public class Node {
         this.parent = parent;
     }
     
+    /**
+     * Methode die een node terug geeft met het volgende vakje.
+     * @return Geeft de node terug waar het volgende vakje in zit.
+     */
     public Node getNextNode(){
         return getNextNode(this);
     }
     
+    /**
+     * Recursieve methode die de parent terug blijft geven totdat die deze niet meer heeft en dan geeft die zichzelf terug.
+     * @param node De node waarmee moet worden gestart.
+     * @return De node waar het volgende vakje in zit.
+     */
     private Node getNextNode(Node node){
         if(node.getParent().getParent() != null){
             return getNextNode(node.getParent());

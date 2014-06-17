@@ -29,18 +29,34 @@ public class Vakje {
         this.transparant = false;
     }
     
+    /**
+     * De methode die de x coördinaat van een vakje terug geeft.
+     * @return De x coördinaat van het vakje.
+     */
     public int getPosX(){
         return posX;
     }
     
+    /**
+     * De methode die de y coördinaat van een vakje terug geeft.
+     * @return De y coördinaat van het vakje.
+     */
     public int getPosY(){
         return posY;
     }
     
+    /**
+     * De methode die een element toevoegt aan het vakje.
+     * @param element Het toe te voegen element
+     */
     public void addElement(Spelelement element){
         elementen.add(element);
     }
     
+    /**
+     * De methode die een element verwijdert van het vakje.
+     * @param element Het te verwijderen element.
+     */
     public void removeElement(Spelelement element){
         for(int i=0; i<elementen.size(); i++) {
             if(elementen.get(i).equals(element)){
@@ -49,34 +65,67 @@ public class Vakje {
         }
     }
     
+    /**
+     * De methode die de lijst met alle elementen op dit vakje terug geeft.
+     * @return Lijst met alle elementen op dit vakje.
+     */
     public ArrayList<Spelelement> getElementen(){
         return elementen;
     }
     
+    /**
+     * De methode die alle buren van dit vakje terug geeft.
+     * @return HashMap met alle buren.
+     */
     public HashMap<Windrichting, Vakje> getBuren(){
         return buren;
     }
     
+    /**
+     * De methode die de buren van dit vakje set.
+     * @param windrichting De windrichting van de buur.
+     * @param vakje Het vakje van de buur.
+     */
     public void setBuren(Windrichting windrichting, Vakje vakje){
         buren.put(windrichting, vakje);
     }
     
+    /**
+     * Geeft terug of het vakje een muur is of niet
+     * @return Of het vakje een muur is of niet.
+     */
     public boolean getMuur(){
         return muur;
     }
     
+    /**
+     * De methode die een vakje in een muur kan veranderen of een muur in een gewoon vakje kan veranderen.
+     * @param muur De waarde true of false wat bepaald of het een muur moet worden of niet.
+     */
     public void setMuur(boolean muur){
         this.muur = muur;
     }
     
+    /**
+     * Det methode die terug geeft of een vakje transparant is of niet.
+     * @return Of een muur transparant is of niet(true of false).
+     */
     public boolean getTransparent(){
         return transparant;
     }
     
+    /**
+     * De methode die een muur transparant maakt of juis niet transparant maakt.
+     * @param transparant De waarde true of false wat bepaald of de muur transparant moet worden of niet.
+     */
     public void setTransparent(boolean transparant){
         this.transparant = transparant;
     }
     
+    /**
+     * De methode die het vakje tekent op het speelveld.
+     * @param g Het graphics object.
+     */
     public void draw(Graphics g){  
         g.setColor(Color.BLACK);
         

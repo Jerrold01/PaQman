@@ -13,6 +13,10 @@ package projectpaqman;
  */
 public interface BeweegStrategy {
    
-    public void move(Spelelement spelelement, GameEventListener gameEventListener);
+    /**
+     * De methode welke door alle spoken gebruikt wordt om te bewegen. 
+     * @param spelelement Het spelement welke moet bewegen
+     */
+    public void move(Spelelement spelelement);
     
 }

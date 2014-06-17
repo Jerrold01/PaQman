@@ -23,17 +23,25 @@ public class PaqmanHelper extends Spelelement {
         super(vakje, gameEventListener);
     }
     
+    /**
+     * De methode die de paqmanhelper op een nieuw vakje zet.
+     */
     private void move(){
-        Vakje nieuwVakje = nextVakje(this);
+        Vakje nieuwVakje = nextVakje();
         nieuwVakje.addElement(this);
         this.vakje.removeElement(this);
         this.vakje = nieuwVakje;
     }
     
-    private Vakje nextVakje(Spelelement spelelement){
+    /**
+     * De methode die het volgende vakje terug geeft waar de paqmanhelper zich naartoe moet bewegen.
+     * @param spelelement 
+     * @return 
+     */
+    private Vakje nextVakje(){
         Node spook = null;
         Queue<Node> queue = new LinkedList();
-        Node root = new Node(spelelement.vakje);
+        Node root = new Node(this.vakje);
         queue.offer(root);
         while(!queue.isEmpty() && spook == null){
             Node node = queue.poll();

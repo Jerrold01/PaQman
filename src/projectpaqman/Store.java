@@ -37,8 +37,8 @@ public class Store extends JFrame {
         paqmanhelper = new JLabel("Paqman Helper (1500 Punten)");
         extraleven = new JLabel("Extra Leven (2000 Punten)");
         
-        paqmanhelperknop.addActionListener(new paqmanHelperListener());
-        extralevenknop.addActionListener(new extraLevenListener());
+        paqmanhelperknop.addActionListener(new paqmanHelperClickListener());
+        extralevenknop.addActionListener(new extraLevenClickListener());
 
         add(paqmanhelper);
         add(paqmanhelperknop);
@@ -46,18 +46,28 @@ public class Store extends JFrame {
         add(extralevenknop);
     }
     
+    /**
+     * De methode die een nieuwe gameEventListener zet voor de store.
+     * @param gameEventListener De nieuwe gameEventListener
+     */
     public void setGameEventListener(GameEventListener gameEventListener){
         this.gameEventListener = gameEventListener;
     }
     
-    public class paqmanHelperListener implements ActionListener{
+    /**
+     * De methode die kijkt of er op de koop knop van de paqmanhelper wordt geklikt en dan het juiste event verstuurd.
+     */
+    public class paqmanHelperClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.PAQMANHELPER));
         }
     }
     
-    public class extraLevenListener implements ActionListener{
+    /**
+     * De methode die kijkt of er op de koop knop van de extra leven wordt geklikt en dan het juiste event verstuurd.
+     */
+    public class extraLevenClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent actionEvent){
             gameEventListener.gameEventOccurred(new GameEvent(GameEventType.EXTRALEVEN));
