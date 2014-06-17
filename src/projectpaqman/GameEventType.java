@@ -7,7 +7,7 @@
 package projectpaqman;
 
 /**
- *
+ * Een enum met alle types Game Events die plaats kunnen vinden
  * @author Jerrold
  */
 public enum GameEventType {

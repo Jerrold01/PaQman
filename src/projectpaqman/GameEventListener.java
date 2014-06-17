@@ -12,5 +12,9 @@ package projectpaqman;
  */
 public interface GameEventListener {
 
+    /**
+     * De functie die geimplementeerd moet worden, zodra een klasse deze interface implementeert. Via deze functie kunnen game events worden verstuurd.
+     * @param gameEvent Het game event wat plaats heeft gevonden en wordt verspreid.
+     */
     public void gameEventOccurred(GameEvent gameEvent);
 }

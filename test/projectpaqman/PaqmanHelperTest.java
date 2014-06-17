@@ -38,19 +38,4 @@ public class PaqmanHelperTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of draw method, of class PaqmanHelper.
-     */
-    @Test
-    public void testDraw() {
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class PaqmanHelper.
-     */
-    @Test
-    public void testGameEventOccurred() {
-    }
-    
 }

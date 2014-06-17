@@ -36,41 +36,5 @@ public class GameEventHandlerTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of addGameEventListener method, of class GameEventHandler.
-     */
-    @Test
-    public void testAddGameEventListener() {
-    }
-
-    /**
-     * Test of removeGameEventListener method, of class GameEventHandler.
-     */
-    @Test
-    public void testRemoveGameEventListener() {
-    }
-
-    /**
-     * Test of clearGameEventListeners method, of class GameEventHandler.
-     */
-    @Test
-    public void testClearGameEventListeners() {
-    }
-
-    /**
-     * Test of setElementToAdd method, of class GameEventHandler.
-     */
-    @Test
-    public void testSetElementToAdd() {
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class GameEventHandler.
-     */
-    @Test
-    public void testGameEventOccurred() {
-    }
-    
+    }    
 }

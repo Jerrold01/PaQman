@@ -37,19 +37,4 @@ public class PowerupsTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of values method, of class Powerups.
-     */
-    @Test
-    public void testValues() {
-    }
-
-    /**
-     * Test of valueOf method, of class Powerups.
-     */
-    @Test
-    public void testValueOf() {
-    }
-    
 }

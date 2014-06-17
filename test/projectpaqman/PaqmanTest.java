@@ -39,47 +39,4 @@ public class PaqmanTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of draw method, of class Paqman.
-     */
-    @Test
-    public void testDraw() {
-    }
-
-    /**
-     * Test of keyReleased method, of class Paqman.
-     */
-    @Test
-    public void testKeyReleased() {
-    }
-
-    /**
-     * Test of keyPressed method, of class Paqman.
-     */
-    @Test
-    public void testKeyPressed() {
-    }
-
-    /**
-     * Test of keyTyped method, of class Paqman.
-     */
-    @Test
-    public void testKeyTyped() {
-    }
-
-    /**
-     * Test of respawn method, of class Paqman.
-     */
-    @Test
-    public void testRespawn() {
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Paqman.
-     */
-    @Test
-    public void testGameEventOccurred() {
-    }
-    
 }

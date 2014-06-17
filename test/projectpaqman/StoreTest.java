@@ -37,17 +37,4 @@ public class StoreTest {
     @After
     public void tearDown() {
     }
-
-    @Test
-    public void testSomeMethod() {
-
-    }
-
-    /**
-     * Test of setGameEventListener method, of class Store.
-     */
-    @Test
-    public void testSetGameEventListener() {
-    }
-    
 }

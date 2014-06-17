@@ -36,22 +36,5 @@ public class MainFrameTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of createComponents method, of class MainFrame.
-     */
-    @Test
-    public void testCreateComponents() {
-
-    }
-
-    /**
-     * Test of main method, of class MainFrame.
-     */
-    @Test
-    public void testMain() {
-
-    }
-    
+    }    
 }

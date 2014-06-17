@@ -36,22 +36,5 @@ public class EventTypeTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of values method, of class EventType.
-     */
-    @Test
-    public void testValues() {
-
-    }
-
-    /**
-     * Test of valueOf method, of class EventType.
-     */
-    @Test
-    public void testValueOf() {
-
-    }
-    
+    }    
 }

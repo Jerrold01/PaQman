@@ -38,29 +38,4 @@ public class SuperbolletjeTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of draw method, of class Superbolletje.
-     */
-    @Test
-    public void testDraw() {
-
-    }
-
-    /**
-     * Test of delete method, of class Superbolletje.
-     */
-    @Test
-    public void testDelete() {
-
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Superbolletje.
-     */
-    @Test
-    public void testGameEventOccurred() {
-
-    }
-    
 }

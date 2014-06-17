@@ -38,26 +38,4 @@ public class KersTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of draw method, of class Kers.
-     */
-    @Test
-    public void testDraw() {
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Kers.
-     */
-    @Test
-    public void testGameEventOccurred() {
-    }
-
-    /**
-     * Test of delete method, of class Kers.
-     */
-    @Test
-    public void testDelete() {
-    }
-    
 }

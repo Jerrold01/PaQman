@@ -38,29 +38,4 @@ public class SpookTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of draw method, of class Spook.
-     */
-    @Test
-    public void testDraw() {
-
-    }
-
-    /**
-     * Test of respawn method, of class Spook.
-     */
-    @Test
-    public void testRespawn() {
-
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Spook.
-     */
-    @Test
-    public void testGameEventOccurred() {
-
-    }
-    
 }

@@ -6,14 +6,11 @@
 
 package projectpaqman;
 
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -38,14 +35,6 @@ public class LevelTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of paintComponent method, of class Level.
-     */
-    @Test
-    public void testPaintComponent() {
-
     }
 
     /**
@@ -84,96 +73,144 @@ public class LevelTest {
     }
 
     /**
-     * Test of addGameEventListener method, of class Level.
+     * Test of spawnKers method, of class Level.
      */
     @Test
-    public void testAddGameEventListener() {
-
+    public void testSpawnKers() {
+        String pad = "1";
+        Level testLevel = new Level(4, new GameEventHandler());
+        
+        //Fysiek testgeval 1
+        System.out.println("Testgeval 1----------------------------------------");
+        testLevel.spawnKers();
+        for(int x = 0; x<5; x++){
+            System.out.println("A");
+            pad += "-2";
+            for(int y =0; y<5; y++){
+                System.out.println("B");
+                pad += "-3";
+                Vakje current = testLevel.getVakje(x, y);
+                for(Spelelement element : current.getElementen()){
+                    System.out.println("C");
+                    pad += "-4";
+                    if(element instanceof Kers){
+                        System.out.println("D");
+                        assert(true);
+                        pad += "-5";
+                    }else{
+                        pad += "-6";
+                    }
+                }
+                pad += "-7";
+            }
+            pad += "-8";
+        }
+        pad += "-9";
+        System.out.println(pad);
+        
+        //Fysiek testgeval 2
+        System.out.println("Testgeval 2----------------------------------------");
+        testLevel.spawnKers();
+        for(int x = 0; x<5; x++){
+            System.out.println("A");
+            pad += "-2";
+            for(int y =0; y<5; y++){
+                System.out.println("B");
+                pad += "-3";
+                Vakje current = testLevel.getVakje(x, y);
+                for(Spelelement element : current.getElementen()){
+                    System.out.println("C");
+                    pad += "-4";
+                    if(element instanceof Kers){
+                        System.out.println("D");
+                        assert(true);
+                        pad += "-5";
+                    }else{
+                        pad += "-6";
+                    }
+                }
+                pad += "-7";
+            }
+            pad += "-8";
+        }
+        pad += "-9";
+        System.out.println(pad);        
+        
+        //Fysiek testgeval 3
+        System.out.println("Testgeval 3----------------------------------------");
+        pad = "1";
+        for(int x = 4; x<5; x++){
+            System.out.println("A");
+            pad += "-2";
+            for(int y = 5; y<5; y++){
+                System.out.println("B");
+                pad += "-3";
+                Vakje current = testLevel.getVakje(x, y);
+                for(Spelelement element : current.getElementen()){
+                    System.out.println("C");
+                    pad += "-4";
+                    if(element instanceof Kers){
+                        System.out.println("D");
+                        assert(true);
+                        pad += "-5";
+                    }else{
+                        pad += "-6";
+                    }
+                }
+                pad += "-7";
+            }
+            pad += "-8";
+        }
+        pad += "-9";
+        System.out.println(pad);
+        
+        //Fysiek testgeval 4
+        System.out.println("Testgeval 4----------------------------------------");
+        pad = "1";
+        for(int x = 5; x<5; x++){
+            System.out.println("A");
+            pad += "-2";
+            for(int y = 4; y<5; y++){
+                System.out.println("B");
+                pad += "-3";
+                Vakje current = testLevel.getVakje(x, y);
+                for(Spelelement element : current.getElementen()){
+                    System.out.println("C");
+                    pad += "-4";
+                    if(element instanceof Kers){
+                        System.out.println("D");
+                        assert(true);
+                        pad += "-5";
+                    }else{
+                        pad += "-6";
+                    }
+                }
+                pad += "-7";
+            }
+            pad += "-8";
+        }
+        pad += "-9";
+        System.out.println(pad);
     }
-
-    /**
-     * Test of removeGameEventListener method, of class Level.
-     */
-    @Test
-    public void testRemoveGameEventListener() {
-
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Level.
-     */
-    @Test
-    public void testGameEventOccurred() {
-
-    }
-
-    /**
-     * Test of getLevel method, of class Level.
-     */
-    @Test
-    public void testGetLevel() {
-
-    }
-
-    /**
-     * Test of getGameText method, of class Level.
-     */
-    @Test
-    public void testGetGameText() {
-
-    }
-
-    /**
-     * Test of setGameText method, of class Level.
-     */
-    @Test
-    public void testSetGameText() {
-
-    }
-
+    
     /**
      * Test of spawnPowerup method, of class Level.
      */
     @Test
     public void testSpawnPowerup() {
-
-    }
-
-    /**
-     * Test of delete method, of class Level.
-     */
-    @Test
-    public void testDelete() {
-
-    }
-
-    /**
-     * Test of actionPerformed method, of class Level.
-     */
-    @Test
-    public void testActionPerformed() {
-
-    }
-
-    /**
-     * Test of getLevelText method, of class Level.
-     */
-    @Test
-    public void testGetLevelText() {
-    }
-
-    /**
-     * Test of setLevelText method, of class Level.
-     */
-    @Test
-    public void testSetLevelText() {
-    }
-
-    /**
-     * Test of getVakje method, of class Level.
-     */
-    @Test
-    public void testGetVakje() {
+        Level testLevel = new Level(4, new GameEventHandler());
+        testLevel.spawnKers();
+        
+        for(int x=0; x<5; x++){
+            for(int y=0; y<5; y++){
+                Vakje current = testLevel.getVakje(x, y);
+                for(Spelelement element : current.getElementen()){
+                    if(element instanceof Powerup){
+                        assert(true);
+                    }
+                }
+            }     
+        }
     }
 
     /**
@@ -181,5 +218,18 @@ public class LevelTest {
      */
     @Test
     public void testSpawnPaqmanHelper() {
+        Level testLevel = new Level(4, new GameEventHandler());
+        testLevel.spawnKers();
+        
+        for(int x=0; x<5; x++){
+            for(int y=0; y<5; y++){
+                Vakje current = testLevel.getVakje(x, y);
+                for(Spelelement element : current.getElementen()){
+                    if(element instanceof PaqmanHelper){
+                        assert(true);
+                    }
+                }
+            }     
+        }        
     }
 }

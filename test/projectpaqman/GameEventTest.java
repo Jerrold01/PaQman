@@ -37,34 +37,4 @@ public class GameEventTest {
     @After
     public void tearDown() {
     }
-
-    @Test
-    public void testSomeMethod() {
-
-    }
-
-    /**
-     * Test of getSource method, of class GameEvent.
-     */
-    @Test
-    public void testGetSource() {
-
-    }
-
-    /**
-     * Test of getPowerup method, of class GameEvent.
-     */
-    @Test
-    public void testGetPowerup() {
-
-    }
-
-    /**
-     * Test of getEventType method, of class GameEvent.
-     */
-    @Test
-    public void testGetEventType() {
-        
-    }
-    
 }

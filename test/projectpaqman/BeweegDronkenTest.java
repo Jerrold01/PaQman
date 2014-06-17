@@ -36,19 +36,5 @@ public class BeweegDronkenTest {
     
     @After
     public void tearDown() {
-    }
-
-    @Test
-    public void testSomeMethod() {
-
-    }
-
-    /**
-     * Test of move method, of class BeweegDronken.
-     */
-    @Test
-    public void testMove() {
-
-    }
-    
+    }    
 }

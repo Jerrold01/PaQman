@@ -36,34 +36,5 @@ public class NodeTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of getData method, of class Node.
-     */
-    @Test
-    public void testGetData() {
-    }
-
-    /**
-     * Test of getParent method, of class Node.
-     */
-    @Test
-    public void testGetParent() {
-    }
-
-    /**
-     * Test of setParent method, of class Node.
-     */
-    @Test
-    public void testSetParent() {
-    }
-
-    /**
-     * Test of getNextNode method, of class Node.
-     */
-    @Test
-    public void testGetNextNode() {
-    }
-    
+    }    
 }

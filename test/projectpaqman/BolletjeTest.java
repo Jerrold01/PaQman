@@ -37,27 +37,5 @@ public class BolletjeTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of draw method, of class Bolletje.
-     */
-    @Test
-    public void testDraw() {
-    }
-
-    /**
-     * Test of delete method, of class Bolletje.
-     */
-    @Test
-    public void testDelete() {
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Bolletje.
-     */
-    @Test
-    public void testGameEventOccurred() {
-    }
-    
+    }    
 }

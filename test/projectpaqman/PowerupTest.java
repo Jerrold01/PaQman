@@ -38,26 +38,4 @@ public class PowerupTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of draw method, of class Powerup.
-     */
-    @Test
-    public void testDraw() {
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class Powerup.
-     */
-    @Test
-    public void testGameEventOccurred() {
-    }
-
-    /**
-     * Test of delete method, of class Powerup.
-     */
-    @Test
-    public void testDelete() {
-    }
-    
 }

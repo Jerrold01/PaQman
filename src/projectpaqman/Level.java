@@ -183,9 +183,9 @@ public class Level extends JPanel implements GameEventListener{
     }
     
     /**
-     * De functie waarmee een kers random op het veld gespawned kan worden.
+     * De functie waarmee een kers op een random positie op het veld gespawned kan worden.
      */
-    private void spawnKers(){
+    public void spawnKers(){
         double posX = Math.random()*vakjes.length;
         double posY = Math.random()*vakjes[0].length;
         if(!vakjes[(int)posX][(int)posY].getMuur()){
@@ -198,7 +198,7 @@ public class Level extends JPanel implements GameEventListener{
     }
     
     /**
-     * De functie waarmee een kers random op het veld gespawned kan worden.
+     * De functie waarmee een powerup op een random positie op het veld gespawned kan worden.
      */
     public void spawnPowerup(){
         double posX = Math.random()*vakjes.length;
@@ -213,7 +213,7 @@ public class Level extends JPanel implements GameEventListener{
     }
     
     /**
-     * De functie waarmee een paqmanhelper random op het veld gespawned kan worden.
+     * De functie waarmee een paqmanhelper op een random positie op het veld gespawned kan worden.
      */
     public void spawnPaqmanHelper(){
         double posX = Math.random()*vakjes.length;
@@ -264,7 +264,7 @@ public class Level extends JPanel implements GameEventListener{
     }
 
     /**
-     * De functie waarmee het level alle vakjes en evt. tekent.
+     * De functie waarmee het level alle vakjes en evt. tekst tekent.
      * @param g 
      */
     

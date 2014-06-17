@@ -38,37 +38,4 @@ public class SpelelementTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of setVakje method, of class Spelelement.
-     */
-    @Test
-    public void testSetVakje() {
-
-    }
-
-    /**
-     * Test of draw method, of class Spelelement.
-     */
-    @Test
-    public void testDraw() {
-
-    }
-
-    /**
-     * Test of delete method, of class Spelelement.
-     */
-    @Test
-    public void testDelete() {
-
-    }
-
-    /**
-     * Test of respawn method, of class Spelelement.
-     */
-    @Test
-    public void testRespawn() {
-
-    }
-    
 }

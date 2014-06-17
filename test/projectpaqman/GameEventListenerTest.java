@@ -36,53 +36,5 @@ public class GameEventListenerTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of addGameEventListener method, of class GameEventListener.
-     */
-    @Test
-    public void testAddGameEventListener() {
-
-    }
-
-    /**
-     * Test of removeGameEventListener method, of class GameEventListener.
-     */
-    @Test
-    public void testRemoveGameEventListener() {
-
-    }
-
-    /**
-     * Test of fireGameEvent method, of class GameEventListener.
-     */
-    @Test
-    public void testFireGameEvent() {
-
-    }
-
-    /**
-     * Test of gameEventOccurred method, of class GameEventListener.
-     */
-    @Test
-    public void testGameEventOccurred() {
-
-    }
-
-    public class GameEventListenerImpl implements GameEventListener {
-
-        public void addGameEventListener(GameEventListener listener) {
-        }
-
-        public void removeGameEventListener(GameEventListener listener) {
-        }
-
-        public void fireGameEvent(GameEvent event) {
-        }
-
-        public void gameEventOccurred(GameEvent event) {
-        }
-    }
-    
+    }   
 }

@@ -36,5 +36,4 @@ public class ProjectpaqmanSuite {
     @After
     public void tearDown() throws Exception {
     }
-    
 }

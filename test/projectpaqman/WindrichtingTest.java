@@ -37,21 +37,4 @@ public class WindrichtingTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of values method, of class Windrichting.
-     */
-    @Test
-    public void testValues() {
-
-    }
-
-    /**
-     * Test of valueOf method, of class Windrichting.
-     */
-    @Test
-    public void testValueOf() {
-
-    }
-    
 }

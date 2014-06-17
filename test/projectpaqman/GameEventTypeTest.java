@@ -37,19 +37,4 @@ public class GameEventTypeTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of values method, of class GameEventType.
-     */
-    @Test
-    public void testValues() {
-    }
-
-    /**
-     * Test of valueOf method, of class GameEventType.
-     */
-    @Test
-    public void testValueOf() {
-    }
-    
 }
