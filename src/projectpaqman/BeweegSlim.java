@@ -13,13 +13,15 @@ import java.util.*;
  * @author kevinwareman
  */
 public class BeweegSlim implements BeweegStrategy {
-    
+
     @Override
     public void move(Spelelement spelelement){
-        Vakje nieuwVakje = nextVakjeDijkstra(spelelement);
+        Vakje nieuwVakje = nextVakje(spelelement);
         nieuwVakje.addElement(spelelement);
         spelelement.vakje.removeElement(spelelement);
         spelelement.vakje = nieuwVakje;
+
+        
     }
     
         /**
@@ -28,12 +30,15 @@ public class BeweegSlim implements BeweegStrategy {
      * @return Het eerstvolgende vakje waar het spook zich naartoe moet bewegen.
      */
     private Vakje nextVakje(Spelelement spelelement){
+        int aantalIteraties = 0;
+        long startTime = System.nanoTime();
         Node paqman = null;
         Queue<Node> queue = new LinkedList();
         ArrayList<Vakje> checklist = new ArrayList();
         Node root = new Node(spelelement.vakje);
         queue.offer(root);
         while(!queue.isEmpty() && paqman == null){
+            aantalIteraties++;
             Node node = queue.poll();
             Vakje vakje = node.getData();
             checklist.add(vakje);
@@ -62,10 +67,15 @@ public class BeweegSlim implements BeweegStrategy {
         }
         
         if(paqman == null){
+            long tijd = System.nanoTime()- startTime;
+            System.out.println("Tijd: " + tijd + "\n" + aantalIteraties);
             return getRandomNextVakje(spelelement.vakje);
         }else{
+            long tijd = System.nanoTime()- startTime;
+            System.out.println("Tijd: " + tijd + "\n" + aantalIteraties);
             return paqman.getNextNode().getData();
         }
+        
     }
     
     /**
@@ -90,6 +100,8 @@ public class BeweegSlim implements BeweegStrategy {
      * @return Het eerstvolgende vakje waarnaar het ingevoerde spelelement moet lopen om dichterbij Paqman te komen.
      */
     private Vakje nextVakjeDijkstra(Spelelement spelelement){
+        int aantalIteraties = 0;
+        long startTime = System.currentTimeMillis();
         Vakje paqman = null;
         HashMap<Vakje, Integer> M = new HashMap(); //Vakjes met bijbehorende stappen tot de startcel.
         Queue<Vakje> Q = new LinkedList(); //De vakjes die nog gecheckt moeten worden in de wachtrij.
@@ -99,6 +111,7 @@ public class BeweegSlim implements BeweegStrategy {
         M.put(spelelement.vakje, 0);
         Q.offer(spelelement.vakje);
         while(!Q.isEmpty() && paqman == null){
+            aantalIteraties++;
             Vakje current = Q.poll();
             S.add(current);
             
@@ -119,7 +132,10 @@ public class BeweegSlim implements BeweegStrategy {
             }
         }
         
+        
         if(paqman == null){
+            long tijd = System.currentTimeMillis() - startTime;
+            System.out.println("Tijd: " + tijd + "\n" + aantalIteraties);
             return getRandomNextVakje(spelelement.vakje);
         }else{
             Vakje nieuwVakje = paqman;
@@ -127,6 +143,8 @@ public class BeweegSlim implements BeweegStrategy {
             for(int i=0; i < aantalStappen; i++){
                 nieuwVakje = P.get(nieuwVakje);
             }
+            long tijd = System.currentTimeMillis() - startTime;
+            System.out.println("Tijd: " + tijd + "\n" + aantalIteraties);
             return nieuwVakje;
         }
     }
